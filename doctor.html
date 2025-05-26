@@ -1,658 +1,918 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Our Doctors - Health Care</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
     <style>
-        .doctors-section {
-            padding: 2.5rem 0 2rem 0;
-            background: #f7fafd;
+      .doctors-section {
+        padding: 2.5rem 0 2rem 0;
+        background: #f7fafd;
+      }
+      .doctors-flex {
+        display: flex;
+        gap: 2.5rem;
+        justify-content: center;
+        align-items: stretch;
+        max-width: 1200px;
+        margin: 0 auto;
+        flex-wrap: wrap;
+      }
+      .doctor-box {
+        background: #fff;
+        border-radius: 1.2rem;
+        box-shadow: 0 2px 16px rgba(25, 118, 210, 0.08);
+        padding: 2rem 1.5rem 2.5rem 1.5rem;
+        flex: 1 1 260px;
+        min-width: 220px;
+        max-width: 320px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        margin-bottom: 1.5rem;
+      }
+      .doctor-img {
+        width: 200px;
+        height: 200px;
+        border-radius: 12px;
+        object-fit: cover;
+        margin-bottom: 1rem;
+        border: 3px solid #1976d2;
+      }
+      .doctor-name {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #1976d2;
+        margin-bottom: 0.3rem;
+      }
+      .doctor-spec {
+        font-size: 1rem;
+        color: #388e3c;
+        margin-bottom: 0.5rem;
+      }
+      .doctor-desc {
+        font-size: 0.9rem;
+        color: #555;
+        margin-bottom: 1.2rem;
+      }
+      .doctor-status-btn {
+        padding: 0.5rem 1.3rem;
+        border: none;
+        border-radius: 2rem;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s, color 0.2s;
+      }
+      .doctor-status-free {
+        background: #388e3c;
+        color: #fff;
+      }
+      .doctor-status-occupied {
+        background: #d32f2f;
+        color: #fff;
+      }
+      .hero-section {
+        position: relative;
+        min-height: 60vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(
+            rgba(20, 20, 20, 0.8),
+            rgba(25, 118, 210, 0.5)
+          ),
+          url("IMAGES/img1.avif") center/cover no-repeat;
+        color: #fff;
+        padding: 0;
+      }
+      .hero-section .hero-text h1,
+      .hero-section .hero-text h3,
+      .hero-section .hero-text p,
+      .hero-section .hero-btn {
+        color: #fff;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+      }
+      .book-appointment-link {
+        display: inline-block;
+        margin-bottom: 0.7rem;
+        color: #1976d2;
+        font-weight: 600;
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      .book-appointment-link:hover {
+        color: #125199;
+        text-decoration: underline;
+      }
+      .read-more-link {
+        display: inline-block;
+        color: #388e3c;
+        font-weight: 600;
+        margin-bottom: 0.7rem;
+        text-decoration: none;
+        cursor: pointer;
+        transition: color 0.2s;
+      }
+      .read-more-link:hover {
+        color: #1976d2;
+        text-decoration: underline;
+      }
+      .doctor-more-info {
+        background: #f1f8ff;
+        color: #222;
+        border-radius: 0.7rem;
+        padding: 0.7rem 1rem;
+        margin-bottom: 1rem;
+        font-size: 0.95rem;
+        box-shadow: 0 1px 6px rgba(25, 118, 210, 0.07);
+      }
+      .search-popup,
+      .profile-popup,
+      .appointments-popup {
+        position: fixed;
+        top: 70px;
+        right: 30px;
+        background: #fff;
+        box-shadow: 0 2px 16px rgba(25, 118, 210, 0.15);
+        border-radius: 1rem;
+        padding: 1rem 1.2rem 1rem 1.2rem;
+        z-index: 1002;
+        min-width: 260px;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        animation: fadeIn 0.2s;
+      }
+      .profile-popup,
+      .appointments-popup {
+        padding: 0.7rem 0.7rem 0.7rem 0.7rem;
+        min-width: 180px;
+      }
+      .popup-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      .popup-list li {
+        margin-bottom: 0.5rem;
+      }
+      .popup-link {
+        display: block;
+        color: #1976d2;
+        font-weight: 600;
+        text-decoration: none;
+        padding: 0.5rem 0.7rem;
+        border-radius: 0.5rem;
+        transition: background 0.2s, color 0.2s;
+      }
+      .popup-link:hover {
+        background: #f1f8ff;
+        color: #125199;
+      }
+      .close-search {
+        background: none;
+        border: none;
+        color: #1976d2;
+        font-size: 1.5rem;
+        align-self: flex-end;
+        margin-top: 0.2rem;
+        cursor: pointer;
+        transition: color 0.2s;
+      }
+      .close-search:hover {
+        color: #d32f2f;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
         }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .search-form {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .search-input {
+        flex: 1;
+        padding: 0.5rem 1rem;
+        border: 1px solid #1976d2;
+        border-radius: 2rem;
+        font-size: 1rem;
+        outline: none;
+      }
+      .search-submit {
+        background: #1976d2;
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        width: 2.2rem;
+        height: 2.2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 1.1rem;
+        transition: background 0.2s;
+      }
+      .search-submit:hover {
+        background: #125199;
+      }
+      @media (max-width: 900px) {
         .doctors-flex {
-            display: flex;
-            gap: 2.5rem;
-            justify-content: center;
-            align-items: stretch;
-            max-width: 1200px;
-            margin: 0 auto;
-            flex-wrap: wrap;
+          flex-direction: column;
+          gap: 1.5rem;
+          align-items: stretch;
         }
         .doctor-box {
-            background: #fff;
-            border-radius: 1.2rem;
-            box-shadow: 0 2px 16px rgba(25, 118, 210, 0.08);
-            padding: 2rem 1.5rem 2.5rem 1.5rem;
-            flex: 1 1 260px;
-            min-width: 220px;
-            max-width: 320px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            margin-bottom: 1.5rem;
+          max-width: 100%;
         }
-        .doctor-img {
-            width: 200px;
-            height: 200px;
-            border-radius: 12px;
-            object-fit: cover;
-            margin-bottom: 1rem;
-            border: 3px solid #1976d2;
-        }
-        .doctor-name {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #1976d2;
-            margin-bottom: 0.3rem;
-        }
-        .doctor-spec {
-            font-size: 1rem;
-            color: #388e3c;
-            margin-bottom: 0.5rem;
-        }
-        .doctor-desc {
-            font-size: 0.9rem;
-            color: #555;
-            margin-bottom: 1.2rem;
-        }
-        .doctor-status-btn {
-            padding: 0.5rem 1.3rem;
-            border: none;
-            border-radius: 2rem;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.2s, color 0.2s;
-        }
-        .doctor-status-free {
-            background: #388e3c;
-            color: #fff;
-        }
-        .doctor-status-occupied {
-            background: #d32f2f;
-            color: #fff;
-        }
-        .hero-section {
-            position: relative;
-            min-height: 60vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(rgba(20, 20, 20, 0.8), rgba(25, 118, 210, 0.5)), url('IMAGES/img1.avif') center/cover no-repeat;
-            color: #fff;
-            padding: 0;
-        }
-        .hero-section .hero-text h1,
-        .hero-section .hero-text h3,
-        .hero-section .hero-text p,
-        .hero-section .hero-btn {
-            color: #fff;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.25);
-        }
-        .book-appointment-link {
-            display: inline-block;
-            margin-bottom: 0.7rem;
-            color: #1976d2;
-            font-weight: 600;
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-        .book-appointment-link:hover {
-            color: #125199;
-            text-decoration: underline;
-        }
-        .read-more-link {
-            display: inline-block;
-            color: #388e3c;
-            font-weight: 600;
-            margin-bottom: 0.7rem;
-            text-decoration: none;
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-        .read-more-link:hover {
-            color: #1976d2;
-            text-decoration: underline;
-        }
-        .doctor-more-info {
-            background: #f1f8ff;
-            color: #222;
-            border-radius: 0.7rem;
-            padding: 0.7rem 1rem;
-            margin-bottom: 1rem;
-            font-size: 0.95rem;
-            box-shadow: 0 1px 6px rgba(25, 118, 210, 0.07);
-        }
-        .search-popup, .profile-popup, .appointments-popup {
-            position: fixed;
-            top: 70px;
-            right: 30px;
-            background: #fff;
-            box-shadow: 0 2px 16px rgba(25, 118, 210, 0.15);
-            border-radius: 1rem;
-            padding: 1rem 1.2rem 1rem 1.2rem;
-            z-index: 1002;
-            min-width: 260px;
-            display: flex;
-            flex-direction: column;
-            align-items: stretch;
-            animation: fadeIn 0.2s;
-        }
-        .profile-popup, .appointments-popup {
-            padding: 0.7rem 0.7rem 0.7rem 0.7rem;
-            min-width: 180px;
-        }
-        .popup-list {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-        .popup-list li {
-            margin-bottom: 0.5rem;
-        }
-        .popup-link {
-            display: block;
-            color: #1976d2;
-            font-weight: 600;
-            text-decoration: none;
-            padding: 0.5rem 0.7rem;
-            border-radius: 0.5rem;
-            transition: background 0.2s, color 0.2s;
-        }
-        .popup-link:hover {
-            background: #f1f8ff;
-            color: #125199;
-        }
-        .close-search {
-            background: none;
-            border: none;
-            color: #1976d2;
-            font-size: 1.5rem;
-            align-self: flex-end;
-            margin-top: 0.2rem;
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-        .close-search:hover {
-            color: #d32f2f;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .search-form {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .search-input {
-            flex: 1;
-            padding: 0.5rem 1rem;
-            border: 1px solid #1976d2;
-            border-radius: 2rem;
-            font-size: 1rem;
-            outline: none;
-        }
-        .search-submit {
-            background: #1976d2;
-            color: #fff;
-            border: none;
-            border-radius: 50%;
-            width: 2.2rem;
-            height: 2.2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 1.1rem;
-            transition: background 0.2s;
-        }
-        .search-submit:hover {
-            background: #125199;
-        }
-        @media (max-width: 900px) {
-            .doctors-flex {
-                flex-direction: column;
-                gap: 1.5rem;
-                align-items: stretch;
-            }
-            .doctor-box {
-                max-width: 100%;
-            }
-        }
-        /* Add highlight style for found doctor */
-        .highlight-doctor {
-            box-shadow: 0 0 0 4px #1976d2, 0 2px 16px rgba(25, 118, 210, 0.08);
-            transition: box-shadow 0.3s;
-        }
-        .footer-section {
-            background: #1976d2;
-            color: #fff;
-            padding: 2.2rem 0 1.2rem 0;
-            margin-top: 2rem;
-        }
-        .footer-container {
-            max-width: 1100px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1.2rem;
-        }
+      }
+      /* Add highlight style for found doctor */
+      .highlight-doctor {
+        box-shadow: 0 0 0 4px #1976d2, 0 2px 16px rgba(25, 118, 210, 0.08);
+        transition: box-shadow 0.3s;
+      }
+      .footer-section {
+        background: #1976d2;
+        color: #fff;
+        padding: 2.2rem 0 1.2rem 0;
+        margin-top: 2rem;
+      }
+      .footer-container {
+        max-width: 1100px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.2rem;
+      }
+      .footer-top {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2.5rem;
+        justify-content: space-between;
+        width: 100%;
+        margin-bottom: 1.5rem;
+      }
+      .footer-logo-col {
+        flex: 1 1 220px;
+        min-width: 200px;
+        max-width: 260px;
+      }
+      .footer-hospital-name {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 0.3rem;
+      }
+      .footer-hospital-desc {
+        color: #e3f2fd;
+        font-size: 0.98rem;
+        margin-bottom: 0.7rem;
+      }
+      .footer-links-col,
+      .footer-contact-col,
+      .footer-hours-col {
+        flex: 1 1 180px;
+        min-width: 170px;
+      }
+      .footer-links-col h4,
+      .footer-contact-col h4,
+      .footer-hours-col h4 {
+        color: #90caf9;
+        font-size: 1.08rem;
+        margin-bottom: 0.7rem;
+        font-weight: 700;
+      }
+      .footer-link-list,
+      .footer-contact-list,
+      .footer-hours-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .footer-link-list li,
+      .footer-contact-list li,
+      .footer-hours-list li {
+        margin-bottom: 0.5rem;
+        color: #e3f2fd;
+        font-size: 0.98rem;
+      }
+      .footer-link-list a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.2s;
+      }
+      .footer-link-list a:hover {
+        color: #90caf9;
+      }
+      .footer-contact-list i {
+        color: #90caf9;
+        margin-right: 0.5rem;
+      }
+      .footer-contact-list a {
+        color: #25d366;
+        text-decoration: none;
+        font-weight: 600;
+      }
+      .footer-contact-list a:hover {
+        text-decoration: underline;
+      }
+      .footer-bottom {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.7rem;
+      }
+      @media (max-width: 900px) {
         .footer-top {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2.5rem;
-            justify-content: space-between;
-            width: 100%;
-            margin-bottom: 1.5rem;
+          flex-direction: column;
+          gap: 1.5rem;
+          align-items: flex-start;
         }
-        .footer-logo-col {
-            flex: 1 1 220px;
-            min-width: 200px;
-            max-width: 260px;
+        .footer-logo-col,
+        .footer-links-col,
+        .footer-contact-col,
+        .footer-hours-col {
+          max-width: 100%;
         }
-        .footer-hospital-name {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 0.3rem;
+      }
+      @media (max-width: 700px) {
+        .footer-container {
+          padding: 0 0.7rem;
         }
-        .footer-hospital-desc {
-            color: #e3f2fd;
-            font-size: 0.98rem;
-            margin-bottom: 0.7rem;
-        }
-        .footer-links-col, .footer-contact-col, .footer-hours-col {
-            flex: 1 1 180px;
-            min-width: 170px;
-        }
-        .footer-links-col h4, .footer-contact-col h4, .footer-hours-col h4 {
-            color: #90caf9;
-            font-size: 1.08rem;
-            margin-bottom: 0.7rem;
-            font-weight: 700;
-        }
-        .footer-link-list, .footer-contact-list, .footer-hours-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .footer-link-list li, .footer-contact-list li, .footer-hours-list li {
-            margin-bottom: 0.5rem;
-            color: #e3f2fd;
-            font-size: 0.98rem;
-        }
-        .footer-link-list a {
-            color: #fff;
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.2s;
-        }
-        .footer-link-list a:hover {
-            color: #90caf9;
-        }
-        .footer-contact-list i {
-            color: #90caf9;
-            margin-right: 0.5rem;
-        }
-        .footer-contact-list a {
-            color: #25D366;
-            text-decoration: none;
-            font-weight: 600;
-        }
-        .footer-contact-list a:hover {
-            text-decoration: underline;
-        }
-        .footer-bottom {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.7rem;
-        }
-        @media (max-width: 900px) {
-            .footer-top {
-                flex-direction: column;
-                gap: 1.5rem;
-                align-items: flex-start;
-            }
-            .footer-logo-col, .footer-links-col, .footer-contact-col, .footer-hours-col {
-                max-width: 100%;
-            }
-        }
-        @media (max-width: 700px) {
-            .footer-container {
-                padding: 0 0.7rem;
-            }
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <div class="header-container">
-            <div class="header-section logo-section">
-                <img src="IMAGES/logo-removebg-preview.png" alt="Hospital Logo" class="header-logo" height="40">
-            </div>
-            <div class="header-section menu-section">
-                <nav class="desktop-nav">
-                    <ul class="nav-links">
-                        <li><a href="index.html#home"><i class="fa-solid fa-house"></i> Home</a></li>
-                        <li><a href="index.html#about"><i class="fa-solid fa-circle-info"></i> About</a></li>
-                        <li><a href="doctor.html"><i class="fa-solid fa-user-doctor"></i> Doctors</a></li>
-                        <li><a href="index.html#contact"><i class="fa-solid fa-envelope"></i> Contact</a></li>
-                    </ul>
-                </nav>
-                <button class="menu-toggle" aria-label="Open menu">
-                    <i class="fa-solid fa-bars"></i>
-                </button>
-            </div>
-            <div class="header-section icons-section">
-                <a href="#search" class="icon-btn" title="Search"><i class="fa-solid fa-magnifying-glass"></i></a>
-                <a href="#profile" class="icon-btn" title="Profile"><i class="fa-solid fa-user"></i></a>
-                <a href="#appointments" class="icon-btn" title="Appointments"><i class="fa-solid fa-calendar-check"></i></a>
-            </div>
+      <div class="header-container">
+        <div class="header-section logo-section">
+          <img
+            src="IMAGES/logo-removebg-preview.png"
+            alt="Hospital Logo"
+            class="header-logo"
+            height="40"
+          />
         </div>
+        <div class="header-section menu-section">
+          <nav class="desktop-nav">
+            <ul class="nav-links">
+              <li>
+                <a href="index.html#home"
+                  ><i class="fa-solid fa-house"></i> Home</a
+                >
+              </li>
+              <li>
+                <a href="index.html#about"
+                  ><i class="fa-solid fa-circle-info"></i> About</a
+                >
+              </li>
+              <li>
+                <a href="doctor.html"
+                  ><i class="fa-solid fa-user-doctor"></i> Doctors</a
+                >
+              </li>
+              <li>
+                <a href="index.html#contact"
+                  ><i class="fa-solid fa-envelope"></i> Contact</a
+                >
+              </li>
+            </ul>
+          </nav>
+          <button class="menu-toggle" aria-label="Open menu">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+        </div>
+        <div class="header-section icons-section">
+          <a href="#search" class="icon-btn" title="Search"
+            ><i class="fa-solid fa-magnifying-glass"></i
+          ></a>
+          <a href="#profile" class="icon-btn" title="Profile"
+            ><i class="fa-solid fa-user"></i
+          ></a>
+          <a href="#appointments" class="icon-btn" title="Appointments"
+            ><i class="fa-solid fa-calendar-check"></i
+          ></a>
+        </div>
+      </div>
     </header>
     <main>
-        <section id="home" class="hero-section">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h1>HEALTH CARE</h1>
-                    <h3>for whole family</h3>
-                    <p>In health care sector, services excellence is the facility of the hospitalas health care service providerto consistently.</p>
-                    <a href="index.html#services" class="hero-btn">CHECK OUR SERVICES</a>
-                </div>
+      <section id="home" class="hero-section">
+        <div class="hero-content">
+          <div class="hero-text">
+            <h1>HEALTH CARE</h1>
+            <h3>for whole family</h3>
+            <p>
+              In health care sector, services excellence is the facility of the
+              hospitalas health care service providerto consistently.
+            </p>
+            <a href="index.html#services" class="hero-btn"
+              >CHECK OUR SERVICES</a
+            >
+          </div>
+        </div>
+      </section>
+      <section class="doctors-section">
+        <div class="doctors-flex">
+          <div class="doctor-box">
+            <img
+              src="IMAGES/img1.avif"
+              alt="Dr. John Smith"
+              class="doctor-img"
+            />
+            <div class="doctor-name">Dr. John Smith</div>
+            <div class="doctor-spec">Cardiologist</div>
+            <a href="#appointments" class="book-appointment-link"
+              >Book Appointment</a
+            >
+            <p class="doctor-desc">
+              Expert in heart health, diagnostics, and cardiovascular care with
+              15+ years of experience.
+            </p>
+            <a href="#" class="read-more-link" data-doctor="1">Read More</a>
+            <div
+              class="doctor-more-info"
+              id="doctor-more-1"
+              style="display: none"
+            >
+              <p>
+                Dr. John Smith has published over 30 research papers in
+                cardiology and is known for his patient-centered approach and
+                advanced diagnostic skills.
+              </p>
             </div>
-        </section>
-        <section class="doctors-section">
-            <div class="doctors-flex">
-                <div class="doctor-box">
-                    <img src="IMAGES/img1.avif" alt="Dr. John Smith" class="doctor-img">
-                    <div class="doctor-name">Dr. John Smith</div>
-                    <div class="doctor-spec">Cardiologist</div>
-                    <a href="#appointments" class="book-appointment-link">Book Appointment</a>
-                    <p class="doctor-desc">Expert in heart health, diagnostics, and cardiovascular care with 15+ years of experience.</p>
-                    <a href="#" class="read-more-link" data-doctor="1">Read More</a>
-                    <div class="doctor-more-info" id="doctor-more-1" style="display:none;">
-                        <p>Dr. John Smith has published over 30 research papers in cardiology and is known for his patient-centered approach and advanced diagnostic skills.</p>
-                    </div>
-                </div>
-                <div class="doctor-box">
-                    <img src="IMAGES/img2.webp" alt="Dr. Jane Doe" class="doctor-img">
-                    <div class="doctor-name">Dr. Jane Doe</div>
-                    <div class="doctor-spec">Pediatrician</div>
-                    <a href="#appointments" class="book-appointment-link">Book Appointment</a>
-                    <p class="doctor-desc">Specializes in children's health, growth, and development. Compassionate and attentive.</p>
-                    <a href="#" class="read-more-link" data-doctor="2">Read More</a>
-                    <div class="doctor-more-info" id="doctor-more-2" style="display:none;">
-                        <p>Dr. Jane Doe is a leading pediatrician with a focus on preventive care and child wellness, and is beloved by families for her gentle manner.</p>
-                    </div>
-                </div>
-                <div class="doctor-box">
-                    <img src="IMAGES/img3.jpg" alt="Dr. Alex Lee" class="doctor-img">
-                    <div class="doctor-name">Dr. Alex Lee</div>
-                    <div class="doctor-spec">Dermatologist</div>
-                    <a href="#appointments" class="book-appointment-link">Book Appointment</a>
-                    <p class="doctor-desc">Skilled in treating skin conditions and cosmetic dermatology. Patient-focused care.</p>
-                    <a href="#" class="read-more-link" data-doctor="3">Read More</a>
-                    <div class="doctor-more-info" id="doctor-more-3" style="display:none;">
-                        <p>Dr. Alex Lee offers the latest treatments in dermatology and is an expert in both medical and cosmetic skin care solutions.</p>
-                    </div>
-                </div>
-                <div class="doctor-box">
-                    <img src="IMAGES/img4.jpg" alt="Dr. Maria Gomez" class="doctor-img">
-                    <div class="doctor-name">Dr. Maria Gomez</div>
-                    <div class="doctor-spec">Neurologist</div>
-                    <a href="#appointments" class="book-appointment-link">Book Appointment</a>
-                    <p class="doctor-desc">Experienced in neurological disorders, stroke management, and patient rehabilitation.</p>
-                    <a href="#" class="read-more-link" data-doctor="4">Read More</a>
-                    <div class="doctor-more-info" id="doctor-more-4" style="display:none;">
-                        <p>Dr. Maria Gomez is recognized for her work in neurorehabilitation and her dedication to improving patient outcomes after neurological events.</p>
-                    </div>
-                </div>
-                <div class="doctor-box">
-                    <img src="IMAGES/logo.png" alt="Dr. Samuel Kim" class="doctor-img">
-                    <div class="doctor-name">Dr. Samuel Kim</div>
-                    <div class="doctor-spec">Orthopedic Surgeon</div>
-                    <a href="#appointments" class="book-appointment-link">Book Appointment</a>
-                    <p class="doctor-desc">Expert in bone, joint, and muscle care. Performs advanced orthopedic surgeries.</p>
-                    <a href="#" class="read-more-link" data-doctor="5">Read More</a>
-                    <div class="doctor-more-info" id="doctor-more-5" style="display:none;">
-                        <p>Dr. Samuel Kim is a pioneer in minimally invasive orthopedic surgery and has helped hundreds of patients regain mobility.</p>
-                    </div>
-                </div>
-                <div class="doctor-box">
-                    <img src="IMAGES/logo-transparent.png" alt="Dr. Linda Park" class="doctor-img">
-                    <div class="doctor-name">Dr. Linda Park</div>
-                    <div class="doctor-spec">General Practitioner</div>
-                    <a href="#appointments" class="book-appointment-link">Book Appointment</a>
-                    <p class="doctor-desc">Provides comprehensive primary care and preventive health services for all ages.</p>
-                    <a href="#" class="read-more-link" data-doctor="6">Read More</a>
-                    <div class="doctor-more-info" id="doctor-more-6" style="display:none;">
-                        <p>Dr. Linda Park is dedicated to holistic patient care and is known for her thorough checkups and friendly approach to family medicine.</p>
-                    </div>
-                </div>
-                <div class="doctor-box">
-                    <img src="IMAGES/img5.jpg" alt="Dr. Priya Patel" class="doctor-img">
-                    <div class="doctor-name">Dr. Priya Patel</div>
-                    <div class="doctor-spec">Anesthesiologist</div>
-                    <a href="#appointments" class="book-appointment-link">Book Appointment</a>
-                    <p class="doctor-desc">Expert in anesthesia, pain management, and perioperative care for all surgical procedures.</p>
-                    <a href="#" class="read-more-link" data-doctor="7">Read More</a>
-                    <div class="doctor-more-info" id="doctor-more-7" style="display:none;">
-                        <p>Dr. Priya Patel ensures patient safety and comfort during surgeries, with advanced skills in critical care and emergency response.</p>
-                    </div>
-                </div>
-                <div class="doctor-box">
-                    <img src="IMAGES/img6.jpg" alt="Dr. Michael Brown" class="doctor-img">
-                    <div class="doctor-name">Dr. Michael Brown</div>
-                    <div class="doctor-spec">Radiologist</div>
-                    <a href="#appointments" class="book-appointment-link">Book Appointment</a>
-                    <p class="doctor-desc">Specialist in medical imaging, diagnostics, and interpretation of X-rays, CT, and MRI scans.</p>
-                    <a href="#" class="read-more-link" data-doctor="8">Read More</a>
-                    <div class="doctor-more-info" id="doctor-more-8" style="display:none;">
-                        <p>Dr. Michael Brown provides accurate and timely imaging reports, supporting all departments with essential diagnostic insights.</p>
-                    </div>
-                </div>
-                <div class="doctor-box">
-                    <img src="IMAGES/img7.jpg" alt="Dr. Aisha Hassan" class="doctor-img">
-                    <div class="doctor-name">Dr. Aisha Hassan</div>
-                    <div class="doctor-spec">Emergency Medicine</div>
-                    <a href="#appointments" class="book-appointment-link">Book Appointment</a>
-                    <p class="doctor-desc">Frontline expert in acute care, trauma, and life-saving emergency interventions 24/7.</p>
-                    <a href="#" class="read-more-link" data-doctor="9">Read More</a>
-                    <div class="doctor-more-info" id="doctor-more-9" style="display:none;">
-                        <p>Dr. Aisha Hassan leads the emergency team, providing rapid assessment and treatment for critical and urgent cases at any hour.</p>
-                    </div>
-                </div>
+          </div>
+          <div class="doctor-box">
+            <img src="IMAGES/img2.webp" alt="Dr. Jane Doe" class="doctor-img" />
+            <div class="doctor-name">Dr. Jane Doe</div>
+            <div class="doctor-spec">Pediatrician</div>
+            <a href="#appointments" class="book-appointment-link"
+              >Book Appointment</a
+            >
+            <p class="doctor-desc">
+              Specializes in children's health, growth, and development.
+              Compassionate and attentive.
+            </p>
+            <a href="#" class="read-more-link" data-doctor="2">Read More</a>
+            <div
+              class="doctor-more-info"
+              id="doctor-more-2"
+              style="display: none"
+            >
+              <p>
+                Dr. Jane Doe is a leading pediatrician with a focus on
+                preventive care and child wellness, and is beloved by families
+                for her gentle manner.
+              </p>
             </div>
-        </section>
-        <div id="search-popup" class="search-popup" style="display:none;">
-            <form class="search-form" onsubmit="return false;">
-                <input type="text" class="search-input" placeholder="Search doctors, services...">
-                <button type="submit" class="search-submit"><i class="fa fa-search"></i></button>
-            </form>
-            <button class="close-search" aria-label="Close search">&times;</button>
+          </div>
+          <div class="doctor-box">
+            <img src="IMAGES/img3.jpg" alt="Dr. Alex Lee" class="doctor-img" />
+            <div class="doctor-name">Dr. Alex Lee</div>
+            <div class="doctor-spec">Dermatologist</div>
+            <a href="#appointments" class="book-appointment-link"
+              >Book Appointment</a
+            >
+            <p class="doctor-desc">
+              Skilled in treating skin conditions and cosmetic dermatology.
+              Patient-focused care.
+            </p>
+            <a href="#" class="read-more-link" data-doctor="3">Read More</a>
+            <div
+              class="doctor-more-info"
+              id="doctor-more-3"
+              style="display: none"
+            >
+              <p>
+                Dr. Alex Lee offers the latest treatments in dermatology and is
+                an expert in both medical and cosmetic skin care solutions.
+              </p>
+            </div>
+          </div>
+          <div class="doctor-box">
+            <img
+              src="IMAGES/img4.jpg"
+              alt="Dr. Maria Gomez"
+              class="doctor-img"
+            />
+            <div class="doctor-name">Dr. Maria Gomez</div>
+            <div class="doctor-spec">Neurologist</div>
+            <a href="#appointments" class="book-appointment-link"
+              >Book Appointment</a
+            >
+            <p class="doctor-desc">
+              Experienced in neurological disorders, stroke management, and
+              patient rehabilitation.
+            </p>
+            <a href="#" class="read-more-link" data-doctor="4">Read More</a>
+            <div
+              class="doctor-more-info"
+              id="doctor-more-4"
+              style="display: none"
+            >
+              <p>
+                Dr. Maria Gomez is recognized for her work in
+                neurorehabilitation and her dedication to improving patient
+                outcomes after neurological events.
+              </p>
+            </div>
+          </div>
+          <div class="doctor-box">
+            <img
+              src="IMAGES/logo.png"
+              alt="Dr. Samuel Kim"
+              class="doctor-img"
+            />
+            <div class="doctor-name">Dr. Samuel Kim</div>
+            <div class="doctor-spec">Orthopedic Surgeon</div>
+            <a href="#appointments" class="book-appointment-link"
+              >Book Appointment</a
+            >
+            <p class="doctor-desc">
+              Expert in bone, joint, and muscle care. Performs advanced
+              orthopedic surgeries.
+            </p>
+            <a href="#" class="read-more-link" data-doctor="5">Read More</a>
+            <div
+              class="doctor-more-info"
+              id="doctor-more-5"
+              style="display: none"
+            >
+              <p>
+                Dr. Samuel Kim is a pioneer in minimally invasive orthopedic
+                surgery and has helped hundreds of patients regain mobility.
+              </p>
+            </div>
+          </div>
+          <div class="doctor-box">
+            <img
+              src="IMAGES/logo-transparent.png"
+              alt="Dr. Linda Park"
+              class="doctor-img"
+            />
+            <div class="doctor-name">Dr. Linda Park</div>
+            <div class="doctor-spec">General Practitioner</div>
+            <a href="#appointments" class="book-appointment-link"
+              >Book Appointment</a
+            >
+            <p class="doctor-desc">
+              Provides comprehensive primary care and preventive health services
+              for all ages.
+            </p>
+            <a href="#" class="read-more-link" data-doctor="6">Read More</a>
+            <div
+              class="doctor-more-info"
+              id="doctor-more-6"
+              style="display: none"
+            >
+              <p>
+                Dr. Linda Park is dedicated to holistic patient care and is
+                known for her thorough checkups and friendly approach to family
+                medicine.
+              </p>
+            </div>
+          </div>
+          <div class="doctor-box">
+            <img
+              src="IMAGES/Anest.jpg"
+              alt="Dr. Priya Patel"
+              class="doctor-img"
+            />
+            <div class="doctor-name">Dr. Priya Patel</div>
+            <div class="doctor-spec">Anesthesiologist</div>
+            <a href="#appointments" class="book-appointment-link"
+              >Book Appointment</a
+            >
+            <p class="doctor-desc">
+              Expert in anesthesia, pain management, and perioperative care for
+              all surgical procedures.
+            </p>
+            <a href="#" class="read-more-link" data-doctor="7">Read More</a>
+            <div
+              class="doctor-more-info"
+              id="doctor-more-7"
+              style="display: none"
+            >
+              <p>
+                Dr. Priya Patel ensures patient safety and comfort during
+                surgeries, with advanced skills in critical care and emergency
+                response.
+              </p>
+            </div>
+          </div>
+          <div class="doctor-box">
+            <img
+              src="IMAGES/x-rays1.jpg"
+              alt="Dr. Michael Brown"
+              class="doctor-img"
+            />
+            <div class="doctor-name">Dr. Michael Brown</div>
+            <div class="doctor-spec">Radiologist</div>
+            <a href="#appointments" class="book-appointment-link"
+              >Book Appointment</a
+            >
+            <p class="doctor-desc">
+              Specialist in medical imaging, diagnostics, and interpretation of
+              X-rays, CT, and MRI scans.
+            </p>
+            <a href="#" class="read-more-link" data-doctor="8">Read More</a>
+            <div
+              class="doctor-more-info"
+              id="doctor-more-8"
+              style="display: none"
+            >
+              <p>
+                Dr. Michael Brown provides accurate and timely imaging reports,
+                supporting all departments with essential diagnostic insights.
+              </p>
+            </div>
+          </div>
+          <div class="doctor-box">
+            <img
+              src="IMAGES/general.jpg"
+              alt="Dr. Aisha Hassan"
+              class="doctor-img"
+            />
+            <div class="doctor-name">Dr. Aisha Hassan</div>
+            <div class="doctor-spec">Emergency Medicine</div>
+            <a href="#appointments" class="book-appointment-link"
+              >Book Appointment</a
+            >
+            <p class="doctor-desc">
+              Frontline expert in acute care, trauma, and life-saving emergency
+              interventions 24/7.
+            </p>
+            <a href="#" class="read-more-link" data-doctor="9">Read More</a>
+            <div
+              class="doctor-more-info"
+              id="doctor-more-9"
+              style="display: none"
+            >
+              <p>
+                Dr. Aisha Hassan leads the emergency team, providing rapid
+                assessment and treatment for critical and urgent cases at any
+                hour.
+              </p>
+            </div>
+          </div>
         </div>
-        <div id="profile-popup" class="profile-popup" style="display:none;">
-            <ul class="popup-list">
-                <li><a href="#profile-view" class="popup-link">View Profile</a></li>
-                <li><a href="#logout" class="popup-link">Logout</a></li>
-            </ul>
-        </div>
-        <div id="appointments-popup" class="appointments-popup" style="display:none;">
-            <ul class="popup-list">
-                <li><a href="#check-list" class="popup-link">Check List</a></li>
-                <li><a href="#edit-appointment" class="popup-link">Edit Appointment</a></li>
-            </ul>
-        </div>
+      </section>
+      <div id="search-popup" class="search-popup" style="display: none">
+        <form class="search-form" onsubmit="return false;">
+          <input
+            type="text"
+            class="search-input"
+            placeholder="Search doctors, services..."
+          />
+          <button type="submit" class="search-submit">
+            <i class="fa fa-search"></i>
+          </button>
+        </form>
+        <button class="close-search" aria-label="Close search">&times;</button>
+      </div>
+      <div id="profile-popup" class="profile-popup" style="display: none">
+        <ul class="popup-list">
+          <li><a href="#profile-view" class="popup-link">View Profile</a></li>
+          <li><a href="#logout" class="popup-link">Logout</a></li>
+        </ul>
+      </div>
+      <div
+        id="appointments-popup"
+        class="appointments-popup"
+        style="display: none"
+      >
+        <ul class="popup-list">
+          <li><a href="#check-list" class="popup-link">Check List</a></li>
+          <li>
+            <a href="#edit-appointment" class="popup-link">Edit Appointment</a>
+          </li>
+        </ul>
+      </div>
     </main>
     <script src="script.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('.read-more-link').forEach(function(link) {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    var id = this.getAttribute('data-doctor');
-                    var info = document.getElementById('doctor-more-' + id);
-                    var isOpen = info.style.display === 'block';
-                    // Close all other doctor-more-info sections
-                    document.querySelectorAll('.doctor-more-info').forEach(function(div) {
-                        div.style.display = 'none';
-                    });
-                    // Reset all read more link text
-                    document.querySelectorAll('.read-more-link').forEach(function(l) {
-                        l.textContent = 'Read More';
-                    });
-                    // Toggle current
-                    if (!isOpen) {
-                        info.style.display = 'block';
-                        this.textContent = 'Show Less';
-                    }
-                });
+      document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll(".read-more-link").forEach(function (link) {
+          link.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("data-doctor");
+            var info = document.getElementById("doctor-more-" + id);
+            var isOpen = info.style.display === "block";
+            // Close all other doctor-more-info sections
+            document
+              .querySelectorAll(".doctor-more-info")
+              .forEach(function (div) {
+                div.style.display = "none";
+              });
+            // Reset all read more link text
+            document.querySelectorAll(".read-more-link").forEach(function (l) {
+              l.textContent = "Read More";
             });
-            var searchBtn = document.querySelector('.icon-btn[title="Search"]');
-            var searchPopup = document.getElementById('search-popup');
-            var closeSearchBtn = document.querySelector('.close-search');
-            var profileBtn = document.querySelector('.icon-btn[title="Profile"]');
-            var profilePopup = document.getElementById('profile-popup');
-            var appointmentsBtn = document.querySelector('.icon-btn[title="Appointments"]');
-            var appointmentsPopup = document.getElementById('appointments-popup');
-
-            // Helper to close all popups
-            function closeAllPopups() {
-                if (searchPopup) searchPopup.style.display = 'none';
-                if (profilePopup) profilePopup.style.display = 'none';
-                if (appointmentsPopup) appointmentsPopup.style.display = 'none';
+            // Toggle current
+            if (!isOpen) {
+              info.style.display = "block";
+              this.textContent = "Show Less";
             }
-
-            if (searchBtn && searchPopup && closeSearchBtn) {
-                searchBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    closeAllPopups();
-                    searchPopup.style.display = 'flex';
-                    setTimeout(function() {
-                        var input = searchPopup.querySelector('.search-input');
-                        if(input) input.focus();
-                    }, 100);
-                });
-                closeSearchBtn.addEventListener('click', function() {
-                    searchPopup.style.display = 'none';
-                });
-            }
-            if (profileBtn && profilePopup) {
-                profileBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    closeAllPopups();
-                    profilePopup.style.display = 'flex';
-                });
-            }
-            if (appointmentsBtn && appointmentsPopup) {
-                appointmentsBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    closeAllPopups();
-                    appointmentsPopup.style.display = 'flex';
-                });
-            }
-            // Close popups on outside click
-            document.addEventListener('mousedown', function(e) {
-                var popups = [searchPopup, profilePopup, appointmentsPopup];
-                var isInside = popups.some(function(popup) {
-                    return popup && popup.contains(e.target);
-                });
-                var isIcon = e.target.closest('.icon-btn');
-                if (!isInside && !isIcon) closeAllPopups();
-            });
-            // Close popups on Escape
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape') closeAllPopups();
-            });
-            // Search filter functionality (by name or specialty)
-            var searchInput = document.querySelector('.search-input');
-            var doctorBoxes = document.querySelectorAll('.doctor-box');
-            if (searchInput) {
-                searchInput.addEventListener('input', function() {
-                    var query = this.value.trim().toLowerCase();
-                    doctorBoxes.forEach(function(box) {
-                        var name = box.querySelector('.doctor-name').textContent.toLowerCase();
-                        var spec = box.querySelector('.doctor-spec').textContent.toLowerCase();
-                        if (name.includes(query) || spec.includes(query)) {
-                            box.style.display = '';
-                        } else {
-                            box.style.display = 'none';
-                        }
-                    });
-                });
-                searchInput.form.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    var query = searchInput.value.trim().toLowerCase();
-                    if (!query) return;
-                    var found = false;
-                    doctorBoxes.forEach(function(box) {
-                        var name = box.querySelector('.doctor-name').textContent.toLowerCase();
-                        var spec = box.querySelector('.doctor-spec').textContent.toLowerCase();
-                        if (!found && (name.includes(query) || spec.includes(query))) {
-                            box.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                            box.classList.add('highlight-doctor');
-                            setTimeout(function() { box.classList.remove('highlight-doctor'); }, 1500);
-                            found = true;
-                        }
-                    });
-                });
-            }
+          });
         });
+        var searchBtn = document.querySelector('.icon-btn[title="Search"]');
+        var searchPopup = document.getElementById("search-popup");
+        var closeSearchBtn = document.querySelector(".close-search");
+        var profileBtn = document.querySelector('.icon-btn[title="Profile"]');
+        var profilePopup = document.getElementById("profile-popup");
+        var appointmentsBtn = document.querySelector(
+          '.icon-btn[title="Appointments"]'
+        );
+        var appointmentsPopup = document.getElementById("appointments-popup");
+
+        // Helper to close all popups
+        function closeAllPopups() {
+          if (searchPopup) searchPopup.style.display = "none";
+          if (profilePopup) profilePopup.style.display = "none";
+          if (appointmentsPopup) appointmentsPopup.style.display = "none";
+        }
+
+        if (searchBtn && searchPopup && closeSearchBtn) {
+          searchBtn.addEventListener("click", function (e) {
+            e.preventDefault();
+            closeAllPopups();
+            searchPopup.style.display = "flex";
+            setTimeout(function () {
+              var input = searchPopup.querySelector(".search-input");
+              if (input) input.focus();
+            }, 100);
+          });
+          closeSearchBtn.addEventListener("click", function () {
+            searchPopup.style.display = "none";
+          });
+        }
+        if (profileBtn && profilePopup) {
+          profileBtn.addEventListener("click", function (e) {
+            e.preventDefault();
+            closeAllPopups();
+            profilePopup.style.display = "flex";
+          });
+        }
+        if (appointmentsBtn && appointmentsPopup) {
+          appointmentsBtn.addEventListener("click", function (e) {
+            e.preventDefault();
+            closeAllPopups();
+            appointmentsPopup.style.display = "flex";
+          });
+        }
+        // Close popups on outside click
+        document.addEventListener("mousedown", function (e) {
+          var popups = [searchPopup, profilePopup, appointmentsPopup];
+          var isInside = popups.some(function (popup) {
+            return popup && popup.contains(e.target);
+          });
+          var isIcon = e.target.closest(".icon-btn");
+          if (!isInside && !isIcon) closeAllPopups();
+        });
+        // Close popups on Escape
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape") closeAllPopups();
+        });
+        // Search filter functionality (by name or specialty)
+        var searchInput = document.querySelector(".search-input");
+        var doctorBoxes = document.querySelectorAll(".doctor-box");
+        if (searchInput) {
+          searchInput.addEventListener("input", function () {
+            var query = this.value.trim().toLowerCase();
+            doctorBoxes.forEach(function (box) {
+              var name = box
+                .querySelector(".doctor-name")
+                .textContent.toLowerCase();
+              var spec = box
+                .querySelector(".doctor-spec")
+                .textContent.toLowerCase();
+              if (name.includes(query) || spec.includes(query)) {
+                box.style.display = "";
+              } else {
+                box.style.display = "none";
+              }
+            });
+          });
+          searchInput.form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            var query = searchInput.value.trim().toLowerCase();
+            if (!query) return;
+            var found = false;
+            doctorBoxes.forEach(function (box) {
+              var name = box
+                .querySelector(".doctor-name")
+                .textContent.toLowerCase();
+              var spec = box
+                .querySelector(".doctor-spec")
+                .textContent.toLowerCase();
+              if (!found && (name.includes(query) || spec.includes(query))) {
+                box.scrollIntoView({ behavior: "smooth", block: "center" });
+                box.classList.add("highlight-doctor");
+                setTimeout(function () {
+                  box.classList.remove("highlight-doctor");
+                }, 1500);
+                found = true;
+              }
+            });
+          });
+        }
+      });
     </script>
     <!-- Footer Section -->
     <footer class="footer-section">
-        <div class="footer-container">
-            <div class="footer-top">
-                <div class="footer-logo-col">
-                    <img src="IMAGES/logo-removebg-preview.png" alt="Hospital Logo" height="44" style="margin-bottom:0.7rem;">
-                    <div class="footer-hospital-name">HealthCare Hospital</div>
-                    <div class="footer-hospital-desc">Providing quality healthcare for families with compassion, technology, and expertise. Your health, our priority.</div>
-                </div>
-                <div class="footer-links-col">
-                    <h4>Quick Links</h4>
-                    <ul class="footer-link-list">
-                        <li><a href="index.html#home">Home</a></li>
-                        <li><a href="about-us/about.html">About</a></li>
-                        <li><a href="doctor.html">Doctors</a></li>
-                        <li><a href="index.html#services">Services</a></li>
-                        <li><a href="index.html#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-contact-col">
-                    <h4>Contact Us</h4>
-                    <ul class="footer-contact-list">
-                        <li><i class="fa fa-map-marker-alt"></i> 123 Main Street, City, Country</li>
-                        <li><i class="fa fa-phone"></i> +123 673882675</li>
-                        <li><i class="fa fa-envelope"></i> info@lekeakaakematu.com</li>
-                        <li><a href="https://wa.me/1236743882675" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> WhatsApp Chat</a></li>
-                    </ul>
-                </div>
-                <div class="footer-hours-col">
-                    <h4>Opening Hours</h4>
-                    <ul class="footer-hours-list">
-                        <li>Mon - Fri: 8:00am - 8:00pm</li>
-                        <li>Saturday: 9:00am - 5:00pm</li>
-                        <li>Sunday: Emergency Only</li>
-                    </ul>
-                </div>
+      <div class="footer-container">
+        <div class="footer-top">
+          <div class="footer-logo-col">
+            <img
+              src="IMAGES/logo-removebg-preview.png"
+              alt="Hospital Logo"
+              height="44"
+              style="margin-bottom: 0.7rem"
+            />
+            <div class="footer-hospital-name">HealthCare Hospital</div>
+            <div class="footer-hospital-desc">
+              Providing quality healthcare for families with compassion,
+              technology, and expertise. Your health, our priority.
             </div>
-            <div class="footer-bottom">
-                <div class="footer-social">
-                    <a href="https://wa.me/1236743882675" target="_blank" rel="noopener" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-                    <a href="#" title="Facebook"><i class="fa-brands fa-facebook"></i></a>
-                    <a href="#" title="Twitter"><i class="fa-brands fa-twitter"></i></a>
-                    <a href="#" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
-                </div>
-                <div class="footer-copy">&copy; 2025 LEKE'S FOUNDATION. All rights reserved. | Designed by health care Web Team</div>
-            </div>
+          </div>
+          <div class="footer-links-col">
+            <h4>Quick Links</h4>
+            <ul class="footer-link-list">
+              <li><a href="index.html#home">Home</a></li>
+              <li><a href="about-us/about.html">About</a></li>
+              <li><a href="doctor.html">Doctors</a></li>
+              <li><a href="index.html#services">Services</a></li>
+              <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+          </div>
+          <div class="footer-contact-col">
+            <h4>Contact Us</h4>
+            <ul class="footer-contact-list">
+              <li>
+                <i class="fa fa-map-marker-alt"></i> 123 Main Street, City,
+                Country
+              </li>
+              <li><i class="fa fa-phone"></i> +123 673882675</li>
+              <li><i class="fa fa-envelope"></i> info@lekeakaakematu.com</li>
+              <li>
+                <a
+                  href="https://wa.me/1236743882675"
+                  target="_blank"
+                  rel="noopener"
+                  ><i class="fa-brands fa-whatsapp"></i> WhatsApp Chat</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="footer-hours-col">
+            <h4>Opening Hours</h4>
+            <ul class="footer-hours-list">
+              <li>Mon - Fri: 8:00am - 8:00pm</li>
+              <li>Saturday: 9:00am - 5:00pm</li>
+              <li>Sunday: Emergency Only</li>
+            </ul>
+          </div>
         </div>
+        <div class="footer-bottom">
+          <div class="footer-social">
+            <a
+              href="https://wa.me/1236743882675"
+              target="_blank"
+              rel="noopener"
+              title="WhatsApp"
+              ><i class="fa-brands fa-whatsapp"></i
+            ></a>
+            <a href="#" title="Facebook"
+              ><i class="fa-brands fa-facebook"></i
+            ></a>
+            <a href="#" title="Twitter"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#" title="Instagram"
+              ><i class="fa-brands fa-instagram"></i
+            ></a>
+            <a href="#" title="LinkedIn"
+              ><i class="fa-brands fa-linkedin"></i
+            ></a>
+          </div>
+          <div class="footer-copy">
+            &copy; 2025 LEKE'S FOUNDATION. All rights reserved. | Designed by
+            health care Web Team
+          </div>
+        </div>
+      </div>
     </footer>
-</body>
+  </body>
 </html>

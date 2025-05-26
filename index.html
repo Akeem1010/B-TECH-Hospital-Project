@@ -1,284 +1,547 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> HEALTH CARE</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HEALTH CARE</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
     <!-- Internal styles moved to styles.css -->
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <div class="header-container">
-            <div class="header-section logo-section">
-                <img src="IMAGES/logo-removebg-preview.png" alt="Hospital Logo" class="header-logo" height="40">
-                <!-- <span><i class="fa-solid fa-hospital"></i> HealthCare Hospital</span> -->
-            </div>
-            <div class="header-section menu-section">
-                <nav class="desktop-nav">
-                    <ul class="nav-links">
-                        <li><a href="#home"><i class="fa-solid fa-house"></i> Home</a></li>
-                        <li><a href="about.html"><i class="fa-solid fa-circle-info"></i> About</a></li>
-                        <li><a href="doctor.html"><i class="fa-solid fa-user-doctor"></i> Doctors</a></li>
-                        <li><a href="#contact"><i class="fa-solid fa-envelope"></i> Contact</a></li>
-                    </ul>
-                </nav>
-                <button class="menu-toggle" aria-label="Open menu">
-                    <i class="fa-solid fa-bars"></i>
-                </button>
-            </div>
-            <div class="header-section icons-section">
-                <a href="#search" class="icon-btn" title="Search"><i class="fa-solid fa-magnifying-glass"></i></a>
-                <a href="#profile" class="icon-btn" title="Profile"><i class="fa-solid fa-user"></i></a>
-                <a href="#appointments" class="icon-btn" title="Appointments"><i class="fa-solid fa-calendar-check"></i></a>
-            </div>
+      <div class="header-container">
+        <div class="header-section logo-section">
+          <img
+            src="IMAGES/logo-removebg-preview.png"
+            alt="Hospital Logo"
+            class="header-logo"
+            height="40"
+          />
+          <!-- <span><i class="fa-solid fa-hospital"></i> HealthCare Hospital</span> -->
         </div>
+        <div class="header-section menu-section">
+          <nav class="desktop-nav">
+            <ul class="nav-links">
+              <li>
+                <a href="#home"><i class="fa-solid fa-house"></i> Home</a>
+              </li>
+              <li>
+                <a href="about.html"
+                  ><i class="fa-solid fa-circle-info"></i> About</a
+                >
+              </li>
+              <li>
+                <a href="doctor.html"
+                  ><i class="fa-solid fa-user-doctor"></i> Doctors</a
+                >
+              </li>
+              <li>
+                <a href="#contact"
+                  ><i class="fa-solid fa-envelope"></i> Contact</a
+                >
+              </li>
+            </ul>
+          </nav>
+          <button class="menu-toggle" aria-label="Open menu">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+        </div>
+        <div class="header-section icons-section">
+          <a href="#search" class="icon-btn" title="Search"
+            ><i class="fa-solid fa-magnifying-glass"></i
+          ></a>
+          <a href="#profile" class="icon-btn" title="Profile"
+            ><i class="fa-solid fa-user"></i
+          ></a>
+          <a href="#appointments" class="icon-btn" title="Appointments"
+            ><i class="fa-solid fa-calendar-check"></i
+          ></a>
+        </div>
+      </div>
     </header>
     <main>
-        <section id="home" class="hero-section">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h1>LEKE'S FOUNDATION</h1>
-                    <!-- <h1>HEALTH CARE</h1> -->
-                    <h3>for whole family</h3>
-                    <p>In health care sector, services excellence is the facility of the hospitalas health care service providerto consistently.</p>
-                    <a href="#services" class="hero-btn">CHECK OUR SERVICES</a>
-                </div>
+      <section id="home" class="hero-section">
+        <div class="hero-content">
+          <div class="hero-text">
+            <h1>LEKE'S FOUNDATION</h1>
+            <!-- <h1>HEALTH CARE</h1> -->
+            <h3>for whole family</h3>
+            <p>
+              In health care sector, services excellence is the facility of the
+              hospitalas health care service providerto consistently.
+            </p>
+            <a href="#services" class="hero-btn">CHECK OUR SERVICES</a>
+          </div>
+        </div>
+      </section>
+      <section class="features-section">
+        <div class="features-flex">
+          <div class="feature-box">
+            <i class="fa-solid fa-user-doctor"></i>
+            <h3>Our Doctors</h3>
+            <p>Find experienced specialists for every need.</p>
+            <a href="doctor.html" class="feature-btn">View Doctors</a>
+          </div>
+          <div class="feature-box">
+            <i class="fa-solid fa-clock"></i>
+            <h3>24 Hours Services</h3>
+            <p>Round-the-clock emergency and support services.</p>
+            <a href="#services" class="feature-btn">Our Services</a>
+          </div>
+          <div class="feature-box">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <h3>Need Emergency</h3>
+            <p>Immediate help for urgent medical needs.</p>
+            <a href="#contact" class="feature-btn"
+              >Contact Us: +123 673882675</a
+            >
+            <a
+              href="https://wa.me/1236743882675"
+              class="feature-btn whatsapp-btn"
+              target="_blank"
+              rel="noopener"
+              style="margin-top: 0.5rem; background: #25d366; color: #fff"
+              ><i class="fa-brands fa-whatsapp"></i> WhatsApp</a
+            >
+          </div>
+        </div>
+      </section>
+      <section id="services" class="services-section">
+        <div class="services-overlay">
+          <h2 class="services-title">Our Hospital Services</h2>
+          <ul class="services-list">
+            <li>
+              <i class="fa-solid fa-stethoscope"></i> General Consultation
+            </li>
+            <li><i class="fa-solid fa-heart-pulse"></i> Cardiology</li>
+            <li><i class="fa-solid fa-x-ray"></i> Radiology & Imaging</li>
+            <li><i class="fa-solid fa-user-nurse"></i> Nursing Care</li>
+            <li><i class="fa-solid fa-syringe"></i> Vaccinations</li>
+            <li>
+              <i class="fa-solid fa-briefcase-medical"></i> Emergency Services
+            </li>
+            <li><i class="fa-solid fa-flask-vial"></i> Laboratory Services</li>
+            <li><i class="fa-solid fa-baby"></i> Maternity & Pediatrics</li>
+            <li><i class="fa-solid fa-bed"></i> Inpatient & Outpatient Care</li>
+            <li><i class="fa-solid fa-user-md"></i> Specialist Referrals</li>
+          </ul>
+        </div>
+      </section>
+      <section class="why-choose-section">
+        <div class="why-choose-container">
+          <h1 class="why-choose-title">Why Choose Us</h1>
+          <h3 class="why-choose-sub">YOU WILL GET THE BEST MEDICAL BENEFITS</h3>
+          <p class="why-choose-desc">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Pellentesque euismod, nisi eu consectetur consectetur, nisl nisi
+            consectetur nisi, euismod euismod nisi nisi euismod.
+          </p>
+          <div class="facilities-flex">
+            <ul class="facilities-list">
+              <li>
+                <i class="fa-solid fa-hospital-user"></i> Advanced MRI Center
+              </li>
+              <li>
+                <i class="fa-solid fa-microscope"></i> Modern Pathology Lab
+              </li>
+              <li>
+                <i class="fa-solid fa-ambulance"></i> 24/7 Ambulance Service
+              </li>
+              <li>
+                <i class="fa-solid fa-heart-circle-plus"></i> Cardiac Care Unit
+              </li>
+            </ul>
+            <ul class="facilities-list">
+              <li><i class="fa-solid fa-x-ray"></i> Digital X-Ray Suite</li>
+              <li>
+                <i class="fa-solid fa-user-nurse"></i> Neonatal Intensive Care
+              </li>
+              <li><i class="fa-solid fa-syringe"></i> Vaccination Center</li>
+              <li><i class="fa-solid fa-bed"></i> Private Patient Rooms</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      <div id="search-popup" class="search-popup" style="display: none">
+        <form class="search-form" onsubmit="return false;">
+          <input
+            type="text"
+            class="search-input"
+            placeholder="Search doctors, services..."
+          />
+          <button type="submit" class="search-submit">
+            <i class="fa fa-search"></i>
+          </button>
+        </form>
+        <button class="close-search" aria-label="Close search">&times;</button>
+      </div>
+      <div id="profile-popup" class="profile-popup" style="display: none">
+        <ul class="popup-list">
+          <li><a href="#profile-view" class="popup-link">View Profile</a></li>
+          <li><a href="#logout" class="popup-link">Logout</a></li>
+        </ul>
+      </div>
+      <div
+        id="appointments-popup"
+        class="appointments-popup"
+        style="display: none"
+      >
+        <ul class="popup-list">
+          <li>
+            <a
+              href="#check-list"
+              class="popup-link"
+              id="appointment-check-list-link"
+              >Check List</a
+            >
+          </li>
+          <li>
+            <a
+              href="#edit-appointment"
+              class="popup-link"
+              id="appointment-edit-appointment-link"
+              >Edit Appointment</a
+            >
+          </li>
+        </ul>
+      </div>
+      <!-- Newsletter Section -->
+      <section class="newsletter-section">
+        <div class="newsletter-container">
+          <h2 class="newsletter-title">Subscribe to Our Newsletter</h2>
+          <p class="newsletter-desc">
+            Stay updated with the latest health tips, hospital news, and special
+            offers. Enter your email below:
+          </p>
+          <form class="newsletter-form" onsubmit="return false;">
+            <input
+              type="email"
+              class="newsletter-input"
+              placeholder="Enter your email address"
+              required
+            />
+            <button type="submit" class="newsletter-btn">Subscribe</button>
+          </form>
+          <div
+            class="newsletter-success"
+            style="
+              display: none;
+              color: #388e3c;
+              margin-top: 1rem;
+              font-weight: 600;
+            "
+          >
+            Thank you for subscribing!
+          </div>
+        </div>
+      </section>
+      <!-- Contact Section -->
+      <section id="contact" class="contact-section">
+        <div class="contact-container">
+          <div class="contact-info">
+            <h2>Contact Us</h2>
+            <p>
+              We are here to help you. Reach out to us for any inquiries,
+              appointments, or feedback.
+            </p>
+            <ul class="contact-details">
+              <li>
+                <i class="fa fa-map-marker-alt"></i> 123 Main Street, City,
+                Country
+              </li>
+              <li><i class="fa fa-phone"></i> +123 673882675</li>
+              <li><i class="fa fa-envelope"></i> info@lekeakaakematu.com</li>
+            </ul>
+            <div class="contact-social">
+              <a
+                href="https://wa.me/1236743882675"
+                target="_blank"
+                rel="noopener"
+                title="WhatsApp"
+                ><i class="fa-brands fa-whatsapp"></i
+              ></a>
+              <a href="#" title="Facebook"
+                ><i class="fa-brands fa-facebook"></i
+              ></a>
+              <a href="#" title="Twitter"
+                ><i class="fa-brands fa-twitter"></i
+              ></a>
+              <a href="#" title="Instagram"
+                ><i class="fa-brands fa-instagram"></i
+              ></a>
             </div>
-        </section>
-        <section class="features-section">
-            <div class="features-flex">
-                <div class="feature-box">
-                    <i class="fa-solid fa-user-doctor"></i>
-                    <h3>Our Doctors</h3>
-                    <p>Find experienced specialists for every need.</p>
-                    <a href="doctor.html" class="feature-btn">View Doctors</a>
-                </div>
-                <div class="feature-box">
-                    <i class="fa-solid fa-clock"></i>
-                    <h3>24 Hours Services</h3>
-                    <p>Round-the-clock emergency and support services.</p>
-                    <a href="#services" class="feature-btn">Our Services</a>
-                </div>
-                <div class="feature-box">
-                    <i class="fa-solid fa-triangle-exclamation"></i>
-                    <h3>Need Emergency</h3>
-                    <p>Immediate help for urgent medical needs.</p>
-                    <a href="#contact" class="feature-btn">Contact Us: +123 673882675</a>
-                    <a href="https://wa.me/1236743882675" class="feature-btn whatsapp-btn" target="_blank" rel="noopener" style="margin-top:0.5rem; background:#25D366; color:#fff;"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-                </div>
-            </div>
-        </section>
-        <section id="services" class="services-section">
-            <div class="services-overlay">
-                <h2 class="services-title">Our Hospital Services</h2>
-                <ul class="services-list">
-                    <li><i class="fa-solid fa-stethoscope"></i> General Consultation</li>
-                    <li><i class="fa-solid fa-heart-pulse"></i> Cardiology</li>
-                    <li><i class="fa-solid fa-x-ray"></i> Radiology & Imaging</li>
-                    <li><i class="fa-solid fa-user-nurse"></i> Nursing Care</li>
-                    <li><i class="fa-solid fa-syringe"></i> Vaccinations</li>
-                    <li><i class="fa-solid fa-briefcase-medical"></i> Emergency Services</li>
-                    <li><i class="fa-solid fa-flask-vial"></i> Laboratory Services</li>
-                    <li><i class="fa-solid fa-baby"></i> Maternity & Pediatrics</li>
-                    <li><i class="fa-solid fa-bed"></i> Inpatient & Outpatient Care</li>
-                    <li><i class="fa-solid fa-user-md"></i> Specialist Referrals</li>
-                </ul>
-            </div>
-        </section>
-        <section class="why-choose-section">
-            <div class="why-choose-container">
-                <h1 class="why-choose-title">Why Choose Us</h1>
-                <h3 class="why-choose-sub">YOU WILL GET THE BEST MEDICAL BENEFITS</h3>
-                <p class="why-choose-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque euismod, nisi eu consectetur consectetur, nisl nisi consectetur nisi, euismod euismod nisi nisi euismod.</p>
-                <div class="facilities-flex">
-                    <ul class="facilities-list">
-                        <li><i class="fa-solid fa-hospital-user"></i> Advanced MRI Center</li>
-                        <li><i class="fa-solid fa-microscope"></i> Modern Pathology Lab</li>
-                        <li><i class="fa-solid fa-ambulance"></i> 24/7 Ambulance Service</li>
-                        <li><i class="fa-solid fa-heart-circle-plus"></i> Cardiac Care Unit</li>
-                    </ul>
-                    <ul class="facilities-list">
-                        <li><i class="fa-solid fa-x-ray"></i> Digital X-Ray Suite</li>
-                        <li><i class="fa-solid fa-user-nurse"></i> Neonatal Intensive Care</li>
-                        <li><i class="fa-solid fa-syringe"></i> Vaccination Center</li>
-                        <li><i class="fa-solid fa-bed"></i> Private Patient Rooms</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-        <div id="search-popup" class="search-popup" style="display:none;">
-            <form class="search-form" onsubmit="return false;">
-                <input type="text" class="search-input" placeholder="Search doctors, services...">
-                <button type="submit" class="search-submit"><i class="fa fa-search"></i></button>
+          </div>
+          <div class="contact-form-map">
+            <form class="contact-form" onsubmit="return false;">
+              <h3>Send Us a Message</h3>
+              <input type="text" name="name" placeholder="Your Name" required />
+              <input
+                type="email"
+                name="email"
+                placeholder="Your Email"
+                required
+              />
+              <input
+                type="tel"
+                name="phone"
+                placeholder="Your Phone (optional)"
+              />
+              <textarea
+                name="message"
+                placeholder="Your Message"
+                required
+              ></textarea>
+              <button type="submit" class="contact-btn">Send Message</button>
+              <div
+                class="contact-success"
+                style="
+                  display: none;
+                  color: #388e3c;
+                  margin-top: 1rem;
+                  font-weight: 600;
+                "
+              >
+                Thank you for contacting us!
+              </div>
             </form>
-            <button class="close-search" aria-label="Close search">&times;</button>
-        </div>
-        <div id="profile-popup" class="profile-popup" style="display:none;">
-            <ul class="popup-list">
-                <li><a href="#profile-view" class="popup-link">View Profile</a></li>
-                <li><a href="#logout" class="popup-link">Logout</a></li>
-            </ul>
-        </div>
-        <div id="appointments-popup" class="appointments-popup" style="display:none;">
-            <ul class="popup-list">
-                <li><a href="#check-list" class="popup-link" id="appointment-check-list-link">Check List</a></li>
-                <li><a href="#edit-appointment" class="popup-link" id="appointment-edit-appointment-link">Edit Appointment</a></li>
-            </ul>
-        </div>
-        <!-- Newsletter Section -->
-        <section class="newsletter-section">
-            <div class="newsletter-container">
-                <h2 class="newsletter-title">Subscribe to Our Newsletter</h2>
-                <p class="newsletter-desc">Stay updated with the latest health tips, hospital news, and special offers. Enter your email below:</p>
-                <form class="newsletter-form" onsubmit="return false;">
-                    <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
-                    <button type="submit" class="newsletter-btn">Subscribe</button>
-                </form>
-                <div class="newsletter-success" style="display:none; color:#388e3c; margin-top:1rem; font-weight:600;">Thank you for subscribing!</div>
+            <div class="contact-map">
+              <iframe
+                src="https://www.google.com/maps?q=123+Main+Street,+City,+Country&output=embed"
+                width="100%"
+                height="250"
+                style="border: 0"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+              ></iframe>
             </div>
-        </section>
-        <!-- Footer Section -->
-        <footer class="footer-section">
-            <div class="footer-container">
-                <div class="footer-top">
-                    <div class="footer-logo-col">
-                        <img src="IMAGES/logo-removebg-preview.png" alt="Hospital Logo" height="44" style="margin-bottom:0.7rem;">
-                        <div class="footer-hospital-name">HealthCare Hospital</div>
-                        <div class="footer-hospital-desc">Providing quality healthcare for families with compassion, technology, and expertise. Your health, our priority.</div>
-                    </div>
-                    <div class="footer-links-col">
-                        <h4>Quick Links</h4>
-                        <ul class="footer-link-list">
-                            <li><a href="#home">Home</a></li>
-                            <li><a href="#about">About</a></li>
-                            <li><a href="doctor.html">Doctors</a></li>
-                            <li><a href="#services">Services</a></li>
-                            <li><a href="#contact">Contact</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-contact-col">
-                        <h4>Contact Us</h4>
-                        <ul class="footer-contact-list">
-                            <li><i class="fa fa-map-marker-alt"></i> 123 Main Street, City, Country</li>
-                            <li><i class="fa fa-phone"></i> +123 673882675</li>
-                            <li><i class="fa fa-envelope"></i> info@lekeakaakematu.com</li>
-                            <li><a href="https://wa.me/1236743882675" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> WhatsApp Chat</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-hours-col">
-                        <h4>Opening Hours</h4>
-                        <ul class="footer-hours-list">
-                            <li>Mon - Fri: 8:00am - 8:00pm</li>
-                            <li>Saturday: 9:00am - 5:00pm</li>
-                            <li>Sunday: Emergency Only</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="footer-bottom">
-                    <div class="footer-social">
-                        <a href="https://wa.me/1236743882675" target="_blank" rel="noopener" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-                        <a href="#" title="Facebook"><i class="fa-brands fa-facebook"></i></a>
-                        <a href="#" title="Twitter"><i class="fa-brands fa-twitter"></i></a>
-                        <a href="#" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="#" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
-                    </div>
-                    <div class="footer-copy">&copy; 2025 LEKE'S FOUNDATION. All rights reserved. | Designed by health care Web Team</div>
-                </div>
+          </div>
+        </div>
+      </section>
+      <!-- Footer Section -->
+      <footer class="footer-section">
+        <div class="footer-container">
+          <div class="footer-top">
+            <div class="footer-logo-col">
+              <img
+                src="IMAGES/logo-removebg-preview.png"
+                alt="Hospital Logo"
+                height="44"
+                style="margin-bottom: 0.7rem"
+              />
+              <div class="footer-hospital-name">HealthCare Hospital</div>
+              <div class="footer-hospital-desc">
+                Providing quality healthcare for families with compassion,
+                technology, and expertise. Your health, our priority.
+              </div>
             </div>
-        </footer>
+            <div class="footer-links-col">
+              <h4>Quick Links</h4>
+              <ul class="footer-link-list">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="doctor.html">Doctors</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+              </ul>
+            </div>
+            <div class="footer-contact-col">
+              <h4>Contact Us</h4>
+              <ul class="footer-contact-list">
+                <li>
+                  <i class="fa fa-map-marker-alt"></i> 123 Main Street, City,
+                  Country
+                </li>
+                <li><i class="fa fa-phone"></i> +123 673882675</li>
+                <li><i class="fa fa-envelope"></i> info@lekeakaakematu.com</li>
+                <li>
+                  <a
+                    href="https://wa.me/1236743882675"
+                    target="_blank"
+                    rel="noopener"
+                    ><i class="fa-brands fa-whatsapp"></i> WhatsApp Chat</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="footer-hours-col">
+              <h4>Opening Hours</h4>
+              <ul class="footer-hours-list">
+                <li>Mon - Sat: 8:00am - 8:00pm</li>
+                <!-- <li>Saturday: 9:00am - 5:00pm</li> -->
+                <li>Sunday: Emergency Only</li>
+              </ul>
+            </div>
+          </div>
+          <div class="footer-bottom">
+            <div class="footer-social">
+              <a
+                href="https://wa.me/1236743882675"
+                target="_blank"
+                rel="noopener"
+                title="WhatsApp"
+                ><i class="fa-brands fa-whatsapp"></i
+              ></a>
+              <a href="#" title="Facebook"
+                ><i class="fa-brands fa-facebook"></i
+              ></a>
+              <a href="#" title="Twitter"
+                ><i class="fa-brands fa-twitter"></i
+              ></a>
+              <a href="#" title="Instagram"
+                ><i class="fa-brands fa-instagram"></i
+              ></a>
+              <a href="#" title="LinkedIn"
+                ><i class="fa-brands fa-linkedin"></i
+              ></a>
+            </div>
+            <div class="footer-copy">
+              &copy; 2025 LEKE'S FOUNDATION. All rights reserved. | Designed by
+              health care Web Team
+            </div>
+          </div>
+        </div>
+      </footer>
     </main>
     <script src="script.js"></script>
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
+      document.addEventListener("DOMContentLoaded", function () {
         // ...existing code for read more...
         var searchBtn = document.querySelector('.icon-btn[title="Search"]');
-        var searchPopup = document.getElementById('search-popup');
-        var closeSearchBtn = document.querySelector('.close-search');
+        var searchPopup = document.getElementById("search-popup");
+        var closeSearchBtn = document.querySelector(".close-search");
         var profileBtn = document.querySelector('.icon-btn[title="Profile"]');
-        var profilePopup = document.getElementById('profile-popup');
-        var appointmentsBtn = document.querySelector('.icon-btn[title="Appointments"]');
-        var appointmentsPopup = document.getElementById('appointments-popup');
+        var profilePopup = document.getElementById("profile-popup");
+        var appointmentsBtn = document.querySelector(
+          '.icon-btn[title="Appointments"]'
+        );
+        var appointmentsPopup = document.getElementById("appointments-popup");
 
         // Helper to close all popups
         function closeAllPopups() {
-            if (searchPopup) searchPopup.style.display = 'none';
-            if (profilePopup) profilePopup.style.display = 'none';
-            if (appointmentsPopup) appointmentsPopup.style.display = 'none';
+          if (searchPopup) searchPopup.style.display = "none";
+          if (profilePopup) profilePopup.style.display = "none";
+          if (appointmentsPopup) appointmentsPopup.style.display = "none";
         }
 
         if (searchBtn && searchPopup && closeSearchBtn) {
-            searchBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                closeAllPopups();
-                searchPopup.style.display = 'flex';
-                setTimeout(function() {
-                    var input = searchPopup.querySelector('.search-input');
-                    if(input) input.focus();
-                }, 100);
-            });
-            closeSearchBtn.addEventListener('click', function() {
-                searchPopup.style.display = 'none';
-            });
+          searchBtn.addEventListener("click", function (e) {
+            e.preventDefault();
+            closeAllPopups();
+            searchPopup.style.display = "flex";
+            setTimeout(function () {
+              var input = searchPopup.querySelector(".search-input");
+              if (input) input.focus();
+            }, 100);
+          });
+          closeSearchBtn.addEventListener("click", function () {
+            searchPopup.style.display = "none";
+          });
         }
         if (profileBtn && profilePopup) {
-            profileBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                closeAllPopups();
-                profilePopup.style.display = 'flex';
-            });
+          profileBtn.addEventListener("click", function (e) {
+            e.preventDefault();
+            closeAllPopups();
+            profilePopup.style.display = "flex";
+          });
         }
         if (appointmentsBtn && appointmentsPopup) {
-            appointmentsBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                closeAllPopups();
-                appointmentsPopup.style.display = 'flex';
-            });
+          appointmentsBtn.addEventListener("click", function (e) {
+            e.preventDefault();
+            closeAllPopups();
+            appointmentsPopup.style.display = "flex";
+          });
         }
         // Close popups on outside click
-        document.addEventListener('mousedown', function(e) {
-            var popups = [searchPopup, profilePopup, appointmentsPopup];
-            var isInside = popups.some(function(popup) {
-                return popup && popup.contains(e.target);
-            });
-            var isIcon = e.target.closest('.icon-btn');
-            if (!isInside && !isIcon) closeAllPopups();
+        document.addEventListener("mousedown", function (e) {
+          var popups = [searchPopup, profilePopup, appointmentsPopup];
+          var isInside = popups.some(function (popup) {
+            return popup && popup.contains(e.target);
+          });
+          var isIcon = e.target.closest(".icon-btn");
+          if (!isInside && !isIcon) closeAllPopups();
         });
         // Close popups on Escape
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') closeAllPopups();
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape") closeAllPopups();
         });
         // Make appointment links clickable
-        var appointmentCheckListLink = document.getElementById('appointment-check-list-link');
-        var appointmentEditAppointmentLink = document.getElementById('appointment-edit-appointment-link');
+        var appointmentCheckListLink = document.getElementById(
+          "appointment-check-list-link"
+        );
+        var appointmentEditAppointmentLink = document.getElementById(
+          "appointment-edit-appointment-link"
+        );
         if (appointmentCheckListLink) {
-            appointmentCheckListLink.addEventListener('click', function(e) {
-                e.preventDefault();
-                alert('Appointment Check List clicked!');
-            });
+          appointmentCheckListLink.addEventListener("click", function (e) {
+            e.preventDefault();
+            alert("Appointment Check List clicked!");
+          });
         }
         if (appointmentEditAppointmentLink) {
-            appointmentEditAppointmentLink.addEventListener('click', function(e) {
-                e.preventDefault();
-                alert('Edit Appointment clicked!');
-            });
-        }
-    });
-    // Newsletter subscribe feedback
-    var newsletterForm = document.querySelector('.newsletter-form');
-    var newsletterInput = document.querySelector('.newsletter-input');
-    var newsletterSuccess = document.querySelector('.newsletter-success');
-    if(newsletterForm && newsletterInput && newsletterSuccess) {
-        newsletterForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            if(newsletterInput.value.trim()) {
-                newsletterSuccess.style.display = 'block';
-                newsletterInput.value = '';
-                setTimeout(function(){ newsletterSuccess.style.display = 'none'; }, 3000);
+          appointmentEditAppointmentLink.addEventListener(
+            "click",
+            function (e) {
+              e.preventDefault();
+              alert("Edit Appointment clicked!");
             }
+          );
+        }
+      });
+      // Newsletter subscribe feedback
+      var newsletterForm = document.querySelector(".newsletter-form");
+      var newsletterInput = document.querySelector(".newsletter-input");
+      var newsletterSuccess = document.querySelector(".newsletter-success");
+      if (newsletterForm && newsletterInput && newsletterSuccess) {
+        newsletterForm.addEventListener("submit", function (e) {
+          e.preventDefault();
+          if (newsletterInput.value.trim()) {
+            newsletterSuccess.style.display = "block";
+            newsletterInput.value = "";
+            setTimeout(function () {
+              newsletterSuccess.style.display = "none";
+            }, 3000);
+          }
         });
-    }
+      }
+      // Contact form feedback
+      var contactForm = document.querySelector(".contact-form");
+      var contactSuccess = document.querySelector(".contact-success");
+      if (contactForm && contactSuccess) {
+        contactForm.addEventListener("submit", function (e) {
+          e.preventDefault();
+          contactSuccess.style.display = "block";
+          contactForm.reset();
+          setTimeout(function () {
+            contactSuccess.style.display = "none";
+          }, 3000);
+        });
+      }
+      // Header nav active state on scroll
+      function setActiveNavLink() {
+        var sections = document.querySelectorAll("section[id]");
+        var navLinks = document.querySelectorAll(".nav-links a");
+        var scrollY = window.pageYOffset;
+        sections.forEach(function (section) {
+          var sectionTop = section.offsetTop - 80;
+          var sectionHeight = section.offsetHeight;
+          if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+            navLinks.forEach(function (link) {
+              link.classList.remove("active");
+              if (link.getAttribute("href") === "#" + section.id) {
+                link.classList.add("active");
+              }
+            });
+          }
+        });
+      }
+      window.addEventListener("scroll", setActiveNavLink);
+      // Initial call
+      setActiveNavLink();
     </script>
-</body>
+  </body>
 </html>

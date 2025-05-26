@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard | HealthCare Hospital</title>
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="dashboard.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <style>
+      /* All dashboard styles moved to dashboard.css */
+    </style>
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <img src="../IMAGES/logo-removebg-preview.png" alt="Logo" />
+          Admin Panel
+        </div>
+        <nav class="sidebar-menu">
+          <ul>
+            <li>
+              <a href="#" class="active"
+                ><i class="fa fa-tachometer-alt"></i> Dashboard</a
+              >
+            </li>
+            <li>
+              <a href="#"><i class="fa fa-user-md"></i> Doctors</a>
+            </li>
+            <li>
+              <a href="#"><i class="fa fa-users"></i> Patients</a>
+            </li>
+            <li>
+              <a href="#"><i class="fa fa-calendar-check"></i> Appointments</a>
+            </li>
+            <li>
+              <a href="#"><i class="fa fa-briefcase-medical"></i> Services</a>
+            </li>
+            <li>
+              <a href="#"><i class="fa fa-flask-vial"></i> Lab Reports</a>
+            </li>
+            <li>
+              <a href="#"><i class="fa fa-envelope"></i> Messages</a>
+            </li>
+            <li>
+              <a href="#"><i class="fa fa-cogs"></i> Settings</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="sidebar-footer">
+          <i class="fa fa-user-shield"></i> Admin |
+          <span id="current-date"></span>
+        </div>
+      </aside>
+      <main class="main-content">
+        <div class="dashboard-header">
+          <h1>Welcome, Admin</h1>
+          <div class="admin-info">
+            <i class="fa fa-user-circle"></i> admin@lekeakaakematu.com
+          </div>
+        </div>
+        <!-- Dashboard Section -->
+        <section id="dashboard-section" class="dashboard-section-content">
+          <div class="dashboard-stats">
+            <div class="stat-card">
+              <span class="stat-icon"><i class="fa fa-user-md"></i></span>
+              <span class="stat-label">Doctors</span>
+              <span class="stat-value">18</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-icon"><i class="fa fa-users"></i></span>
+              <span class="stat-label">Patients</span>
+              <span class="stat-value">245</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-icon"
+                ><i class="fa fa-calendar-check"></i
+              ></span>
+              <span class="stat-label">Appointments</span>
+              <span class="stat-value">32</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-icon"
+                ><i class="fa fa-briefcase-medical"></i
+              ></span>
+              <span class="stat-label">Services</span>
+              <span class="stat-value">12</span>
+            </div>
+          </div>
+          <div class="dashboard-section">
+            <h2>Recent Appointments</h2>
+            <table class="recent-table">
+              <thead>
+                <tr>
+                  <th>Patient</th>
+                  <th>Doctor</th>
+                  <th>Date</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>John Doe</td>
+                  <td>Dr. Smith</td>
+                  <td>2025-05-25</td>
+                  <td><span class="status completed">Completed</span></td>
+                </tr>
+                <tr>
+                  <td>Jane Smith</td>
+                  <td>Dr. Adams</td>
+                  <td>2025-05-26</td>
+                  <td><span class="status pending">Pending</span></td>
+                </tr>
+                <tr>
+                  <td>Michael Lee</td>
+                  <td>Dr. Brown</td>
+                  <td>2025-05-26</td>
+                  <td><span class="status cancelled">Cancelled</span></td>
+                </tr>
+                <tr>
+                  <td>Sarah Kim</td>
+                  <td>Dr. Patel</td>
+                  <td>2025-05-27</td>
+                  <td><span class="status pending">Pending</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="dashboard-section">
+            <h2>Recent Messages</h2>
+            <table class="recent-table">
+              <thead>
+                <tr>
+                  <th>From</th>
+                  <th>Email</th>
+                  <th>Subject</th>
+                  <th>Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Mary Johnson</td>
+                  <td>maryj@email.com</td>
+                  <td>Appointment Inquiry</td>
+                  <td>2025-05-25</td>
+                </tr>
+                <tr>
+                  <td>Paul Green</td>
+                  <td>paulg@email.com</td>
+                  <td>Lab Report</td>
+                  <td>2025-05-25</td>
+                </tr>
+                <tr>
+                  <td>Linda White</td>
+                  <td>lindaw@email.com</td>
+                  <td>Feedback</td>
+                  <td>2025-05-24</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+        <!-- Doctors Section -->
+        <section
+          id="doctors-section"
+          class="dashboard-section-content"
+          style="display: none"
+        >
+          <h2>Doctors Management</h2>
+          <button class="add-btn" id="add-doctor-btn">
+            <i class="fa fa-plus"></i> Add Doctor
+          </button>
+          <table class="recent-table" id="doctors-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Specialty</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="doctors-tbody">
+              <tr>
+                <td>Dr. Smith</td>
+                <td>Cardiology</td>
+                <td>smith@email.com</td>
+                <td>+123456789</td>
+                <td>
+                  <button class="edit-btn"><i class="fa fa-edit"></i></button>
+                  <button class="delete-btn">
+                    <i class="fa fa-trash"></i>
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>Dr. Adams</td>
+                <td>Radiology</td>
+                <td>adams@email.com</td>
+                <td>+987654321</td>
+                <td>
+                  <button class="edit-btn"><i class="fa fa-edit"></i></button>
+                  <button class="delete-btn">
+                    <i class="fa fa-trash"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- Doctor Modal -->
+          <div id="doctor-modal" class="modal" style="display: none">
+            <div class="modal-content">
+              <span class="close-modal" id="close-doctor-modal">&times;</span>
+              <h3 id="doctor-modal-title">Add Doctor</h3>
+              <form id="doctor-form">
+                <input type="hidden" id="doctor-index" />
+                <label
+                  >Name:<input type="text" id="doctor-name" required
+                /></label>
+                <label
+                  >Specialty:<input type="text" id="doctor-specialty" required
+                /></label>
+                <label
+                  >Email:<input type="email" id="doctor-email" required
+                /></label>
+                <label
+                  >Phone:<input type="text" id="doctor-phone" required
+                /></label>
+                <button type="submit" class="save-btn">
+                  <i class="fa fa-save"></i> Save
+                </button>
+              </form>
+            </div>
+          </div>
+        </section>
+        <!-- Patients Section -->
+        <section
+          id="patients-section"
+          class="dashboard-section-content"
+          style="display: none"
+        >
+          <h2>Patients Management</h2>
+          <button class="add-btn" id="add-patient-btn">
+            <i class="fa fa-plus"></i> Add Patient
+          </button>
+          <table class="recent-table" id="patients-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>Age</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="patients-tbody">
+              <tr>
+                <td>John Doe</td>
+                <td>Male</td>
+                <td>34</td>
+                <td>john@email.com</td>
+                <td>+123456789</td>
+                <td>
+                  <button class="edit-btn"><i class="fa fa-edit"></i></button>
+                  <button class="delete-btn">
+                    <i class="fa fa-trash"></i>
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>Jane Smith</td>
+                <td>Female</td>
+                <td>28</td>
+                <td>jane@email.com</td>
+                <td>+987654321</td>
+                <td>
+                  <button class="edit-btn"><i class="fa fa-edit"></i></button>
+                  <button class="delete-btn">
+                    <i class="fa fa-trash"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- Patient Modal -->
+          <div id="patient-modal" class="modal" style="display: none">
+            <div class="modal-content">
+              <span class="close-modal" id="close-patient-modal">&times;</span>
+              <h3 id="patient-modal-title">Add Patient</h3>
+              <form id="patient-form">
+                <input type="hidden" id="patient-index" />
+                <label
+                  >Name:<input type="text" id="patient-name" required
+                /></label>
+                <label
+                  >Gender:
+                  <select id="patient-gender" required>
+                    <option value="">Select</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                  </select>
+                </label>
+                <label
+                  >Age:<input type="number" id="patient-age" min="0" required
+                /></label>
+                <label
+                  >Email:<input type="email" id="patient-email" required
+                /></label>
+                <label
+                  >Phone:<input type="text" id="patient-phone" required
+                /></label>
+                <button type="submit" class="save-btn">
+                  <i class="fa fa-save"></i> Save
+                </button>
+              </form>
+            </div>
+          </div>
+        </section>
+        <!-- Appointments Section -->
+        <section
+          id="appointments-section"
+          class="dashboard-section-content"
+          style="display: none"
+        >
+          <h2>Appointments Management</h2>
+          <button class="add-btn" id="add-appointment-btn">
+            <i class="fa fa-plus"></i> Add Appointment
+          </button>
+          <table class="recent-table" id="appointments-table">
+            <thead>
+              <tr>
+                <th>Patient</th>
+                <th>Doctor</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="appointments-tbody">
+              <tr>
+                <td>John Doe</td>
+                <td>Dr. Smith</td>
+                <td>2025-05-25</td>
+                <td><span class="status completed">Completed</span></td>
+                <td>
+                  <button class="edit-btn"><i class="fa fa-edit"></i></button>
+                  <button class="delete-btn"><i class="fa fa-trash"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td>Jane Smith</td>
+                <td>Dr. Adams</td>
+                <td>2025-05-26</td>
+                <td><span class="status pending">Pending</span></td>
+                <td>
+                  <button class="edit-btn"><i class="fa fa-edit"></i></button>
+                  <button class="delete-btn"><i class="fa fa-trash"></i></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- Appointment Modal -->
+          <div id="appointment-modal" class="modal" style="display: none">
+            <div class="modal-content">
+              <span class="close-modal" id="close-appointment-modal">&times;</span>
+              <h3 id="appointment-modal-title">Add Appointment</h3>
+              <form id="appointment-form">
+                <input type="hidden" id="appointment-index" />
+                <label>Patient:<input type="text" id="appointment-patient" required /></label>
+                <label>Doctor:<input type="text" id="appointment-doctor" required /></label>
+                <label>Date:<input type="date" id="appointment-date" required /></label>
+                <label>Status:
+                  <select id="appointment-status" required>
+                    <option value="Completed">Completed</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Cancelled">Cancelled</option>
+                  </select>
+                </label>
+                <button type="submit" class="save-btn"><i class="fa fa-save"></i> Save</button>
+              </form>
+            </div>
+          </div>
+        </section>
+        <!-- Services Section -->
+        <section
+          id="services-section"
+          class="dashboard-section-content"
+          style="display: none"
+        >
+          <h2>Services Management</h2>
+          <button class="add-btn" id="add-service-btn">
+            <i class="fa fa-plus"></i> Add Service
+          </button>
+          <table class="recent-table" id="services-table">
+            <thead>
+              <tr>
+                <th>Service Name</th>
+                <th>Department</th>
+                <th>Description</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="services-tbody">
+              <tr>
+                <td>Cardiology</td>
+                <td>Heart</td>
+                <td>Heart-related treatments</td>
+                <td>
+                  <button class="edit-btn"><i class="fa fa-edit"></i></button>
+                  <button class="delete-btn">
+                    <i class="fa fa-trash"></i>
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>Radiology</td>
+                <td>Imaging</td>
+                <td>X-ray, MRI, CT scan</td>
+                <td>
+                  <button class="edit-btn"><i class="fa fa-edit"></i></button>
+                  <button class="delete-btn">
+                    <i class="fa fa-trash"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- Service Modal -->
+          <div id="service-modal" class="modal" style="display: none">
+            <div class="modal-content">
+              <span class="close-modal" id="close-service-modal">&times;</span>
+              <h3 id="service-modal-title">Add Service</h3>
+              <form id="service-form">
+                <input type="hidden" id="service-index" />
+                <label>Service Name:<input type="text" id="service-name" required /></label>
+                <label>Department:<input type="text" id="service-department" required /></label>
+                <label>Description:<input type="text" id="service-description" required /></label>
+                <button type="submit" class="save-btn"><i class="fa fa-save"></i> Save</button>
+              </form>
+            </div>
+          </div>
+        </section>
+        <!-- Lab Reports Section -->
+        <section
+          id="labreports-section"
+          class="dashboard-section-content"
+          style="display: none"
+        >
+          <h2>Lab Reports Management</h2>
+          <button class="add-btn" id="add-lab-btn">
+            <i class="fa fa-plus"></i> Add Lab Report
+          </button>
+          <table class="recent-table" id="labreports-table">
+            <thead>
+              <tr>
+                <th>Patient</th>
+                <th>Test</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="labreports-tbody">
+              <tr>
+                <td>John Doe</td>
+                <td>Blood Test</td>
+                <td>2025-05-25</td>
+                <td><span class="status completed">Completed</span></td>
+                <td>
+                  <button class="edit-btn"><i class="fa fa-edit"></i></button>
+                  <button class="delete-btn"><i class="fa fa-trash"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td>Jane Smith</td>
+                <td>X-Ray</td>
+                <td>2025-05-26</td>
+                <td><span class="status pending">Pending</span></td>
+                <td>
+                  <button class="edit-btn"><i class="fa fa-edit"></i></button>
+                  <button class="delete-btn"><i class="fa fa-trash"></i></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- Lab Modal -->
+          <div id="lab-modal" class="modal" style="display: none">
+            <div class="modal-content">
+              <span class="close-modal" id="close-lab-modal">&times;</span>
+              <h3 id="lab-modal-title">Add Lab Report</h3>
+              <form id="lab-form">
+                <input type="hidden" id="lab-index" />
+                <label>Patient:<input type="text" id="lab-patient" required /></label>
+                <label>Test:<input type="text" id="lab-test" required /></label>
+                <label>Date:<input type="date" id="lab-date" required /></label>
+                <label>Status:
+                  <select id="lab-status" required>
+                    <option value="Completed">Completed</option>
+                    <option value="Pending">Pending</option>
+                  </select>
+                </label>
+                <button type="submit" class="save-btn"><i class="fa fa-save"></i> Save</button>
+              </form>
+            </div>
+          </div>
+        </section>
+        <!-- Messages Section -->
+        <section
+          id="messages-section"
+          class="dashboard-section-content"
+          style="display: none"
+        >
+          <h2>Messages</h2>
+          <button class="add-btn" id="add-message-btn">
+            <i class="fa fa-plus"></i> Add Message
+          </button>
+          <table class="recent-table" id="messages-table">
+            <thead>
+              <tr>
+                <th>From</th>
+                <th>Email</th>
+                <th>Subject</th>
+                <th>Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="messages-tbody">
+              <tr>
+                <td>Mary Johnson</td>
+                <td>maryj@email.com</td>
+                <td>Appointment Inquiry</td>
+                <td>2025-05-25</td>
+                <td>
+                  <button class="edit-btn"><i class="fa fa-edit"></i></button>
+                  <button class="delete-btn"><i class="fa fa-trash"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td>Paul Green</td>
+                <td>paulg@email.com</td>
+                <td>Lab Report</td>
+                <td>2025-05-25</td>
+                <td>
+                  <button class="edit-btn"><i class="fa fa-edit"></i></button>
+                  <button class="delete-btn"><i class="fa fa-trash"></i></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- Message Modal -->
+          <div id="message-modal" class="modal" style="display: none">
+            <div class="modal-content">
+              <span class="close-modal" id="close-message-modal">&times;</span>
+              <h3 id="message-modal-title">Add Message</h3>
+              <form id="message-form">
+                <input type="hidden" id="message-index" />
+                <label>From:<input type="text" id="message-from" required /></label>
+                <label>Email:<input type="email" id="message-email" required /></label>
+                <label>Subject:<input type="text" id="message-subject" required /></label>
+                <label>Date:<input type="date" id="message-date" required /></label>
+                <button type="submit" class="save-btn"><i class="fa fa-save"></i> Save</button>
+              </form>
+            </div>
+          </div>
+        </section>
+        <!-- Settings Section -->
+        <section
+          id="settings-section"
+          class="dashboard-section-content"
+          style="display: none"
+        >
+          <h2>Settings</h2>
+          <form class="settings-form">
+            <label
+              >Admin Email:
+              <input type="email" value="admin@lekeakaakematu.com" />
+            </label>
+            <label
+              >Change Password:
+              <input type="password" placeholder="New Password" />
+            </label>
+            <button type="submit" class="save-btn">
+              <i class="fa fa-save"></i> Save Changes
+            </button>
+          </form>
+        </section>
+      </main>
+    </div>
+    <script>
+      // Set current date in sidebar
+      document.getElementById("current-date").textContent =
+        new Date().toLocaleDateString();
+      // Section switching logic
+      const sectionMap = {
+        "dashboard-section": "dashboard-section",
+        "doctors-section": "doctors-section",
+        "patients-section": "patients-section",
+        "appointments-section": "appointments-section",
+        "services-section": "services-section",
+        "labreports-section": "labreports-section",
+        "messages-section": "messages-section",
+        "settings-section": "settings-section",
+      };
+      const navLinks = document.querySelectorAll(".sidebar-menu a");
+      function showSection(sectionId) {
+        Object.values(sectionMap).forEach((id) => {
+          const sec = document.getElementById(id);
+          if (sec) sec.style.display = "none";
+        });
+        const activeSection = document.getElementById(sectionId);
+        if (activeSection) activeSection.style.display = "";
+        if (sectionId === "doctors-section") renderDoctors();
+        if (sectionId === "patients-section") renderPatients();
+      }
+      navLinks.forEach((link) => {
+        link.addEventListener("click", function (e) {
+          e.preventDefault();
+          navLinks.forEach((l) => l.classList.remove("active"));
+          this.classList.add("active");
+          let text = this.textContent.trim().toLowerCase();
+          let sectionId = "dashboard-section";
+          if (text.includes("doctor")) sectionId = "doctors-section";
+          else if (text.includes("patient")) sectionId = "patients-section";
+          else if (text.includes("appointment"))
+            sectionId = "appointments-section";
+          else if (text.includes("service")) sectionId = "services-section";
+          else if (text.includes("lab")) sectionId = "labreports-section";
+          else if (text.includes("message")) sectionId = "messages-section";
+          else if (text.includes("setting")) sectionId = "settings-section";
+          showSection(sectionId);
+        });
+      });
+      // Show dashboard by default
+      showSection("dashboard-section");
+      // Doctors CRUD logic
+      const doctorsTbody = document.getElementById("doctors-tbody");
+      const addDoctorBtn = document.getElementById("add-doctor-btn");
+      const doctorModal = document.getElementById("doctor-modal");
+      const closeDoctorModal = document.getElementById("close-doctor-modal");
+      const doctorForm = document.getElementById("doctor-form");
+      const doctorModalTitle = document.getElementById("doctor-modal-title");
+      const doctorIndexInput = document.getElementById("doctor-index");
+      const doctorNameInput = document.getElementById("doctor-name");
+      const doctorSpecialtyInput = document.getElementById("doctor-specialty");
+      const doctorEmailInput = document.getElementById("doctor-email");
+      const doctorPhoneInput = document.getElementById("doctor-phone");
+      let doctorsData = [
+        {
+          name: "Dr. Smith",
+          specialty: "Cardiology",
+          email: "smith@email.com",
+          phone: "+123456789",
+        },
+        {
+          name: "Dr. Adams",
+          specialty: "Radiology",
+          email: "adams@email.com",
+          phone: "+987654321",
+        },
+      ];
+      function renderDoctors() {
+        doctorsTbody.innerHTML = "";
+        doctorsData.forEach((doc, idx) => {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td>${doc.name}</td>
+            <td>${doc.specialty}</td>
+            <td>${doc.email}</td>
+            <td>${doc.phone}</td>
+            <td>
+              <button class="edit-btn" data-idx="${idx}"><i class="fa fa-edit"></i></button>
+              <button class="delete-btn" data-idx="${idx}"><i class="fa fa-trash"></i></button>
+            </td>
+          `;
+          doctorsTbody.appendChild(tr);
+        });
+      }
+      function openDoctorModal(editIdx = null) {
+        doctorModal.style.display = "block";
+        if (editIdx !== null) {
+          doctorModalTitle.textContent = "Edit Doctor";
+          doctorIndexInput.value = editIdx;
+          doctorNameInput.value = doctorsData[editIdx].name;
+          doctorSpecialtyInput.value = doctorsData[editIdx].specialty;
+          doctorEmailInput.value = doctorsData[editIdx].email;
+          doctorPhoneInput.value = doctorsData[editIdx].phone;
+        } else {
+          doctorModalTitle.textContent = "Add Doctor";
+          doctorIndexInput.value = "";
+          doctorForm.reset();
+        }
+      }
+      function closeDoctorModalFunc() {
+        doctorModal.style.display = "none";
+        doctorForm.reset();
+      }
+      addDoctorBtn.addEventListener("click", () => openDoctorModal());
+      closeDoctorModal.addEventListener("click", closeDoctorModalFunc);
+      doctorForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const idx = doctorIndexInput.value;
+        const newDoc = {
+          name: doctorNameInput.value,
+          specialty: doctorSpecialtyInput.value,
+          email: doctorEmailInput.value,
+          phone: doctorPhoneInput.value,
+        };
+        if (idx === "") {
+          doctorsData.push(newDoc);
+        } else {
+          doctorsData[idx] = newDoc;
+        }
+        renderDoctors();
+        closeDoctorModalFunc();
+      });
+      doctorsTbody.addEventListener("click", function (e) {
+        if (e.target.closest(".edit-btn")) {
+          const idx = e.target.closest(".edit-btn").dataset.idx;
+          openDoctorModal(idx);
+        } else if (e.target.closest(".delete-btn")) {
+          const idx = e.target.closest(".delete-btn").dataset.idx;
+          if (confirm("Are you sure you want to delete this doctor?")) {
+            doctorsData.splice(idx, 1);
+            renderDoctors();
+          }
+        }
+      });
+      // Modal close on outside click
+      window.addEventListener("mousedown", function (e) {
+        if (
+          doctorModal.style.display === "block" &&
+          !doctorModal.querySelector(".modal-content").contains(e.target) &&
+          e.target !== addDoctorBtn
+        ) {
+          closeDoctorModalFunc();
+        }
+      });
+      // Patients CRUD logic
+      const patientsTbody = document.getElementById("patients-tbody");
+      const addPatientBtn = document.getElementById("add-patient-btn");
+      const patientModal = document.getElementById("patient-modal");
+      const closePatientModal = document.getElementById("close-patient-modal");
+      const patientForm = document.getElementById("patient-form");
+      const patientModalTitle = document.getElementById("patient-modal-title");
+      const patientIndexInput = document.getElementById("patient-index");
+      const patientNameInput = document.getElementById("patient-name");
+      const patientGenderInput = document.getElementById("patient-gender");
+      const patientAgeInput = document.getElementById("patient-age");
+      const patientEmailInput = document.getElementById("patient-email");
+      const patientPhoneInput = document.getElementById("patient-phone");
+      let patientsData = [
+        {
+          name: "John Doe",
+          gender: "Male",
+          age: 34,
+          email: "john@email.com",
+          phone: "+123456789",
+        },
+        {
+          name: "Jane Smith",
+          gender: "Female",
+          age: 28,
+          email: "jane@email.com",
+          phone: "+987654321",
+        },
+      ];
+      function renderPatients() {
+        patientsTbody.innerHTML = "";
+        patientsData.forEach((pat, idx) => {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td>${pat.name}</td>
+            <td>${pat.gender}</td>
+            <td>${pat.age}</td>
+            <td>${pat.email}</td>
+            <td>${pat.phone}</td>
+            <td>
+              <button class="edit-btn" data-idx="${idx}"><i class="fa fa-edit"></i></button>
+              <button class="delete-btn" data-idx="${idx}"><i class="fa fa-trash"></i></button>
+            </td>
+          `;
+          patientsTbody.appendChild(tr);
+        });
+      }
+      function openPatientModal(editIdx = null) {
+        patientModal.style.display = "block";
+        if (editIdx !== null) {
+          patientModalTitle.textContent = "Edit Patient";
+          patientIndexInput.value = editIdx;
+          patientNameInput.value = patientsData[editIdx].name;
+          patientGenderInput.value = patientsData[editIdx].gender;
+          patientAgeInput.value = patientsData[editIdx].age;
+          patientEmailInput.value = patientsData[editIdx].email;
+          patientPhoneInput.value = patientsData[editIdx].phone;
+        } else {
+          patientModalTitle.textContent = "Add Patient";
+          patientIndexInput.value = "";
+          patientForm.reset();
+        }
+      }
+      function closePatientModalFunc() {
+        patientModal.style.display = "none";
+        patientForm.reset();
+      }
+      addPatientBtn.addEventListener("click", () => openPatientModal());
+      closePatientModal.addEventListener("click", closePatientModalFunc);
+      patientForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const idx = patientIndexInput.value;
+        const newPat = {
+          name: patientNameInput.value,
+          gender: patientGenderInput.value,
+          age: patientAgeInput.value,
+          email: patientEmailInput.value,
+          phone: patientPhoneInput.value,
+        };
+        if (idx === "") {
+          patientsData.push(newPat);
+        } else {
+          patientsData[idx] = newPat;
+        }
+        renderPatients();
+        closePatientModalFunc();
+      });
+      patientsTbody.addEventListener("click", function (e) {
+        if (e.target.closest(".edit-btn")) {
+          const idx = e.target.closest(".edit-btn").dataset.idx;
+          openPatientModal(idx);
+        } else if (e.target.closest(".delete-btn")) {
+          const idx = e.target.closest(".delete-btn").dataset.idx;
+          if (confirm("Are you sure you want to delete this patient?")) {
+            patientsData.splice(idx, 1);
+            renderPatients();
+          }
+        }
+      });
+      // Modal close on outside click for patient
+      window.addEventListener("mousedown", function (e) {
+        if (
+          patientModal.style.display === "block" &&
+          !patientModal.querySelector(".modal-content").contains(e.target) &&
+          e.target !== addPatientBtn
+        ) {
+          closePatientModalFunc();
+        }
+      });
+      // Appointments CRUD logic
+      const appointmentsTbody = document.getElementById('appointments-tbody');
+      const addAppointmentBtn = document.getElementById('add-appointment-btn');
+      const appointmentModal = document.getElementById('appointment-modal');
+      const closeAppointmentModal = document.getElementById('close-appointment-modal');
+      const appointmentForm = document.getElementById('appointment-form');
+      const appointmentModalTitle = document.getElementById('appointment-modal-title');
+      const appointmentIndexInput = document.getElementById('appointment-index');
+      const appointmentPatientInput = document.getElementById('appointment-patient');
+      const appointmentDoctorInput = document.getElementById('appointment-doctor');
+      const appointmentDateInput = document.getElementById('appointment-date');
+      const appointmentStatusInput = document.getElementById('appointment-status');
+      let appointmentsData = [
+        { patient: 'John Doe', doctor: 'Dr. Smith', date: '2025-05-25', status: 'Completed' },
+        { patient: 'Jane Smith', doctor: 'Dr. Adams', date: '2025-05-26', status: 'Pending' }
+      ];
+      function renderAppointments() {
+        appointmentsTbody.innerHTML = '';
+        appointmentsData.forEach((app, idx) => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td>${app.patient}</td>
+            <td>${app.doctor}</td>
