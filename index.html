@@ -30,7 +30,7 @@
                 <a href="#home"><i class="fa-solid fa-house"></i> Home</a>
               </li>
               <li>
-                <a href="about.html"
+                <a href="#about"
                   ><i class="fa-solid fa-circle-info"></i> About</a
                 >
               </li>
@@ -180,10 +180,86 @@
         <button class="close-search" aria-label="Close search">&times;</button>
       </div>
       <div id="profile-popup" class="profile-popup" style="display: none">
-        <ul class="popup-list">
-          <li><a href="#profile-view" class="popup-link">View Profile</a></li>
-          <li><a href="#logout" class="popup-link">Logout</a></li>
-        </ul>
+        <div class="profile-tabs">
+          <button class="profile-tab-btn active" data-tab="login">Login</button>
+          <button class="profile-tab-btn" data-tab="register">Register</button>
+        </div>
+        <form class="profile-form login-form" id="login-form">
+          <h3>Login</h3>
+          <div class="form-group">
+            <label for="login-email">Email</label>
+            <input type="email" id="login-email" name="login-email" required />
+          </div>
+          <div class="form-group">
+            <label for="login-password">Password</label>
+            <input
+              type="password"
+              id="login-password"
+              name="login-password"
+              required
+            />
+          </div>
+          <button type="submit" class="profile-btn">Login</button>
+          <div
+            class="profile-success"
+            id="login-success"
+            style="
+              display: none;
+              color: #388e3c;
+              margin-top: 0.7rem;
+              font-weight: 600;
+            "
+          >
+            Login successful!
+          </div>
+        </form>
+        <form
+          class="profile-form register-form"
+          id="register-form"
+          style="display: none"
+        >
+          <h3>Register</h3>
+          <div class="form-group">
+            <label for="register-name">Name</label>
+            <input
+              type="text"
+              id="register-name"
+              name="register-name"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="register-email">Email</label>
+            <input
+              type="email"
+              id="register-email"
+              name="register-email"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="register-password">Password</label>
+            <input
+              type="password"
+              id="register-password"
+              name="register-password"
+              required
+            />
+          </div>
+          <button type="submit" class="profile-btn">Register</button>
+          <div
+            class="profile-success"
+            id="register-success"
+            style="
+              display: none;
+              color: #388e3c;
+              margin-top: 0.7rem;
+              font-weight: 600;
+            "
+          >
+            Registration successful!
+          </div>
+        </form>
       </div>
       <div
         id="appointments-popup"
@@ -236,6 +312,54 @@
             "
           >
             Thank you for subscribing!
+          </div>
+        </div>
+      </section>
+      <!-- about section -->
+      <section id="about" class="about-section">
+        <div class="about-section-container">
+          <div class="about-section-text">
+            <h2>About LEKE'S FOUNDATION</h2>
+            <h4>Our Mission, Vision & Values</h4>
+            <p>
+              LEKE'S FOUNDATION is dedicated to providing accessible,
+              high-quality healthcare to our community. Founded in 2010, our
+              hospital has grown into a trusted center for medical excellence,
+              compassion, and innovation. We believe in putting patients first,
+              investing in advanced technology, and supporting our staff to
+              deliver the best care possible.
+            </p>
+            <ul class="about-details-list">
+              <li>
+                <strong>Our Mission:</strong> To deliver patient-centered
+                healthcare with excellence in quality, service, and access.
+              </li>
+              <li>
+                <strong>Our Vision:</strong> To be the leading healthcare
+                provider, recognized for clinical excellence, innovation, and
+                community partnership.
+              </li>
+              <li>
+                <strong>Our Values:</strong> Compassion, Integrity, Teamwork,
+                Innovation, and Respect for all.
+              </li>
+            </ul>
+            <div class="about-extra-info">
+              <h5>What Sets Us Apart?</h5>
+              <ul>
+                <li>24/7 Emergency and Critical Care</li>
+                <li>State-of-the-art Diagnostic and Surgical Facilities</li>
+                <li>Comprehensive Outpatient and Inpatient Services</li>
+                <li>Community Health Outreach and Education</li>
+                <li>Multidisciplinary Team of Experienced Professionals</li>
+              </ul>
+            </div>
+          </div>
+          <div class="about-section-image">
+            <img
+              src="../IMAGES/img1.avif"
+              alt="LEKE'S FOUNDATION Hospital Building"
+            />
           </div>
         </div>
       </section>
@@ -542,6 +666,56 @@
       window.addEventListener("scroll", setActiveNavLink);
       // Initial call
       setActiveNavLink();
+    </script>
+    <script>
+      // Profile tab switching and form logic
+      (function () {
+        var profilePopup = document.getElementById("profile-popup");
+        var tabBtns = profilePopup
+          ? profilePopup.querySelectorAll(".profile-tab-btn")
+          : [];
+        var loginForm = document.getElementById("login-form");
+        var registerForm = document.getElementById("register-form");
+        var loginSuccess = document.getElementById("login-success");
+        var registerSuccess = document.getElementById("register-success");
+        if (tabBtns.length) {
+          tabBtns.forEach(function (btn) {
+            btn.addEventListener("click", function () {
+              tabBtns.forEach(function (b) {
+                b.classList.remove("active");
+              });
+              this.classList.add("active");
+              if (this.dataset.tab === "login") {
+                loginForm.style.display = "";
+                registerForm.style.display = "none";
+              } else {
+                loginForm.style.display = "none";
+                registerForm.style.display = "";
+              }
+            });
+          });
+        }
+        if (loginForm) {
+          loginForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            loginSuccess.style.display = "block";
+            setTimeout(function () {
+              loginSuccess.style.display = "none";
+            }, 2000);
+            loginForm.reset();
+          });
+        }
+        if (registerForm) {
+          registerForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            registerSuccess.style.display = "block";
+            setTimeout(function () {
+              registerSuccess.style.display = "none";
+            }, 2000);
+            registerForm.reset();
+          });
+        }
+      })();
     </script>
   </body>
 </html>
