@@ -693,10 +693,49 @@
         <button class="close-search" aria-label="Close search">&times;</button>
       </div>
       <div id="profile-popup" class="profile-popup" style="display: none">
-        <ul class="popup-list">
-          <li><a href="#profile-view" class="popup-link">View Profile</a></li>
-          <li><a href="#logout" class="popup-link">Logout</a></li>
-        </ul>
+        <div
+          class="profile-popup-btns"
+          style="
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: stretch;
+            min-width: 180px;
+          "
+        >
+          <button
+            id="profile-login-btn"
+            class="profile-btn"
+            style="
+              background: #1976d2;
+              color: #fff;
+              border: none;
+              border-radius: 2rem;
+              padding: 0.7rem 0;
+              font-size: 1.08rem;
+              font-weight: 700;
+              cursor: pointer;
+            "
+          >
+            Login
+          </button>
+          <button
+            id="profile-register-btn"
+            class="profile-btn"
+            style="
+              background: #e3f2fd;
+              color: #1976d2;
+              border: none;
+              border-radius: 2rem;
+              padding: 0.7rem 0;
+              font-size: 1.08rem;
+              font-weight: 700;
+              cursor: pointer;
+            "
+          >
+            Register
+          </button>
+        </div>
       </div>
       <div
         id="appointments-popup"
@@ -836,6 +875,22 @@
                 found = true;
               }
             });
+          });
+        }
+        var profileLoginBtn = document.getElementById("profile-login-btn");
+        var profileRegisterBtn = document.getElementById(
+          "profile-register-btn"
+        );
+        if (profileLoginBtn) {
+          profileLoginBtn.addEventListener("click", function () {
+            window.location.href = "index.html#profile";
+            sessionStorage.setItem("profileTab", "login");
+          });
+        }
+        if (profileRegisterBtn) {
+          profileRegisterBtn.addEventListener("click", function () {
+            window.location.href = "index.html#profile";
+            sessionStorage.setItem("profileTab", "register");
           });
         }
       });

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hospital Login & Registration</title>
+    <link rel="stylesheet" href="../styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <style>
+      body {
+        background: linear-gradient(120deg, #e3f2fd 0%, #f7fafd 100%);
+        min-height: 100vh;
+        margin: 0;
+        font-family: "Segoe UI", Arial, sans-serif;
+      }
+      .header {
+        background: #1976d2;
+        color: #fff;
+        padding: 1.2rem 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.2rem;
+        box-shadow: 0 2px 8px rgba(25, 118, 210, 0.08);
+      }
+      .header img {
+        height: 48px;
+        border-radius: 8px;
+        background: #fff;
+        padding: 2px;
+        display: block;
+        margin: 0 auto;
+      }
+      .header-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-align: center;
+      }
+      .auth-container {
+        max-width: 410px;
+        margin: 2.5rem auto;
+        background: #fff;
+        border-radius: 1.2rem;
+        box-shadow: 0 2px 16px rgba(25, 118, 210, 0.1);
+        padding: 2.2rem 2rem 1.5rem 2rem;
+      }
+      .auth-tabs {
+        display: flex;
+        gap: 0.5rem;
+        margin-bottom: 2rem;
+      }
+      .auth-tab-btn {
+        flex: 1 1 0;
+        background: #e3f2fd;
+        color: #1976d2;
+        border: none;
+        border-radius: 1.2rem 1.2rem 0 0;
+        padding: 0.7rem 0.5rem;
+        font-weight: 700;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background 0.2s, color 0.2s;
+      }
+      .auth-tab-btn.active {
+        background: #1976d2;
+        color: #fff;
+      }
+      .auth-form {
+        display: flex;
+        flex-direction: column;
+        gap: 0.9rem;
+      }
+      .auth-form h3 {
+        margin-bottom: 0.2rem;
+        color: #1976d2;
+        font-size: 1.2rem;
+        text-align: center;
+      }
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+      }
+      .form-group label {
+        font-size: 0.98rem;
+        color: #444;
+        margin-bottom: 0.1rem;
+      }
+      .form-group input,
+      .form-group select {
+        padding: 0.5rem 1rem;
+        border: 1px solid #b3c6e0;
+        border-radius: 0.7rem;
+        font-size: 1rem;
+        outline: none;
+        transition: border 0.2s;
+      }
+      .form-group input:focus {
+        border: 1.5px solid #1976d2;
+      }
+      .auth-btn {
+        background: #1976d2;
+        color: #fff;
+        border: none;
+        border-radius: 2rem;
+        padding: 0.7rem 0;
+        font-size: 1.08rem;
+        font-weight: 700;
+        cursor: pointer;
+        margin-top: 0.5rem;
+        transition: background 0.2s;
+      }
+      .auth-btn:hover {
+        background: #125199;
+      }
+      .auth-link-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 0.5rem;
+        font-size: 0.97rem;
+      }
+      .auth-link {
+        color: #1976d2;
+        text-decoration: underline;
+        cursor: pointer;
+        font-weight: 600;
+      }
+      .auth-success {
+        text-align: center;
+        color: #388e3c;
+        font-weight: 600;
+        margin-top: 0.7rem;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <img src="../IMAGES/logo-removebg-preview.png" alt="Hospital Logo" />
+      <span class="header-title">LEKE'S FOUNDATION Hospital System</span>
+    </div>
+    <div class="auth-container">
+      <div class="auth-tabs">
+        <button class="auth-tab-btn active" data-tab="login">Login</button>
+        <button class="auth-tab-btn" data-tab="register">Register</button>
+      </div>
+      <!-- Login Form -->
+      <form class="auth-form" id="login-form">
+        <h3>Login</h3>
+        <div class="form-group">
+          <label for="login-email">Email</label>
+          <input type="email" id="login-email" name="login-email" required />
+        </div>
+        <div class="form-group">
+          <label for="login-password">Password</label>
+          <input
+            type="password"
+            id="login-password"
+            name="login-password"
+            required
+          />
+        </div>
+        <button type="submit" class="auth-btn">Login</button>
+        <div class="auth-link-row">
+          <span class="auth-link" id="forgot-password-link"
+            >Forgot password?</span
+          >
+          <span class="auth-link" id="login-admin-link">Login as Admin</span>
+        </div>
+        <div class="auth-link-row" style="justify-content: center">
+          Don't have an account?
+          <span class="auth-link" id="show-register-link">Register</span>
+        </div>
+        <div class="auth-success" id="login-success">Login successful!</div>
+      </form>
+      <!-- Admin Login Form (hidden by default) -->
+      <form class="auth-form" id="admin-login-form" style="display: none">
+        <h3>Admin Login</h3>
+        <div class="form-group">
+          <label for="admin-login-email">Email</label>
+          <input
+            type="email"
+            id="admin-login-email"
+            name="admin-login-email"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="admin-login-password">Password</label>
+          <input
+            type="password"
+            id="admin-login-password"
+            name="admin-login-password"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="admin-code">Admin Code</label>
+          <input type="text" id="admin-code" name="admin-code" required />
+        </div>
+        <button type="submit" class="auth-btn">Login as Admin</button>
+        <div class="auth-link-row">
+          <span class="auth-link" id="back-to-user-login"
+            >Back to User Login</span
+          >
+        </div>
+        <div class="auth-success" id="admin-login-success">
+          Admin login successful!
+        </div>
+      </form>
+      <!-- Register Form -->
+      <form class="auth-form" id="register-form" style="display: none">
+        <h3>Register</h3>
+        <div class="form-group">
+          <label for="register-name">Full Names</label>
+          <input type="text" id="register-name" name="register-name" required />
+        </div>
+        <div class="form-group">
+          <label for="register-email">Email</label>
+          <input
+            type="email"
+            id="register-email"
+            name="register-email"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="register-number">Phone Number</label>
+          <input
+            type="tel"
+            id="register-number"
+            name="register-number"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="register-town">Town</label>
+          <input type="text" id="register-town" name="register-town" required />
+        </div>
+        <div class="form-group">
+          <label for="register-region">Region</label>
+          <input
+            type="text"
+            id="register-region"
+            name="register-region"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="register-patientof">Patient Of (optional)</label>
+          <input
+            type="text"
+            id="register-patientof"
+            name="register-patientof"
+          />
+        </div>
+        <div class="form-group">
+          <label for="register-password">Password</label>
+          <input
+            type="password"
+            id="register-password"
+            name="register-password"
+            required
+          />
+        </div>
+        <button type="submit" class="auth-btn">Register</button>
+        <div class="auth-link-row" style="justify-content: center">
+          Already have an account?
+          <span class="auth-link" id="show-login-link">Login</span>
+        </div>
+        <div class="auth-success" id="register-success">
+          Registration successful!
+        </div>
+      </form>
+    </div>
+    <script>
+      // Tab switching and form logic
+      (function () {
+        var tabBtns = document.querySelectorAll(".auth-tab-btn");
+        var loginForm = document.getElementById("login-form");
+        var adminLoginForm = document.getElementById("admin-login-form");
+        var registerForm = document.getElementById("register-form");
+        var loginSuccess = document.getElementById("login-success");
+        var adminLoginSuccess = document.getElementById("admin-login-success");
+        var registerSuccess = document.getElementById("register-success");
+        var showRegisterLink = document.getElementById("show-register-link");
+        var showLoginLink = document.getElementById("show-login-link");
+        var loginAdminLink = document.getElementById("login-admin-link");
+        var backToUserLogin = document.getElementById("back-to-user-login");
+        // Tab switching
+        function showTab(tab) {
+          tabBtns.forEach(function (b) {
+            b.classList.remove("active");
+          });
+          if (tab === "login") {
+            tabBtns[0].classList.add("active");
+            loginForm.style.display = "";
+            adminLoginForm.style.display = "none";
+            registerForm.style.display = "none";
+          } else if (tab === "admin-login") {
+            adminLoginForm.style.display = "";
+            loginForm.style.display = "none";
+            registerForm.style.display = "none";
+          } else {
+            tabBtns[1].classList.add("active");
+            registerForm.style.display = "";
+            loginForm.style.display = "none";
+            adminLoginForm.style.display = "none";
+          }
+        }
+        tabBtns[0].addEventListener("click", function () {
+          showTab("login");
+        });
+        tabBtns[1].addEventListener("click", function () {
+          showTab("register");
+        });
+        if (showRegisterLink)
+          showRegisterLink.addEventListener("click", function () {
+            showTab("register");
+          });
+        if (showLoginLink)
+          showLoginLink.addEventListener("click", function () {
+            showTab("login");
+          });
+        if (loginAdminLink)
+          loginAdminLink.addEventListener("click", function () {
+            showTab("admin-login");
+          });
+        if (backToUserLogin)
+          backToUserLogin.addEventListener("click", function () {
+            showTab("login");
+          });
+        // Demo form feedback
+        if (loginForm)
+          loginForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            loginSuccess.style.display = "block";
+            setTimeout(function () {
+              loginSuccess.style.display = "none";
+            }, 2000);
+            loginForm.reset();
+          });
+        if (adminLoginForm)
+          adminLoginForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            adminLoginSuccess.style.display = "block";
+            setTimeout(function () {
+              adminLoginSuccess.style.display = "none";
+            }, 2000);
+            adminLoginForm.reset();
+          });
+        if (registerForm)
+          registerForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            registerSuccess.style.display = "block";
+            setTimeout(function () {
+              registerSuccess.style.display = "none";
+            }, 2000);
+            registerForm.reset();
+          });
+      })();
+    </script>
+  </body>
+</html>
