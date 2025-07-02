@@ -328,9 +328,38 @@
           style="display: none"
         >
           <h2>Appointments Management</h2>
-          <button class="add-btn" id="add-appointment-btn">
-            <i class="fa fa-plus"></i> Add Appointment
-          </button>
+          <div
+            style="
+              display: flex;
+              gap: 1rem;
+              align-items: center;
+              margin-bottom: 1rem;
+              flex-wrap: wrap;
+            "
+          >
+            <label
+              >Doctor:
+              <select id="filter-appointment-doctor">
+                <option value="">All</option>
+                <option value="Dr. Smith">Dr. Smith</option>
+                <option value="Dr. Adams">Dr. Adams</option>
+                <option value="Dr. Brown">Dr. Brown</option>
+                <option value="Dr. Patel">Dr. Patel</option>
+              </select>
+            </label>
+            <label
+              >Status:
+              <select id="filter-appointment-status">
+                <option value="">All</option>
+                <option value="Completed">Completed</option>
+                <option value="Pending">Pending</option>
+                <option value="Cancelled">Cancelled</option>
+              </select>
+            </label>
+            <button class="add-btn" id="add-appointment-btn">
+              <i class="fa fa-plus"></i> Add Appointment
+            </button>
+          </div>
           <table class="recent-table" id="appointments-table">
             <thead>
               <tr>
@@ -352,6 +381,9 @@
                   <button class="delete-btn">
                     <i class="fa fa-trash"></i>
                   </button>
+                  <button class="prescription-btn">
+                    <i class="fa fa-prescription"></i> Prescription
+                  </button>
                 </td>
               </tr>
               <tr>
@@ -364,40 +396,85 @@
                   <button class="delete-btn">
                     <i class="fa fa-trash"></i>
                   </button>
+                  <button class="prescription-btn">
+                    <i class="fa fa-prescription"></i> Prescription
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>Michael Lee</td>
+                <td>Dr. Brown</td>
+                <td>2025-05-26</td>
+                <td><span class="status cancelled">Cancelled</span></td>
+                <td>
+                  <button class="edit-btn"><i class="fa fa-edit"></i></button>
+                  <button class="delete-btn">
+                    <i class="fa fa-trash"></i>
+                  </button>
+                  <button class="prescription-btn">
+                    <i class="fa fa-prescription"></i> Prescription
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>Sarah Kim</td>
+                <td>Dr. Patel</td>
+                <td>2025-05-27</td>
+                <td><span class="status pending">Pending</span></td>
+                <td>
+                  <button class="edit-btn"><i class="fa fa-edit"></i></button>
+                  <button class="delete-btn">
+                    <i class="fa fa-trash"></i>
+                  </button>
+                  <button class="prescription-btn">
+                    <i class="fa fa-prescription"></i> Prescription
+                  </button>
                 </td>
               </tr>
             </tbody>
           </table>
-          <!-- Appointment Modal -->
-          <div id="appointment-modal" class="modal" style="display: none">
-            <div class="modal-content">
-              <span class="close-modal" id="close-appointment-modal"
+          <!-- Prescription Modal -->
+          <div id="prescription-modal" class="modal" style="display: none">
+            <div class="modal-content" style="max-width: 420px">
+              <span class="close-modal" id="close-prescription-modal"
                 >&times;</span
               >
-              <h3 id="appointment-modal-title">Add Appointment</h3>
-              <form id="appointment-form">
-                <input type="hidden" id="appointment-index" />
-                <label
-                  >Patient:<input type="text" id="appointment-patient" required
-                /></label>
-                <label
-                  >Doctor:<input type="text" id="appointment-doctor" required
-                /></label>
-                <label
-                  >Date:<input type="date" id="appointment-date" required
-                /></label>
-                <label
-                  >Status:
-                  <select id="appointment-status" required>
-                    <option value="Completed">Completed</option>
-                    <option value="Pending">Pending</option>
-                    <option value="Cancelled">Cancelled</option>
-                  </select>
-                </label>
-                <button type="submit" class="save-btn">
-                  <i class="fa fa-save"></i> Save
+              <h3>Create/View Prescription</h3>
+              <form id="prescription-form">
+                <div class="form-group">
+                  <label for="prescription-notes">Prescription Notes</label>
+                  <textarea
+                    id="prescription-notes"
+                    rows="3"
+                    style="
+                      width: 100%;
+                      border-radius: 0.7rem;
+                      border: 1px solid #b3c6e0;
+                      padding: 0.5rem;
+                    "
+                  ></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="prescription-file">Attach File (PDF/Image)</label>
+                  <input
+                    type="file"
+                    id="prescription-file"
+                    accept=".pdf,image/*"
+                  />
+                </div>
+                <button type="submit" class="save-btn" style="margin-top: 1rem">
+                  <i class="fa fa-save"></i> Save Prescription
                 </button>
               </form>
+              <div style="margin-top: 1.5rem">
+                <h4>Previous Prescriptions</h4>
+                <ul
+                  id="previous-prescriptions"
+                  style="list-style: none; padding: 0"
+                >
+                  <li>No previous prescriptions.</li>
+                </ul>
+              </div>
             </div>
           </div>
         </section>
@@ -932,6 +1009,15 @@
         appointmentDateInput = null,
         appointmentStatusInput = null;
 
+      // Load appointments from localStorage (user bookings)
+      function getLocalAppointments() {
+        try {
+          return JSON.parse(localStorage.getItem("appointmentsData")) || [];
+        } catch {
+          return [];
+        }
+      }
+
       // Modal HTML for Appointments
       function ensureAppointmentModal() {
         if (document.getElementById("appointment-modal")) return;
@@ -977,8 +1063,18 @@
         },
       ];
       function renderAppointments() {
+        // Merge demo and user-booked appointments
+        const localApps = getLocalAppointments();
+        const allApps = appointmentsData.concat(
+          localApps.map((app) => ({
+            patient: app.patient,
+            doctor: app.doctor,
+            date: app.date + (app.time ? " " + app.time : ""),
+            status: app.status || "Pending",
+          }))
+        );
         appointmentsTbody.innerHTML = "";
-        appointmentsData.forEach((app, idx) => {
+        allApps.forEach((app, idx) => {
           const tr = document.createElement("tr");
           tr.innerHTML = `
             <td>${app.patient}</td>

@@ -336,32 +336,103 @@
             showTab("login");
           });
         // Demo form feedback
+        function setUserSession(name, email) {
+          localStorage.setItem("userLoggedIn", "true");
+          localStorage.setItem("userName", name);
+          localStorage.setItem("userEmail", email);
+        }
+        function redirectAfterAuth() {
+          // If user was redirected for booking, go back to doctor.html#book-appointment
+          var redirect = localStorage.getItem("redirectAfterLogin");
+          if (redirect) {
+            localStorage.removeItem("redirectAfterLogin");
+            window.location.href = redirect;
+          } else {
+            window.location.href = "../doctor.html";
+          }
+        }
         if (loginForm)
           loginForm.addEventListener("submit", function (e) {
             e.preventDefault();
-            loginSuccess.style.display = "block";
-            setTimeout(function () {
-              loginSuccess.style.display = "none";
-            }, 2000);
-            loginForm.reset();
+            var email = document.getElementById("login-email").value;
+            var password = document.getElementById("login-password").value;
+            fetch("http://localhost:5000/api/login", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ email, password }),
+            })
+              .then((res) =>
+                res.json().then((data) => ({ status: res.status, data }))
+              )
+              .then((result) => {
+                if (result.status === 200) {
+                  setUserSession(result.data.name, result.data.email);
+                  loginSuccess.textContent = "Login successful!";
+                  loginSuccess.style.display = "block";
+                  setTimeout(function () {
+                    loginSuccess.style.display = "none";
+                    redirectAfterAuth();
+                  }, 1200);
+                  loginForm.reset();
+                } else {
+                  loginSuccess.textContent =
+                    result.data.message || "Login failed.";
+                  loginSuccess.style.display = "block";
+                }
+              })
+              .catch(() => {
+                loginSuccess.textContent = "Server error.";
+                loginSuccess.style.display = "block";
+              });
           });
-        if (adminLoginForm)
-          adminLoginForm.addEventListener("submit", function (e) {
-            e.preventDefault();
-            adminLoginSuccess.style.display = "block";
-            setTimeout(function () {
-              adminLoginSuccess.style.display = "none";
-            }, 2000);
-            adminLoginForm.reset();
-          });
+        // --- Registration AJAX ---
         if (registerForm)
           registerForm.addEventListener("submit", function (e) {
             e.preventDefault();
-            registerSuccess.style.display = "block";
-            setTimeout(function () {
-              registerSuccess.style.display = "none";
-            }, 2000);
-            registerForm.reset();
+            var name = document.getElementById("register-name").value;
+            var email = document.getElementById("register-email").value;
+            var password = document.getElementById("register-password").value;
+            var phone = document.getElementById("register-number").value;
+            var town = document.getElementById("register-town").value;
+            var region = document.getElementById("register-region").value;
+            var patientOf = document.getElementById("register-patientof").value;
+            fetch("http://localhost:5000/api/register", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                name,
+                email,
+                password,
+                phone,
+                town,
+                region,
+                patientOf,
+              }),
+            })
+              .then((res) =>
+                res.json().then((data) => ({ status: res.status, data }))
+              )
+              .then((result) => {
+                if (result.status === 201) {
+                  setUserSession(name, email);
+                  registerSuccess.textContent = "Registration successful!";
+                  registerSuccess.style.display = "block";
+                  setTimeout(function () {
+                    registerSuccess.style.display = "none";
+                    // alert("Welcome, " + name + "!");
+                    redirectAfterAuth();
+                  }, 1200);
+                  registerForm.reset();
+                } else {
+                  registerSuccess.textContent =
+                    result.data.message || "Registration failed.";
+                  registerSuccess.style.display = "block";
+                }
+              })
+              .catch(() => {
+                registerSuccess.textContent = "Server error.";
+                registerSuccess.style.display = "block";
+              });
           });
       })();
     </script>
