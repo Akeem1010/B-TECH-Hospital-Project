@@ -216,23 +216,64 @@
             <div class="modal-content">
               <span class="close-modal" id="close-doctor-modal">&times;</span>
               <h3 id="doctor-modal-title">Add Doctor</h3>
-              <form id="doctor-form">
-                <input type="hidden" id="doctor-index" />
-                <label
-                  >Name:<input type="text" id="doctor-name" required
-                /></label>
-                <label
-                  >Specialty:<input type="text" id="doctor-specialty" required
-                /></label>
-                <label
-                  >Email:<input type="email" id="doctor-email" required
-                /></label>
-                <label
-                  >Phone:<input type="text" id="doctor-phone" required
-                /></label>
-                <button type="submit" class="save-btn">
-                  <i class="fa fa-save"></i> Save
-                </button>
+              <form id="doctor-form" enctype="multipart/form-data">
+                <div class="form-group">
+                  <label for="doctor-name">Name</label>
+                  <input type="text" id="doctor-name" name="name" required />
+                </div>
+                <div class="form-group">
+                  <label for="doctor-specialty">Specialty</label>
+                  <input
+                    type="text"
+                    id="doctor-specialty"
+                    name="specialty"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="doctor-email">Email</label>
+                  <input type="email" id="doctor-email" name="email" required />
+                </div>
+                <div class="form-group">
+                  <label for="doctor-phone">Phone</label>
+                  <input type="text" id="doctor-phone" name="phone" required />
+                </div>
+                <div class="form-group">
+                  <label for="doctor-bio">About</label>
+                  <textarea
+                    id="doctor-bio"
+                    name="bio"
+                    rows="3"
+                    placeholder="Write about the doctor..."
+                  ></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="doctor-image">Image</label>
+                  <input
+                    type="file"
+                    id="doctor-image"
+                    name="image"
+                    accept="image/*"
+                  />
+                  <img
+                    id="doctor-image-preview"
+                    src=""
+                    alt="Preview"
+                    style="display: none; max-width: 120px; margin-top: 0.5rem"
+                  />
+                </div>
+                <input type="hidden" id="doctor-id" name="id" />
+                <button type="submit" class="save-btn">Save</button>
+                <div
+                  id="doctor-form-error"
+                  style="color: #d32f2f; display: none; margin-top: 0.7rem"
+                ></div>
+                <div
+                  id="doctor-form-success"
+                  style="color: #388e3c; display: none; margin-top: 0.7rem"
+                >
+                  Doctor saved successfully!
+                </div>
               </form>
             </div>
           </div>
@@ -293,30 +334,52 @@
               <span class="close-modal" id="close-patient-modal">&times;</span>
               <h3 id="patient-modal-title">Add Patient</h3>
               <form id="patient-form">
-                <input type="hidden" id="patient-index" />
-                <label
-                  >Name:<input type="text" id="patient-name" required
-                /></label>
-                <label
-                  >Gender:
-                  <select id="patient-gender" required>
+                <div class="form-group">
+                  <label for="patient-name">Name</label>
+                  <input type="text" id="patient-name" name="name" required />
+                </div>
+                <div class="form-group">
+                  <label for="patient-gender">Gender</label>
+                  <select id="patient-gender" name="gender" required>
                     <option value="">Select</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
                   </select>
-                </label>
-                <label
-                  >Age:<input type="number" id="patient-age" min="0" required
-                /></label>
-                <label
-                  >Email:<input type="email" id="patient-email" required
-                /></label>
-                <label
-                  >Phone:<input type="text" id="patient-phone" required
-                /></label>
-                <button type="submit" class="save-btn">
-                  <i class="fa fa-save"></i> Save
-                </button>
+                </div>
+                <div class="form-group">
+                  <label for="patient-age">Age</label>
+                  <input
+                    type="number"
+                    id="patient-age"
+                    name="age"
+                    required
+                    min="0"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="patient-email">Email</label>
+                  <input
+                    type="email"
+                    id="patient-email"
+                    name="email"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="patient-phone">Phone</label>
+                  <input type="text" id="patient-phone" name="phone" required />
+                </div>
+                <button type="submit" class="save-btn">Save</button>
+                <div
+                  id="patient-form-error"
+                  style="color: #d32f2f; display: none; margin-top: 0.7rem"
+                ></div>
+                <div
+                  id="patient-form-success"
+                  style="color: #388e3c; display: none; margin-top: 0.7rem"
+                >
+                  Patient added successfully!
+                </div>
               </form>
             </div>
           </div>
@@ -792,6 +855,11 @@
       const doctorSpecialtyInput = document.getElementById("doctor-specialty");
       const doctorEmailInput = document.getElementById("doctor-email");
       const doctorPhoneInput = document.getElementById("doctor-phone");
+      const doctorBioInput = document.getElementById("doctor-bio");
+      const doctorImageInput = document.getElementById("doctor-image");
+      const doctorImagePreview = document.getElementById(
+        "doctor-image-preview"
+      );
       let doctorsData = [
         {
           name: "Dr. Smith",
@@ -832,10 +900,17 @@
           doctorSpecialtyInput.value = doctorsData[editIdx].specialty;
           doctorEmailInput.value = doctorsData[editIdx].email;
           doctorPhoneInput.value = doctorsData[editIdx].phone;
+          doctorBioInput.value = doctorsData[editIdx].bio || "";
+          doctorImagePreview.src = doctorsData[editIdx].image || "";
+          doctorImagePreview.style.display = doctorImagePreview.src
+            ? "block"
+            : "none";
         } else {
           doctorModalTitle.textContent = "Add Doctor";
           doctorIndexInput.value = "";
           doctorForm.reset();
+          doctorImagePreview.src = "";
+          doctorImagePreview.style.display = "none";
         }
       }
       function closeDoctorModalFunc() {
@@ -852,14 +927,50 @@
           specialty: doctorSpecialtyInput.value,
           email: doctorEmailInput.value,
           phone: doctorPhoneInput.value,
+          bio: doctorBioInput.value,
+          image: doctorImageInput.files[0],
         };
-        if (idx === "") {
-          doctorsData.push(newDoc);
-        } else {
-          doctorsData[idx] = newDoc;
+        const formData = new FormData();
+        for (let key in newDoc) {
+          formData.append(key, newDoc[key]);
         }
-        renderDoctors();
-        closeDoctorModalFunc();
+        if (idx === "") {
+          fetch("http://localhost:5000/api/doctors", {
+            method: "POST",
+            body: formData,
+          })
+            .then((res) => {
+              if (!res.ok) throw new Error("Failed to add doctor");
+              return res.json();
+            })
+            .then(() => {
+              renderDoctors();
+              closeDoctorModalFunc();
+              updateDashboardStats();
+            })
+            .catch((err) => {
+              console.error(err);
+              alert("Error: " + err.message);
+            });
+        } else {
+          fetch(`http://localhost:5000/api/doctors/${idx}`, {
+            method: "PUT",
+            body: formData,
+          })
+            .then((res) => {
+              if (!res.ok) throw new Error("Failed to update doctor");
+              return res.json();
+            })
+            .then(() => {
+              renderDoctors();
+              closeDoctorModalFunc();
+              updateDashboardStats();
+            })
+            .catch((err) => {
+              console.error(err);
+              alert("Error: " + err.message);
+            });
+        }
       });
       doctorsTbody.addEventListener("click", function (e) {
         if (e.target.closest(".edit-btn")) {
@@ -1048,41 +1159,29 @@
         document.querySelector("#appointments-section").appendChild(modal);
       }
 
-      let appointmentsData = [
-        {
-          patient: "John Doe",
-          doctor: "Dr. Smith",
-          date: "2025-05-25",
-          status: "Completed",
-        },
-        {
-          patient: "Jane Smith",
-          doctor: "Dr. Adams",
-          date: "2025-05-26",
-          status: "Pending",
-        },
-      ];
-      function renderAppointments() {
-        // Merge demo and user-booked appointments
-        const localApps = getLocalAppointments();
-        const allApps = appointmentsData.concat(
-          localApps.map((app) => ({
-            patient: app.patient,
-            doctor: app.doctor,
-            date: app.date + (app.time ? " " + app.time : ""),
-            status: app.status || "Pending",
-          }))
-        );
+      // --- Fetch and Render Appointments from Backend ---
+      async function fetchAppointmentsFromBackend() {
+        try {
+          const res = await fetch("http://localhost:5000/api/appointments");
+          if (!res.ok) throw new Error("Failed to fetch");
+          const data = await res.json();
+          return data;
+        } catch {
+          return [];
+        }
+      }
+      async function renderAppointments() {
+        const allApps = await fetchAppointmentsFromBackend();
         appointmentsTbody.innerHTML = "";
         allApps.forEach((app, idx) => {
           const tr = document.createElement("tr");
           tr.innerHTML = `
-            <td>${app.patient}</td>
-            <td>${app.doctor}</td>
-            <td>${app.date}</td>
-            <td><span class="status ${app.status.toLowerCase()}">${
-            app.status
-          }</span></td>
+            <td>${app.patientName || app.patient}</td>
+            <td>${app.doctorName || app.doctor}</td>
+            <td>${app.date} ${app.time ? app.time : ""}</td>
+            <td><span class="status ${
+              app.status ? app.status.toLowerCase() : "pending"
+            }">${app.status || "Pending"}</span></td>
             <td>
               <button class="edit-btn" data-idx="${idx}"><i class="fa fa-edit"></i></button>
               <button class="delete-btn" data-idx="${idx}"><i class="fa fa-trash"></i></button>
@@ -1091,6 +1190,8 @@
           appointmentsTbody.appendChild(tr);
         });
       }
+      // On page load, fetch and render appointments
+      renderAppointments();
       function openAppointmentModal(editIdx = null) {
         ensureAppointmentModal();
         appointmentModal = document.getElementById("appointment-modal");
@@ -1633,21 +1734,193 @@
           closeMessageViewModalFunc();
         }
       });
-      // Update showSection to render all CRUD tables
-      const oldShowSection2 = showSection;
-      showSection = function (sectionId) {
-        Object.values(sectionMap).forEach((id) => {
-          const sec = document.getElementById(id);
-          if (sec) sec.style.display = "none";
+      // --- Dashboard Stats: Fetch Counts from Backend ---
+      async function fetchCount(url) {
+        try {
+          const res = await fetch(url);
+          if (!res.ok) throw new Error("Failed");
+          const data = await res.json();
+          return Array.isArray(data) ? data.length : data.count || 0;
+        } catch {
+          return 0;
+        }
+      }
+      async function updateDashboardStats() {
+        const [doctorCount, patientCount, appointmentCount] = await Promise.all(
+          [
+            fetchCount("http://localhost:5000/api/doctors"),
+            fetchCount("http://localhost:5000/api/patients/count"),
+            fetchCount("http://localhost:5000/api/appointments"),
+          ]
+        );
+        document.querySelectorAll(".stat-label").forEach((el) => {
+          if (el.textContent.includes("Doctor"))
+            el.nextElementSibling.textContent = doctorCount;
+          if (el.textContent.includes("Patient"))
+            el.nextElementSibling.textContent = patientCount;
+          if (el.textContent.includes("Appointment"))
+            el.nextElementSibling.textContent = appointmentCount;
         });
-        const activeSection = document.getElementById(sectionId);
-        if (activeSection) activeSection.style.display = "";
-        if (sectionId === "doctors-section") renderDoctors();
-        if (sectionId === "patients-section") renderPatients();
-        if (sectionId === "appointments-section") renderAppointments();
-        if (sectionId === "services-section") renderServices();
-        if (sectionId === "labreports-section") renderLabReports();
-        if (sectionId === "messages-section") renderMessages();
+      }
+      updateDashboardStats();
+
+      async function fetchDoctors() {
+        try {
+          const res = await fetch("http://localhost:5000/api/doctors");
+          if (!res.ok) throw new Error("Failed");
+          return await res.json();
+        } catch {
+          return [];
+        }
+      }
+      function doctorRowHTML(doc, idx) {
+        return `<tr>
+    <td>${doc.name}</td>
+    <td>${doc.specialty}</td>
+    <td>${doc.email || ""}</td>
+    <td>${doc.phone || ""}</td>
+    <td>
+      <button class="edit-btn" data-idx="${idx}"><i class="fa fa-edit"></i></button>
+      <button class="delete-btn" data-idx="${idx}"><i class="fa fa-trash"></i></button>
+    </td>
+  </tr>`;
+      }
+      async function renderDoctors() {
+        const doctors = await fetchDoctors();
+        const tbody = document.getElementById("doctors-tbody");
+        tbody.innerHTML = doctors.map(doctorRowHTML).join("");
+      }
+      renderDoctors();
+      // --- Add Doctor Modal Logic ---
+      document.getElementById("add-doctor-btn").onclick = function () {
+        document.getElementById("doctor-modal-title").textContent =
+          "Add Doctor";
+        document.getElementById("doctor-form").reset();
+        document.getElementById("doctor-modal").style.display = "block";
+      };
+      document.getElementById("close-doctor-modal").onclick = function () {
+        document.getElementById("doctor-modal").style.display = "none";
+      };
+      document.getElementById("doctor-form").onsubmit = async function (e) {
+        e.preventDefault();
+        const name = document.getElementById("doctor-name").value;
+        const specialty = document.getElementById("doctor-specialty").value;
+        const email = document.getElementById("doctor-email").value;
+        const phone = document.getElementById("doctor-phone").value;
+        const bio = document.getElementById("doctor-bio").value;
+        const image = document.getElementById("doctor-image").files[0];
+        const errorDiv = document.getElementById("doctor-form-error");
+        const successDiv = document.getElementById("doctor-form-success");
+        errorDiv.style.display = "none";
+        successDiv.style.display = "none";
+        try {
+          const res = await fetch("http://localhost:5000/api/doctors", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name, specialty, email, phone, bio }),
+          });
+          if (res.ok) {
+            const data = await res.json();
+            if (image) {
+              const formData = new FormData();
+              formData.append("image", image);
+              await fetch(
+                `http://localhost:5000/api/doctors/${data.id}/image`,
+                {
+                  method: "POST",
+                  body: formData,
+                }
+              );
+            }
+            successDiv.style.display = "block";
+            setTimeout(() => {
+              document.getElementById("doctor-modal").style.display = "none";
+              successDiv.style.display = "none";
+              renderDoctors();
+              updateDashboardStats();
+            }, 1200);
+          } else {
+            const data = await res.json().catch(() => ({}));
+            errorDiv.textContent = data.message || "Failed to add doctor.";
+            errorDiv.style.display = "block";
+          }
+        } catch {
+          errorDiv.textContent = "Server error.";
+          errorDiv.style.display = "block";
+        }
+      };
+      // --- Patients CRUD: Fetch, Add, Render ---
+      async function fetchPatients() {
+        try {
+          const res = await fetch("http://localhost:5000/api/patients");
+          if (!res.ok) throw new Error("Failed");
+          return await res.json();
+        } catch {
+          return [];
+        }
+      }
+      function patientRowHTML(pat, idx) {
+        return `<tr>
+    <td>${pat.name}</td>
+    <td>${pat.gender}</td>
+    <td>${pat.age}</td>
+    <td>${pat.email}</td>
+    <td>${pat.phone}</td>
+    <td>
+      <button class="edit-btn" data-idx="${idx}"><i class="fa fa-edit"></i></button>
+      <button class="delete-btn" data-idx="${idx}"><i class="fa fa-trash"></i></button>
+    </td>
+  </tr>`;
+      }
+      async function renderPatients() {
+        const patients = await fetchPatients();
+        const tbody = document.getElementById("patients-tbody");
+        tbody.innerHTML = patients.map(patientRowHTML).join("");
+      }
+      renderPatients();
+      document.getElementById("add-patient-btn").onclick = function () {
+        document.getElementById("patient-modal-title").textContent =
+          "Add Patient";
+        document.getElementById("patient-form").reset();
+        document.getElementById("patient-modal").style.display = "block";
+      };
+      document.getElementById("close-patient-modal").onclick = function () {
+        document.getElementById("patient-modal").style.display = "none";
+      };
+      document.getElementById("patient-form").onsubmit = async function (e) {
+        e.preventDefault();
+        const name = document.getElementById("patient-name").value;
+        const gender = document.getElementById("patient-gender").value;
+        const age = document.getElementById("patient-age").value;
+        const email = document.getElementById("patient-email").value;
+        const phone = document.getElementById("patient-phone").value;
+        const errorDiv = document.getElementById("patient-form-error");
+        const successDiv = document.getElementById("patient-form-success");
+        errorDiv.style.display = "none";
+        successDiv.style.display = "none";
+        try {
+          const res = await fetch("http://localhost:5000/api/patients", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name, gender, age, email, phone }),
+          });
+          if (res.ok) {
+            successDiv.style.display = "block";
+            setTimeout(() => {
+              document.getElementById("patient-modal").style.display = "none";
+              successDiv.style.display = "none";
+              renderPatients();
+              updateDashboardStats && updateDashboardStats();
+            }, 1200);
+          } else {
+            const data = await res.json().catch(() => ({}));
+            errorDiv.textContent = data.message || "Failed to add patient.";
+            errorDiv.style.display = "block";
+          }
+        } catch {
+          errorDiv.textContent = "Server error.";
+          errorDiv.style.display = "block";
+        }
       };
     </script>
   </body>

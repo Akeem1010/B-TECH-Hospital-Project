@@ -8,6 +8,11 @@ const userSchema = new mongoose.Schema({
   town: String,
   region: String,
   patientOf: String,
+  role: {
+    type: String,
+    enum: ["patient", "doctor", "admin"],
+    default: "patient",
+  },
 });
 
 module.exports = mongoose.model("User", userSchema);
