@@ -23,12 +23,25 @@ router.post("/doctors", upload.single("image"), async (req, res) => {
       });
       imageUrl = await uploadPromise;
     }
-    const doctor = new Doctor({ name, specialty, bio, email, phone, image: imageUrl });
+    const doctor = new Doctor({
+      name,
+      specialty,
+      bio,
+      email,
+      phone,
+      image: imageUrl,
+    });
     await doctor.save();
     res.status(201).json({ message: "Doctor added", doctor });
   } catch (err) {
-    console.error('Doctor creation error:', err); // Log full error for debugging
-    res.status(500).json({ message: "failed to add doctor", error: err.message, stack: err.stack });
+    console.error("Doctor creation error:", err); // Log full error for debugging
+    res
+      .status(500)
+      .json({
+        message: "failed to add doctor",
+        error: err.message,
+        stack: err.stack,
+      });
   }
 });
 

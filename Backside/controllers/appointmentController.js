@@ -44,7 +44,10 @@ router.get("/appointments/recent", async (req, res) => {
   } catch (err) {
     res
       .status(500)
-      .json({ message: "Failed to fetch recent appointments", error: err.message });
+      .json({
+        message: "Failed to fetch recent appointments",
+        error: err.message,
+      });
   }
 });
 
@@ -68,8 +71,7 @@ router.patch("/appointments/:id/status", async (req, res) => {
   try {
     const { id } = req.params;
     const { status } = req.body;
-    if (!status)
-      return res.status(400).json({ message: "Status is required" });
+    if (!status) return res.status(400).json({ message: "Status is required" });
     const updated = await Appointment.findByIdAndUpdate(
       id,
       { status },

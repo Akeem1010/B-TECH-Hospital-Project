@@ -402,11 +402,72 @@
           </table>
           <!-- Message View Modal -->
           <div id="message-view-modal" class="modal" style="display: none">
-            <div class="modal-content" style="max-width: 420px; padding: 2rem 2.5rem; border-radius: 1.2rem; background: #fff; box-shadow: 0 8px 32px rgba(0,0,0,0.18); position: relative;">
-              <span class="close-modal" id="close-message-view-modal" style="position: absolute; top: 18px; right: 22px; font-size: 2rem; color: #888; cursor: pointer; transition: color 0.2s; z-index: 2;">&times;</span>
-              <h3 style="margin-bottom: 1.2rem; color: #2a3b4c; font-size: 1.3rem; font-weight: 600; text-align: center;">Message Details</h3>
-              <div id="message-view-content" style="font-size: 1.08rem; color: #222; line-height: 1.7; background: #f7fafd; border-radius: 0.7rem; padding: 1.2rem 1.1rem; border: 1px solid #e3e9f2;"></div>
-              <button id="close-message-view-btn" style="margin: 1.5rem auto 0 auto; display: block; background: #2a7be4; color: #fff; border: none; border-radius: 0.5rem; padding: 0.6rem 1.6rem; font-size: 1rem; cursor: pointer; transition: background 0.2s;">Close</button>
+            <div
+              class="modal-content"
+              style="
+                max-width: 420px;
+                padding: 2rem 2.5rem;
+                border-radius: 1.2rem;
+                background: #fff;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+                position: relative;
+              "
+            >
+              <span
+                class="close-modal"
+                id="close-message-view-modal"
+                style="
+                  position: absolute;
+                  top: 18px;
+                  right: 22px;
+                  font-size: 2rem;
+                  color: #888;
+                  cursor: pointer;
+                  transition: color 0.2s;
+                  z-index: 2;
+                "
+                >&times;</span
+              >
+              <h3
+                style="
+                  margin-bottom: 1.2rem;
+                  color: #2a3b4c;
+                  font-size: 1.3rem;
+                  font-weight: 600;
+                  text-align: center;
+                "
+              >
+                Message Details
+              </h3>
+              <div
+                id="message-view-content"
+                style="
+                  font-size: 1.08rem;
+                  color: #222;
+                  line-height: 1.7;
+                  background: #f7fafd;
+                  border-radius: 0.7rem;
+                  padding: 1.2rem 1.1rem;
+                  border: 1px solid #e3e9f2;
+                "
+              ></div>
+              <button
+                id="close-message-view-btn"
+                style="
+                  margin: 1.5rem auto 0 auto;
+                  display: block;
+                  background: #2a7be4;
+                  color: #fff;
+                  border: none;
+                  border-radius: 0.5rem;
+                  padding: 0.6rem 1.6rem;
+                  font-size: 1rem;
+                  cursor: pointer;
+                  transition: background 0.2s;
+                "
+              >
+                Close
+              </button>
             </div>
           </div>
         </section>
@@ -513,8 +574,12 @@
 <td>${doc.email || ""}</td>
 <td>${doc.phone || ""}</td>
 <td>
-  <button class="edit-btn" data-id="${doc._id}"><i class="fa fa-edit"></i></button>
-  <button class="delete-btn" data-id="${doc._id}"><i class="fa fa-trash"></i></button>
+  <button class="edit-btn" data-id="${
+    doc._id
+  }"><i class="fa fa-edit"></i></button>
+  <button class="delete-btn" data-id="${
+    doc._id
+  }"><i class="fa fa-trash"></i></button>
 </td>
 </tr>`;
       }
@@ -588,7 +653,7 @@
           const id = e.target.closest(".edit-btn").dataset.id;
           // Fetch doctor by id and open modal for editing (implement as needed)
           // openDoctorModal(id); // You may need to fetch the doctor data by id
-          alert('Edit doctor feature coming soon!');
+          alert("Edit doctor feature coming soon!");
         } else if (e.target.closest(".delete-btn")) {
           const id = e.target.closest(".delete-btn").dataset.id;
           if (confirm("Are you sure you want to delete this doctor?")) {
@@ -681,7 +746,10 @@
       }
       async function deleteAppointment(id) {
         try {
-          const res = await fetch(`http://localhost:5000/api/appointments/${id}`, { method: "DELETE" });
+          const res = await fetch(
+            `http://localhost:5000/api/appointments/${id}`,
+            { method: "DELETE" }
+          );
           return res.ok;
         } catch {
           return false;
@@ -689,11 +757,14 @@
       }
       async function updateAppointmentStatus(id, status) {
         try {
-          const res = await fetch(`http://localhost:5000/api/appointments/${id}/status`, {
-            method: "PATCH",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ status })
-          });
+          const res = await fetch(
+            `http://localhost:5000/api/appointments/${id}/status`,
+            {
+              method: "PATCH",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ status }),
+            }
+          );
           return res.ok;
         } catch {
           return false;
@@ -711,14 +782,22 @@
       <td>${app.date} ${app.time ? app.time : ""}</td>
       <td>
         <select class="status-select" data-id="${app._id}">
-          <option value="Pending" ${statusVal === "Pending" ? "selected" : ""}>Pending</option>
-          <option value="Completed" ${statusVal === "Completed" ? "selected" : ""}>Completed</option>
-          <option value="Cancelled" ${statusVal === "Cancelled" ? "selected" : ""}>Cancelled</option>
+          <option value="Pending" ${
+            statusVal === "Pending" ? "selected" : ""
+          }>Pending</option>
+          <option value="Completed" ${
+            statusVal === "Completed" ? "selected" : ""
+          }>Completed</option>
+          <option value="Cancelled" ${
+            statusVal === "Cancelled" ? "selected" : ""
+          }>Cancelled</option>
         </select>
       </td>
       <td>
         <button class="edit-btn" data-idx="${idx}"><i class="fa fa-edit"></i></button>
-        <button class="delete-btn" data-id="${app._id}"><i class="fa fa-trash"></i></button>
+        <button class="delete-btn" data-id="${
+          app._id
+        }"><i class="fa fa-trash"></i></button>
       </td>
     `;
           appointmentsTbody.appendChild(tr);
@@ -1016,7 +1095,9 @@
       }
       async function deleteMessage(id) {
         try {
-          const res = await fetch(`http://localhost:5000/api/messages/${id}`, { method: "DELETE" });
+          const res = await fetch(`http://localhost:5000/api/messages/${id}`, {
+            method: "DELETE",
+          });
           return res.ok;
         } catch {
           return false;
@@ -1059,10 +1140,20 @@
       function openMessageViewModal(idx) {
         ensureMessageViewModal();
         messageViewModal = document.getElementById("message-view-modal");
-        closeMessageViewModal = document.getElementById("close-message-view-modal");
+        closeMessageViewModal = document.getElementById(
+          "close-message-view-modal"
+        );
         messageViewContent = document.getElementById("message-view-content");
         const msg = messagesData[idx];
-        messageViewContent.innerHTML = `<strong>From:</strong> ${msg.name || msg.from || "-"}<br><strong>Email:</strong> ${msg.email || "-"}<br><strong>Subject:</strong> ${msg.subject || "-"}<br><strong>Date:</strong> ${msg.date ? msg.date.split("T")[0] : "-"}<br><strong>Message:</strong> ${msg.message || msg.content || "-"}`;
+        messageViewContent.innerHTML = `<strong>From:</strong> ${
+          msg.name || msg.from || "-"
+        }<br><strong>Email:</strong> ${
+          msg.email || "-"
+        }<br><strong>Subject:</strong> ${
+          msg.subject || "-"
+        }<br><strong>Date:</strong> ${
+          msg.date ? msg.date.split("T")[0] : "-"
+        }<br><strong>Message:</strong> ${msg.message || msg.content || "-"}`;
         messageViewModal.style.display = "block";
       }
       // --- Dashboard Stats: Fetch Counts from Backend ---
@@ -1087,11 +1178,13 @@
         }
       }
       async function updateDashboardStats() {
-        const [doctorCount, patientCount, appointmentCount] = await Promise.all([
-          fetchCount("http://localhost:5000/api/doctors"),
-          fetchPatientCount(),
-          fetchCount("http://localhost:5000/api/appointments"),
-        ]);
+        const [doctorCount, patientCount, appointmentCount] = await Promise.all(
+          [
+            fetchCount("http://localhost:5000/api/doctors"),
+            fetchPatientCount(),
+            fetchCount("http://localhost:5000/api/appointments"),
+          ]
+        );
         document.querySelectorAll(".stat-label").forEach((el) => {
           if (el.textContent.includes("Doctor"))
             el.nextElementSibling.textContent = doctorCount;
@@ -1115,7 +1208,9 @@
       // --- Fix close for message view modal ---
       async function fetchRecentAppointments() {
         try {
-          const res = await fetch("http://localhost:5000/api/appointments/recent");
+          const res = await fetch(
+            "http://localhost:5000/api/appointments/recent"
+          );
           if (!res.ok) throw new Error("Failed");
           return await res.json();
         } catch {
@@ -1123,7 +1218,9 @@
         }
       }
       async function renderRecentAppointments() {
-        const recentTbody = document.getElementById("recent-appointments-tbody");
+        const recentTbody = document.getElementById(
+          "recent-appointments-tbody"
+        );
         const apps = await fetchRecentAppointments();
         recentTbody.innerHTML = "";
         apps.forEach((app) => {
