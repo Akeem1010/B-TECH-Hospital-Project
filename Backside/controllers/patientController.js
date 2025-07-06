@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const Patient = require("../models/Patient");
 
 // Add a new patient
 router.post("/patients", async (req, res) => {
@@ -16,11 +15,19 @@ router.post("/patients", async (req, res) => {
   }
 });
 
-// Get all patients
+// Get all patients (from Patient collection and User collection with role 'patient')
 router.get("/patients", async (req, res) => {
   try {
     const patients = await Patient.find().sort({ createdAt: -1 });
-    res.json(patients);
+    const User = require("../models/User");
+    const userPatients = await User.find({ role: "patient" }).select(
+      "name email phone town region"
+    );
+    // Merge and deduplicate by email
+    const allPatients = [...patients, ...userPatients].filter(
+      (pat, idx, arr) => arr.findIndex((p) => p.email === pat.email) === idx
+    );
+    res.json(allPatients);
   } catch (err) {
     res
       .status(500)

@@ -52,4 +52,14 @@ router.post("/login", async (req, res) => {
   }
 });
 
+// Get all users (for dashboard patient count)
+router.get("/users", async (req, res) => {
+  try {
+    const users = await User.find();
+    res.json(users);
+  } catch (err) {
+    res.status(500).json({ message: "Failed to fetch users", error: err.message });
+  }
+});
+
 module.exports = router;

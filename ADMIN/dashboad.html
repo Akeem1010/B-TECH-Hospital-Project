@@ -32,16 +32,10 @@
               <a href="#"><i class="fa fa-user-md"></i> Doctors</a>
             </li>
             <li>
-              <a href="#"><i class="fa fa-users"></i> Patients</a>
-            </li>
-            <li>
               <a href="#"><i class="fa fa-calendar-check"></i> Appointments</a>
             </li>
             <li>
               <a href="#"><i class="fa fa-briefcase-medical"></i> Services</a>
-            </li>
-            <li>
-              <a href="#"><i class="fa fa-flask-vial"></i> Lab Reports</a>
             </li>
             <li>
               <a href="#"><i class="fa fa-envelope"></i> Messages</a>
@@ -102,31 +96,8 @@
                   <th>Status</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td>John Doe</td>
-                  <td>Dr. Smith</td>
-                  <td>2025-05-25</td>
-                  <td><span class="status completed">Completed</span></td>
-                </tr>
-                <tr>
-                  <td>Jane Smith</td>
-                  <td>Dr. Adams</td>
-                  <td>2025-05-26</td>
-                  <td><span class="status pending">Pending</span></td>
-                </tr>
-                <tr>
-                  <td>Michael Lee</td>
-                  <td>Dr. Brown</td>
-                  <td>2025-05-26</td>
-                  <td><span class="status cancelled">Cancelled</span></td>
-                </tr>
-                <tr>
-                  <td>Sarah Kim</td>
-                  <td>Dr. Patel</td>
-                  <td>2025-05-27</td>
-                  <td><span class="status pending">Pending</span></td>
-                </tr>
+              <tbody id="recent-appointments-tbody">
+                <!-- Dynamic rows will be rendered by JS -->
               </tbody>
             </table>
           </div>
@@ -141,25 +112,8 @@
                   <th>Date</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td>Mary Johnson</td>
-                  <td>maryj@email.com</td>
-                  <td>Appointment Inquiry</td>
-                  <td>2025-05-25</td>
-                </tr>
-                <tr>
-                  <td>Paul Green</td>
-                  <td>paulg@email.com</td>
-                  <td>Lab Report</td>
-                  <td>2025-05-25</td>
-                </tr>
-                <tr>
-                  <td>Linda White</td>
-                  <td>lindaw@email.com</td>
-                  <td>Feedback</td>
-                  <td>2025-05-24</td>
-                </tr>
+              <tbody id="recent-messages-tbody">
+                <!-- Dynamic rows will be rendered by JS -->
               </tbody>
             </table>
           </div>
@@ -177,6 +131,7 @@
           <table class="recent-table" id="doctors-table">
             <thead>
               <tr>
+                <th>Image</th>
                 <th>Name</th>
                 <th>Specialty</th>
                 <th>Email</th>
@@ -184,32 +139,7 @@
                 <th>Actions</th>
               </tr>
             </thead>
-            <tbody id="doctors-tbody">
-              <tr>
-                <td>Dr. Smith</td>
-                <td>Cardiology</td>
-                <td>smith@email.com</td>
-                <td>+123456789</td>
-                <td>
-                  <button class="edit-btn"><i class="fa fa-edit"></i></button>
-                  <button class="delete-btn">
-                    <i class="fa fa-trash"></i>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>Dr. Adams</td>
-                <td>Radiology</td>
-                <td>adams@email.com</td>
-                <td>+987654321</td>
-                <td>
-                  <button class="edit-btn"><i class="fa fa-edit"></i></button>
-                  <button class="delete-btn">
-                    <i class="fa fa-trash"></i>
-                  </button>
-                </td>
-              </tr>
-            </tbody>
+            <tbody id="doctors-tbody"></tbody>
           </table>
           <!-- Doctor Modal -->
           <div id="doctor-modal" class="modal" style="display: none">
@@ -278,112 +208,6 @@
             </div>
           </div>
         </section>
-        <!-- Patients Section -->
-        <section
-          id="patients-section"
-          class="dashboard-section-content"
-          style="display: none"
-        >
-          <h2>Patients Management</h2>
-          <button class="add-btn" id="add-patient-btn">
-            <i class="fa fa-plus"></i> Add Patient
-          </button>
-          <table class="recent-table" id="patients-table">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Gender</th>
-                <th>Age</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody id="patients-tbody">
-              <tr>
-                <td>John Doe</td>
-                <td>Male</td>
-                <td>34</td>
-                <td>john@email.com</td>
-                <td>+123456789</td>
-                <td>
-                  <button class="edit-btn"><i class="fa fa-edit"></i></button>
-                  <button class="delete-btn">
-                    <i class="fa fa-trash"></i>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>Jane Smith</td>
-                <td>Female</td>
-                <td>28</td>
-                <td>jane@email.com</td>
-                <td>+987654321</td>
-                <td>
-                  <button class="edit-btn"><i class="fa fa-edit"></i></button>
-                  <button class="delete-btn">
-                    <i class="fa fa-trash"></i>
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <!-- Patient Modal -->
-          <div id="patient-modal" class="modal" style="display: none">
-            <div class="modal-content">
-              <span class="close-modal" id="close-patient-modal">&times;</span>
-              <h3 id="patient-modal-title">Add Patient</h3>
-              <form id="patient-form">
-                <div class="form-group">
-                  <label for="patient-name">Name</label>
-                  <input type="text" id="patient-name" name="name" required />
-                </div>
-                <div class="form-group">
-                  <label for="patient-gender">Gender</label>
-                  <select id="patient-gender" name="gender" required>
-                    <option value="">Select</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="patient-age">Age</label>
-                  <input
-                    type="number"
-                    id="patient-age"
-                    name="age"
-                    required
-                    min="0"
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="patient-email">Email</label>
-                  <input
-                    type="email"
-                    id="patient-email"
-                    name="email"
-                    required
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="patient-phone">Phone</label>
-                  <input type="text" id="patient-phone" name="phone" required />
-                </div>
-                <button type="submit" class="save-btn">Save</button>
-                <div
-                  id="patient-form-error"
-                  style="color: #d32f2f; display: none; margin-top: 0.7rem"
-                ></div>
-                <div
-                  id="patient-form-success"
-                  style="color: #388e3c; display: none; margin-top: 0.7rem"
-                >
-                  Patient added successfully!
-                </div>
-              </form>
-            </div>
-          </div>
-        </section>
         <!-- Appointments Section -->
         <section
           id="appointments-section"
@@ -434,66 +258,7 @@
               </tr>
             </thead>
             <tbody id="appointments-tbody">
-              <tr>
-                <td>John Doe</td>
-                <td>Dr. Smith</td>
-                <td>2025-05-25</td>
-                <td><span class="status completed">Completed</span></td>
-                <td>
-                  <button class="edit-btn"><i class="fa fa-edit"></i></button>
-                  <button class="delete-btn">
-                    <i class="fa fa-trash"></i>
-                  </button>
-                  <button class="prescription-btn">
-                    <i class="fa fa-prescription"></i> Prescription
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>Jane Smith</td>
-                <td>Dr. Adams</td>
-                <td>2025-05-26</td>
-                <td><span class="status pending">Pending</span></td>
-                <td>
-                  <button class="edit-btn"><i class="fa fa-edit"></i></button>
-                  <button class="delete-btn">
-                    <i class="fa fa-trash"></i>
-                  </button>
-                  <button class="prescription-btn">
-                    <i class="fa fa-prescription"></i> Prescription
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>Michael Lee</td>
-                <td>Dr. Brown</td>
-                <td>2025-05-26</td>
-                <td><span class="status cancelled">Cancelled</span></td>
-                <td>
-                  <button class="edit-btn"><i class="fa fa-edit"></i></button>
-                  <button class="delete-btn">
-                    <i class="fa fa-trash"></i>
-                  </button>
-                  <button class="prescription-btn">
-                    <i class="fa fa-prescription"></i> Prescription
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>Sarah Kim</td>
-                <td>Dr. Patel</td>
-                <td>2025-05-27</td>
-                <td><span class="status pending">Pending</span></td>
-                <td>
-                  <button class="edit-btn"><i class="fa fa-edit"></i></button>
-                  <button class="delete-btn">
-                    <i class="fa fa-trash"></i>
-                  </button>
-                  <button class="prescription-btn">
-                    <i class="fa fa-prescription"></i> Prescription
-                  </button>
-                </td>
-              </tr>
+              <!-- Dynamic rows will be rendered by JS -->
             </tbody>
           </table>
           <!-- Prescription Modal -->
@@ -614,79 +379,6 @@
             </div>
           </div>
         </section>
-        <!-- Lab Reports Section -->
-        <section
-          id="labreports-section"
-          class="dashboard-section-content"
-          style="display: none"
-        >
-          <h2>Lab Reports Management</h2>
-          <button class="add-btn" id="add-lab-btn">
-            <i class="fa fa-plus"></i> Add Lab Report
-          </button>
-          <table class="recent-table" id="labreports-table">
-            <thead>
-              <tr>
-                <th>Patient</th>
-                <th>Test</th>
-                <th>Date</th>
-                <th>Status</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody id="labreports-tbody">
-              <tr>
-                <td>John Doe</td>
-                <td>Blood Test</td>
-                <td>2025-05-25</td>
-                <td><span class="status completed">Completed</span></td>
-                <td>
-                  <button class="edit-btn"><i class="fa fa-edit"></i></button>
-                  <button class="delete-btn">
-                    <i class="fa fa-trash"></i>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>Jane Smith</td>
-                <td>X-Ray</td>
-                <td>2025-05-26</td>
-                <td><span class="status pending">Pending</span></td>
-                <td>
-                  <button class="edit-btn"><i class="fa fa-edit"></i></button>
-                  <button class="delete-btn">
-                    <i class="fa fa-trash"></i>
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <!-- Lab Modal -->
-          <div id="lab-modal" class="modal" style="display: none">
-            <div class="modal-content">
-              <span class="close-modal" id="close-lab-modal">&times;</span>
-              <h3 id="lab-modal-title">Add Lab Report</h3>
-              <form id="lab-form">
-                <input type="hidden" id="lab-index" />
-                <label
-                  >Patient:<input type="text" id="lab-patient" required
-                /></label>
-                <label>Test:<input type="text" id="lab-test" required /></label>
-                <label>Date:<input type="date" id="lab-date" required /></label>
-                <label
-                  >Status:
-                  <select id="lab-status" required>
-                    <option value="Completed">Completed</option>
-                    <option value="Pending">Pending</option>
-                  </select>
-                </label>
-                <button type="submit" class="save-btn">
-                  <i class="fa fa-save"></i> Save
-                </button>
-              </form>
-            </div>
-          </div>
-        </section>
         <!-- Messages Section -->
         <section
           id="messages-section"
@@ -694,9 +386,6 @@
           style="display: none"
         >
           <h2>Messages</h2>
-          <button class="add-btn" id="add-message-btn">
-            <i class="fa fa-plus"></i> Add Message
-          </button>
           <table class="recent-table" id="messages-table">
             <thead>
               <tr>
@@ -708,65 +397,16 @@
               </tr>
             </thead>
             <tbody id="messages-tbody">
-              <tr>
-                <td>Mary Johnson</td>
-                <td>maryj@email.com</td>
-                <td>Appointment Inquiry</td>
-                <td>2025-05-25</td>
-                <td>
-                  <button class="edit-btn"><i class="fa fa-edit"></i></button>
-                  <button class="delete-btn">
-                    <i class="fa fa-trash"></i>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>Paul Green</td>
-                <td>paulg@email.com</td>
-                <td>Lab Report</td>
-                <td>2025-05-25</td>
-                <td>
-                  <button class="edit-btn"><i class="fa fa-edit"></i></button>
-                  <button class="delete-btn">
-                    <i class="fa fa-trash"></i>
-                  </button>
-                </td>
-              </tr>
+              <!-- Dynamic rows -->
             </tbody>
           </table>
-          <!-- Message Modal -->
-          <div id="message-modal" class="modal" style="display: none">
-            <div class="modal-content">
-              <span class="close-modal" id="close-message-modal">&times;</span>
-              <h3 id="message-modal-title">Add Message</h3>
-              <form id="message-form">
-                <input type="hidden" id="message-index" />
-                <label
-                  >From:<input type="text" id="message-from" required
-                /></label>
-                <label
-                  >Email:<input type="email" id="message-email" required
-                /></label>
-                <label
-                  >Subject:<input type="text" id="message-subject" required
-                /></label>
-                <label
-                  >Date:<input type="date" id="message-date" required
-                /></label>
-                <button type="submit" class="save-btn">
-                  <i class="fa fa-save"></i> Save
-                </button>
-              </form>
-            </div>
-          </div>
           <!-- Message View Modal -->
           <div id="message-view-modal" class="modal" style="display: none">
-            <div class="modal-content">
-              <span class="close-modal" id="close-message-view-modal"
-                >&times;</span
-              >
-              <h3>Message Details</h3>
-              <div id="message-view-content"></div>
+            <div class="modal-content" style="max-width: 420px; padding: 2rem 2.5rem; border-radius: 1.2rem; background: #fff; box-shadow: 0 8px 32px rgba(0,0,0,0.18); position: relative;">
+              <span class="close-modal" id="close-message-view-modal" style="position: absolute; top: 18px; right: 22px; font-size: 2rem; color: #888; cursor: pointer; transition: color 0.2s; z-index: 2;">&times;</span>
+              <h3 style="margin-bottom: 1.2rem; color: #2a3b4c; font-size: 1.3rem; font-weight: 600; text-align: center;">Message Details</h3>
+              <div id="message-view-content" style="font-size: 1.08rem; color: #222; line-height: 1.7; background: #f7fafd; border-radius: 0.7rem; padding: 1.2rem 1.1rem; border: 1px solid #e3e9f2;"></div>
+              <button id="close-message-view-btn" style="margin: 1.5rem auto 0 auto; display: block; background: #2a7be4; color: #fff; border: none; border-radius: 0.5rem; padding: 0.6rem 1.6rem; font-size: 1rem; cursor: pointer; transition: background 0.2s;">Close</button>
             </div>
           </div>
         </section>
@@ -801,10 +441,8 @@
       const sectionMap = {
         "dashboard-section": "dashboard-section",
         "doctors-section": "doctors-section",
-        "patients-section": "patients-section",
         "appointments-section": "appointments-section",
         "services-section": "services-section",
-        "labreports-section": "labreports-section",
         "messages-section": "messages-section",
         "settings-section": "settings-section",
       };
@@ -817,10 +455,8 @@
         const activeSection = document.getElementById(sectionId);
         if (activeSection) activeSection.style.display = "";
         if (sectionId === "doctors-section") renderDoctors();
-        if (sectionId === "patients-section") renderPatients();
         if (sectionId === "appointments-section") renderAppointments();
         if (sectionId === "services-section") renderServices();
-        if (sectionId === "labreports-section") renderLabReports();
         if (sectionId === "messages-section") renderMessages();
       }
       navLinks.forEach((link) => {
@@ -831,11 +467,9 @@
           let text = this.textContent.trim().toLowerCase();
           let sectionId = "dashboard-section";
           if (text.includes("doctor")) sectionId = "doctors-section";
-          else if (text.includes("patient")) sectionId = "patients-section";
           else if (text.includes("appointment"))
             sectionId = "appointments-section";
           else if (text.includes("service")) sectionId = "services-section";
-          else if (text.includes("lab")) sectionId = "labreports-section";
           else if (text.includes("message")) sectionId = "messages-section";
           else if (text.includes("setting")) sectionId = "settings-section";
           showSection(sectionId);
@@ -860,37 +494,36 @@
       const doctorImagePreview = document.getElementById(
         "doctor-image-preview"
       );
-      let doctorsData = [
-        {
-          name: "Dr. Smith",
-          specialty: "Cardiology",
-          email: "smith@email.com",
-          phone: "+123456789",
-        },
-        {
-          name: "Dr. Adams",
-          specialty: "Radiology",
-          email: "adams@email.com",
-          phone: "+987654321",
-        },
-      ];
-      function renderDoctors() {
-        doctorsTbody.innerHTML = "";
-        doctorsData.forEach((doc, idx) => {
-          const tr = document.createElement("tr");
-          tr.innerHTML = `
-            <td>${doc.name}</td>
-            <td>${doc.specialty}</td>
-            <td>${doc.email}</td>
-            <td>${doc.phone}</td>
-            <td>
-              <button class="edit-btn" data-idx="${idx}"><i class="fa fa-edit"></i></button>
-              <button class="delete-btn" data-idx="${idx}"><i class="fa fa-trash"></i></button>
-            </td>
-          `;
-          doctorsTbody.appendChild(tr);
-        });
+      function doctorRowHTML(doc, idx) {
+        let imageUrl = "../IMAGES/logo-removebg-preview.png";
+        if (
+          doc.image &&
+          typeof doc.image === "string" &&
+          doc.image.trim() !== ""
+        ) {
+          imageUrl = doc.image;
+        }
+        return `<tr>
+<td style="position:relative;width:60px;height:48px;">
+  <img src="../IMAGES/logo-removebg-preview.png" alt="Logo" style="width:48px;height:48px;object-fit:cover;border-radius:50%;border:1px solid #ccc;position:absolute;left:0;top:0;z-index:1;opacity:0.5;" />
+  <img src="${imageUrl}" alt="Doctor Image" style="width:48px;height:48px;object-fit:cover;border-radius:50%;border:1px solid #ccc;position:absolute;left:0;top:0;z-index:2;" onerror="this.style.display='none';" />
+</td>
+<td>${doc.name}</td>
+<td>${doc.specialty}</td>
+<td>${doc.email || ""}</td>
+<td>${doc.phone || ""}</td>
+<td>
+  <button class="edit-btn" data-id="${doc._id}"><i class="fa fa-edit"></i></button>
+  <button class="delete-btn" data-id="${doc._id}"><i class="fa fa-trash"></i></button>
+</td>
+</tr>`;
       }
+      async function renderDoctors() {
+        const doctors = await fetchDoctors();
+        const tbody = document.getElementById("doctors-tbody");
+        tbody.innerHTML = doctors.map(doctorRowHTML).join("");
+      }
+      renderDoctors();
       function openDoctorModal(editIdx = null) {
         doctorModal.style.display = "block";
         if (editIdx !== null) {
@@ -919,68 +552,53 @@
       }
       addDoctorBtn.addEventListener("click", () => openDoctorModal());
       closeDoctorModal.addEventListener("click", closeDoctorModalFunc);
-      doctorForm.addEventListener("submit", function (e) {
+      doctorForm.addEventListener("submit", async function (e) {
         e.preventDefault();
-        const idx = doctorIndexInput.value;
-        const newDoc = {
-          name: doctorNameInput.value,
-          specialty: doctorSpecialtyInput.value,
-          email: doctorEmailInput.value,
-          phone: doctorPhoneInput.value,
-          bio: doctorBioInput.value,
-          image: doctorImageInput.files[0],
-        };
-        const formData = new FormData();
-        for (let key in newDoc) {
-          formData.append(key, newDoc[key]);
-        }
-        if (idx === "") {
-          fetch("http://localhost:5000/api/doctors", {
+        const form = document.getElementById("doctor-form");
+        const formData = new FormData(form);
+        const errorDiv = document.getElementById("doctor-form-error");
+        const successDiv = document.getElementById("doctor-form-success");
+        errorDiv.style.display = "none";
+        successDiv.style.display = "none";
+        try {
+          const res = await fetch("http://localhost:5000/api/doctors", {
             method: "POST",
             body: formData,
-          })
-            .then((res) => {
-              if (!res.ok) throw new Error("Failed to add doctor");
-              return res.json();
-            })
-            .then(() => {
+          });
+          if (res.ok) {
+            successDiv.style.display = "block";
+            setTimeout(() => {
+              document.getElementById("doctor-modal").style.display = "none";
+              successDiv.style.display = "none";
               renderDoctors();
-              closeDoctorModalFunc();
               updateDashboardStats();
-            })
-            .catch((err) => {
-              console.error(err);
-              alert("Error: " + err.message);
-            });
-        } else {
-          fetch(`http://localhost:5000/api/doctors/${idx}`, {
-            method: "PUT",
-            body: formData,
-          })
-            .then((res) => {
-              if (!res.ok) throw new Error("Failed to update doctor");
-              return res.json();
-            })
-            .then(() => {
-              renderDoctors();
-              closeDoctorModalFunc();
-              updateDashboardStats();
-            })
-            .catch((err) => {
-              console.error(err);
-              alert("Error: " + err.message);
-            });
+            }, 1200);
+          } else {
+            const data = await res.json().catch(() => ({}));
+            errorDiv.textContent = data.message || "Failed to add doctor.";
+            errorDiv.style.display = "block";
+          }
+        } catch {
+          errorDiv.textContent = "Server error.";
+          errorDiv.style.display = "block";
         }
       });
       doctorsTbody.addEventListener("click", function (e) {
         if (e.target.closest(".edit-btn")) {
-          const idx = e.target.closest(".edit-btn").dataset.idx;
-          openDoctorModal(idx);
+          const id = e.target.closest(".edit-btn").dataset.id;
+          // Fetch doctor by id and open modal for editing (implement as needed)
+          // openDoctorModal(id); // You may need to fetch the doctor data by id
+          alert('Edit doctor feature coming soon!');
         } else if (e.target.closest(".delete-btn")) {
-          const idx = e.target.closest(".delete-btn").dataset.idx;
+          const id = e.target.closest(".delete-btn").dataset.id;
           if (confirm("Are you sure you want to delete this doctor?")) {
-            doctorsData.splice(idx, 1);
-            renderDoctors();
+            deleteDoctor(id).then((success) => {
+              if (success) {
+                renderDoctors();
+              } else {
+                alert("Failed to delete doctor.");
+              }
+            });
           }
         }
       });
@@ -992,115 +610,6 @@
           e.target !== addDoctorBtn
         ) {
           closeDoctorModalFunc();
-        }
-      });
-      // Patients CRUD logic
-      const patientsTbody = document.getElementById("patients-tbody");
-      const addPatientBtn = document.getElementById("add-patient-btn");
-      const patientModal = document.getElementById("patient-modal");
-      const closePatientModal = document.getElementById("close-patient-modal");
-      const patientForm = document.getElementById("patient-form");
-      const patientModalTitle = document.getElementById("patient-modal-title");
-      const patientIndexInput = document.getElementById("patient-index");
-      const patientNameInput = document.getElementById("patient-name");
-      const patientGenderInput = document.getElementById("patient-gender");
-      const patientAgeInput = document.getElementById("patient-age");
-      const patientEmailInput = document.getElementById("patient-email");
-      const patientPhoneInput = document.getElementById("patient-phone");
-      let patientsData = [
-        {
-          name: "John Doe",
-          gender: "Male",
-          age: 34,
-          email: "john@email.com",
-          phone: "+123456789",
-        },
-        {
-          name: "Jane Smith",
-          gender: "Female",
-          age: 28,
-          email: "jane@email.com",
-          phone: "+987654321",
-        },
-      ];
-      function renderPatients() {
-        patientsTbody.innerHTML = "";
-        patientsData.forEach((pat, idx) => {
-          const tr = document.createElement("tr");
-          tr.innerHTML = `
-            <td>${pat.name}</td>
-            <td>${pat.gender}</td>
-            <td>${pat.age}</td>
-            <td>${pat.email}</td>
-            <td>${pat.phone}</td>
-            <td>
-              <button class="edit-btn" data-idx="${idx}"><i class="fa fa-edit"></i></button>
-              <button class="delete-btn" data-idx="${idx}"><i class="fa fa-trash"></i></button>
-            </td>
-          `;
-          patientsTbody.appendChild(tr);
-        });
-      }
-      function openPatientModal(editIdx = null) {
-        patientModal.style.display = "block";
-        if (editIdx !== null) {
-          patientModalTitle.textContent = "Edit Patient";
-          patientIndexInput.value = editIdx;
-          patientNameInput.value = patientsData[editIdx].name;
-          patientGenderInput.value = patientsData[editIdx].gender;
-          patientAgeInput.value = patientsData[editIdx].age;
-          patientEmailInput.value = patientsData[editIdx].email;
-          patientPhoneInput.value = patientsData[editIdx].phone;
-        } else {
-          patientModalTitle.textContent = "Add Patient";
-          patientIndexInput.value = "";
-          patientForm.reset();
-        }
-      }
-      function closePatientModalFunc() {
-        patientModal.style.display = "none";
-        patientForm.reset();
-      }
-      addPatientBtn.addEventListener("click", () => openPatientModal());
-      closePatientModal.addEventListener("click", closePatientModalFunc);
-      patientForm.addEventListener("submit", function (e) {
-        e.preventDefault();
-        const idx = patientIndexInput.value;
-        const newPat = {
-          name: patientNameInput.value,
-          gender: patientGenderInput.value,
-          age: patientAgeInput.value,
-          email: patientEmailInput.value,
-          phone: patientPhoneInput.value,
-        };
-        if (idx === "") {
-          patientsData.push(newPat);
-        } else {
-          patientsData[idx] = newPat;
-        }
-        renderPatients();
-        closePatientModalFunc();
-      });
-      patientsTbody.addEventListener("click", function (e) {
-        if (e.target.closest(".edit-btn")) {
-          const idx = e.target.closest(".edit-btn").dataset.idx;
-          openPatientModal(idx);
-        } else if (e.target.closest(".delete-btn")) {
-          const idx = e.target.closest(".delete-btn").dataset.idx;
-          if (confirm("Are you sure you want to delete this patient?")) {
-            patientsData.splice(idx, 1);
-            renderPatients();
-          }
-        }
-      });
-      // Modal close on outside click for patient
-      window.addEventListener("mousedown", function (e) {
-        if (
-          patientModal.style.display === "block" &&
-          !patientModal.querySelector(".modal-content").contains(e.target) &&
-          e.target !== addPatientBtn
-        ) {
-          closePatientModalFunc();
         }
       });
       // Appointments CRUD logic
@@ -1137,25 +646,25 @@
         modal.className = "modal";
         modal.style.display = "none";
         modal.innerHTML = `
-          <div class="modal-content">
-            <span class="close-modal" id="close-appointment-modal">&times;</span>
-            <h3 id="appointment-modal-title">Add Appointment</h3>
-            <form id="appointment-form">
-              <input type="hidden" id="appointment-index" />
-              <label>Patient:<input type="text" id="appointment-patient" required /></label>
-              <label>Doctor:<input type="text" id="appointment-doctor" required /></label>
-              <label>Date:<input type="date" id="appointment-date" required /></label>
-              <label>Status:
-                <select id="appointment-status" required>
-                  <option value="Completed">Completed</option>
-                  <option value="Pending">Pending</option>
-                  <option value="Cancelled">Cancelled</option>
-                </select>
-              </label>
-              <button type="submit" class="save-btn"><i class="fa fa-save"></i> Save</button>
-            </form>
-          </div>
-        `;
+              <div class="modal-content">
+                <span class="close-modal" id="close-appointment-modal">&times;</span>
+                <h3 id="appointment-modal-title">Add Appointment</h3>
+                <form id="appointment-form">
+                  <input type="hidden" id="appointment-index" />
+                  <label>Patient:<input type="text" id="appointment-patient" required /></label>
+                  <label>Doctor:<input type="text" id="appointment-doctor" required /></label>
+                  <label>Date:<input type="date" id="appointment-date" required /></label>
+                  <label>Status:
+                    <select id="appointment-status" required>
+                      <option value="Completed">Completed</option>
+                      <option value="Pending">Pending</option>
+                      <option value="Cancelled">Cancelled</option>
+                    </select>
+                  </label>
+                  <button type="submit" class="save-btn"><i class="fa fa-save"></i> Save</button>
+                </form>
+              </div>
+            `;
         document.querySelector("#appointments-section").appendChild(modal);
       }
 
@@ -1163,11 +672,31 @@
       async function fetchAppointmentsFromBackend() {
         try {
           const res = await fetch("http://localhost:5000/api/appointments");
-          if (!res.ok) throw new Error("Failed to fetch");
+          if (!res.ok) throw new Error("Failed");
           const data = await res.json();
           return data;
         } catch {
           return [];
+        }
+      }
+      async function deleteAppointment(id) {
+        try {
+          const res = await fetch(`http://localhost:5000/api/appointments/${id}`, { method: "DELETE" });
+          return res.ok;
+        } catch {
+          return false;
+        }
+      }
+      async function updateAppointmentStatus(id, status) {
+        try {
+          const res = await fetch(`http://localhost:5000/api/appointments/${id}/status`, {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ status })
+          });
+          return res.ok;
+        } catch {
+          return false;
         }
       }
       async function renderAppointments() {
@@ -1175,18 +704,23 @@
         appointmentsTbody.innerHTML = "";
         allApps.forEach((app, idx) => {
           const tr = document.createElement("tr");
+          const statusVal = app.status || "Pending";
           tr.innerHTML = `
-            <td>${app.patientName || app.patient}</td>
-            <td>${app.doctorName || app.doctor}</td>
-            <td>${app.date} ${app.time ? app.time : ""}</td>
-            <td><span class="status ${
-              app.status ? app.status.toLowerCase() : "pending"
-            }">${app.status || "Pending"}</span></td>
-            <td>
-              <button class="edit-btn" data-idx="${idx}"><i class="fa fa-edit"></i></button>
-              <button class="delete-btn" data-idx="${idx}"><i class="fa fa-trash"></i></button>
-            </td>
-          `;
+      <td>${app.patientName || app.patient}</td>
+      <td>${app.doctorName || app.doctor}</td>
+      <td>${app.date} ${app.time ? app.time : ""}</td>
+      <td>
+        <select class="status-select" data-id="${app._id}">
+          <option value="Pending" ${statusVal === "Pending" ? "selected" : ""}>Pending</option>
+          <option value="Completed" ${statusVal === "Completed" ? "selected" : ""}>Completed</option>
+          <option value="Cancelled" ${statusVal === "Cancelled" ? "selected" : ""}>Cancelled</option>
+        </select>
+      </td>
+      <td>
+        <button class="edit-btn" data-idx="${idx}"><i class="fa fa-edit"></i></button>
+        <button class="delete-btn" data-id="${app._id}"><i class="fa fa-trash"></i></button>
+      </td>
+    `;
           appointmentsTbody.appendChild(tr);
         });
       }
@@ -1256,10 +790,26 @@
           const idx = e.target.closest(".edit-btn").dataset.idx;
           openAppointmentModal(idx);
         } else if (e.target.closest(".delete-btn")) {
-          const idx = e.target.closest(".delete-btn").dataset.idx;
+          const id = e.target.closest(".delete-btn").dataset.id;
           if (confirm("Are you sure you want to delete this appointment?")) {
-            appointmentsData.splice(idx, 1);
-            renderAppointments();
+            deleteAppointment(id).then((success) => {
+              if (success) {
+                renderAppointments();
+              } else {
+                alert("Failed to delete appointment.");
+              }
+            });
+          }
+        }
+      });
+      appointmentsTbody.addEventListener("change", async function (e) {
+        if (e.target.classList.contains("status-select")) {
+          const id = e.target.dataset.id;
+          const status = e.target.value;
+          if (await updateAppointmentStatus(id, status)) {
+            // Optionally show a success message
+          } else {
+            alert("Failed to update status.");
           }
         }
       });
@@ -1296,18 +846,18 @@
         modal.className = "modal";
         modal.style.display = "none";
         modal.innerHTML = `
-          <div class="modal-content">
-            <span class="close-modal" id="close-service-modal">&times;</span>
-            <h3 id="service-modal-title">Add Service</h3>
-            <form id="service-form">
-              <input type="hidden" id="service-index" />
-              <label>Service Name:<input type="text" id="service-name" required /></label>
-              <label>Department:<input type="text" id="service-dept" required /></label>
-              <label>Description:<input type="text" id="service-desc" required /></label>
-              <button type="submit" class="save-btn"><i class="fa fa-save"></i> Save</button>
-            </form>
-          </div>
-        `;
+              <div class="modal-content">
+                <span class="close-modal" id="close-service-modal">&times;</span>
+                <h3 id="service-modal-title">Add Service</h3>
+                <form id="service-form">
+                  <input type="hidden" id="service-index" />
+                  <label>Service Name:<input type="text" id="service-name" required /></label>
+                  <label>Department:<input type="text" id="service-dept" required /></label>
+                  <label>Description:<input type="text" id="service-desc" required /></label>
+                  <button type="submit" class="save-btn"><i class="fa fa-save"></i> Save</button>
+                </form>
+              </div>
+            `;
         document.querySelector("#services-section").appendChild(modal);
       }
       let servicesData = [
@@ -1319,14 +869,14 @@
         servicesData.forEach((srv, idx) => {
           const tr = document.createElement("tr");
           tr.innerHTML = `
-            <td>${srv.name}</td>
-            <td>${srv.dept}</td>
-            <td>${srv.desc}</td>
-            <td>
-              <button class="edit-btn" data-idx="${idx}"><i class="fa fa-edit"></i></button>
-              <button class="delete-btn" data-idx="${idx}"><i class="fa fa-trash"></i></button>
-            </td>
-          `;
+                <td>${srv.name}</td>
+                <td>${srv.dept}</td>
+                <td>${srv.desc}</td>
+                <td>
+                  <button class="edit-btn" data-idx="${idx}"><i class="fa fa-edit"></i></button>
+                  <button class="delete-btn" data-idx="${idx}"><i class="fa fa-trash"></i></button>
+                </td>
+              `;
           servicesTbody.appendChild(tr);
         });
       }
@@ -1401,156 +951,6 @@
           closeServiceModalFunc();
         }
       });
-      // Lab Reports CRUD logic
-      const labreportsTbody = document.querySelector(
-        "#labreports-section tbody"
-      );
-      const addLabReportBtn = document.querySelector(
-        "#labreports-section .add-btn"
-      );
-      let labreportModal = null,
-        closeLabReportModal = null,
-        labreportForm = null,
-        labreportModalTitle = null,
-        labreportIndexInput = null;
-      let labreportPatientInput = null,
-        labreportTestInput = null,
-        labreportDateInput = null,
-        labreportStatusInput = null;
-      function ensureLabReportModal() {
-        if (document.getElementById("labreport-modal")) return;
-        const modal = document.createElement("div");
-        modal.id = "labreport-modal";
-        modal.className = "modal";
-        modal.style.display = "none";
-        modal.innerHTML = `
-          <div class="modal-content">
-            <span class="close-modal" id="close-labreport-modal">&times;</span>
-            <h3 id="labreport-modal-title">Add Lab Report</h3>
-            <form id="labreport-form">
-              <input type="hidden" id="labreport-index" />
-              <label>Patient:<input type="text" id="labreport-patient" required /></label>
-              <label>Test:<input type="text" id="labreport-test" required /></label>
-              <label>Date:<input type="date" id="labreport-date" required /></label>
-              <label>Status:
-                <select id="labreport-status" required>
-                  <option value="Completed">Completed</option>
-                  <option value="Pending">Pending</option>
-                </select>
-              </label>
-              <button type="submit" class="save-btn"><i class="fa fa-save"></i> Save</button>
-            </form>
-          </div>
-        `;
-        document.querySelector("#labreports-section").appendChild(modal);
-      }
-      let labreportsData = [
-        {
-          patient: "John Doe",
-          test: "Blood Test",
-          date: "2025-05-25",
-          status: "Completed",
-        },
-        {
-          patient: "Jane Smith",
-          test: "X-Ray",
-          date: "2025-05-26",
-          status: "Pending",
-        },
-      ];
-      function renderLabReports() {
-        labreportsTbody.innerHTML = "";
-        labreportsData.forEach((lab, idx) => {
-          const tr = document.createElement("tr");
-          tr.innerHTML = `
-            <td>${lab.patient}</td>
-            <td>${lab.test}</td>
-            <td>${lab.date}</td>
-            <td><span class="status ${lab.status.toLowerCase()}">${
-            lab.status
-          }</span></td>
-            <td>
-              <button class="edit-btn" data-idx="${idx}"><i class="fa fa-edit"></i></button>
-              <button class="delete-btn" data-idx="${idx}"><i class="fa fa-trash"></i></button>
-            </td>
-          `;
-          labreportsTbody.appendChild(tr);
-        });
-      }
-      function openLabReportModal(editIdx = null) {
-        ensureLabReportModal();
-        labreportModal = document.getElementById("labreport-modal");
-        closeLabReportModal = document.getElementById("close-labreport-modal");
-        labreportForm = document.getElementById("labreport-form");
-        labreportModalTitle = document.getElementById("labreport-modal-title");
-        labreportIndexInput = document.getElementById("labreport-index");
-        labreportPatientInput = document.getElementById("labreport-patient");
-        labreportTestInput = document.getElementById("labreport-test");
-        labreportDateInput = document.getElementById("labreport-date");
-        labreportStatusInput = document.getElementById("labreport-status");
-        labreportModal.style.display = "block";
-        if (editIdx !== null) {
-          labreportModalTitle.textContent = "Edit Lab Report";
-          labreportIndexInput.value = editIdx;
-          labreportPatientInput.value = labreportsData[editIdx].patient;
-          labreportTestInput.value = labreportsData[editIdx].test;
-          labreportDateInput.value = labreportsData[editIdx].date;
-          labreportStatusInput.value = labreportsData[editIdx].status;
-        } else {
-          labreportModalTitle.textContent = "Add Lab Report";
-          labreportIndexInput.value = "";
-          labreportForm.reset();
-        }
-      }
-      function closeLabReportModalFunc() {
-        labreportModal.style.display = "none";
-        labreportForm.reset();
-      }
-      if (addLabReportBtn)
-        addLabReportBtn.addEventListener("click", () => openLabReportModal());
-      document.addEventListener("click", function (e) {
-        if (e.target && e.target.id === "close-labreport-modal")
-          closeLabReportModalFunc();
-      });
-      document.addEventListener("submit", function (e) {
-        if (e.target && e.target.id === "labreport-form") {
-          e.preventDefault();
-          const idx = labreportIndexInput.value;
-          const newLab = {
-            patient: labreportPatientInput.value,
-            test: labreportTestInput.value,
-            date: labreportDateInput.value,
-            status: labreportStatusInput.value,
-          };
-          if (idx === "") labreportsData.push(newLab);
-          else labreportsData[idx] = newLab;
-          renderLabReports();
-          closeLabReportModalFunc();
-        }
-      });
-      labreportsTbody.addEventListener("click", function (e) {
-        if (e.target.closest(".edit-btn")) {
-          const idx = e.target.closest(".edit-btn").dataset.idx;
-          openLabReportModal(idx);
-        } else if (e.target.closest(".delete-btn")) {
-          const idx = e.target.closest(".delete-btn").dataset.idx;
-          if (confirm("Are you sure you want to delete this lab report?")) {
-            labreportsData.splice(idx, 1);
-            renderLabReports();
-          }
-        }
-      });
-      window.addEventListener("mousedown", function (e) {
-        ensureLabReportModal();
-        if (
-          labreportModal &&
-          labreportModal.style.display === "block" &&
-          !labreportModal.querySelector(".modal-content").contains(e.target) &&
-          e.target !== addLabReportBtn
-        ) {
-          closeLabReportModalFunc();
-        }
-      });
       // Messages CRUD logic
       const messagesTbody = document.querySelector("#messages-section tbody");
       let addMessageBtn = null; // No add button in UI, but logic is here for completeness
@@ -1573,19 +973,19 @@
         modal.className = "modal";
         modal.style.display = "none";
         modal.innerHTML = `
-          <div class="modal-content">
-            <span class="close-modal" id="close-message-modal">&times;</span>
-            <h3 id="message-modal-title">Add Message</h3>
-            <form id="message-form">
-              <input type="hidden" id="message-index" />
-              <label>From:<input type="text" id="message-from" required /></label>
-              <label>Email:<input type="email" id="message-email" required /></label>
-              <label>Subject:<input type="text" id="message-subject" required /></label>
-              <label>Date:<input type="date" id="message-date" required /></label>
-              <button type="submit" class="save-btn"><i class="fa fa-save"></i> Save</button>
-            </form>
-          </div>
-        `;
+              <div class="modal-content">
+                <span class="close-modal" id="close-message-modal">&times;</span>
+                <h3 id="message-modal-title">Add Message</h3>
+                <form id="message-form">
+                  <input type="hidden" id="message-index" />
+                  <label>From:<input type="text" id="message-from" required /></label>
+                  <label>Email:<input type="email" id="message-email" required /></label>
+                  <label>Subject:<input type="text" id="message-subject" required /></label>
+                  <label>Date:<input type="date" id="message-date" required /></label>
+                  <button type="submit" class="save-btn"><i class="fa fa-save"></i> Save</button>
+                </form>
+              </div>
+            `;
         document.querySelector("#messages-section").appendChild(modal);
       }
       function ensureMessageViewModal() {
@@ -1595,145 +995,76 @@
         modal.className = "modal";
         modal.style.display = "none";
         modal.innerHTML = `
-          <div class="modal-content">
-            <span class="close-modal" id="close-message-view-modal">&times;</span>
-            <h3>Message Details</h3>
-            <div id="message-view-content"></div>
-          </div>
-        `;
+              <div class="modal-content" style="max-width: 420px; padding: 2rem 2.5rem; border-radius: 1.2rem; background: #fff; box-shadow: 0 8px 32px rgba(0,0,0,0.18); position: relative;">
+                <span class="close-modal" id="close-message-view-modal" style="position: absolute; top: 18px; right: 22px; font-size: 2rem; color: #888; cursor: pointer; transition: color 0.2s; z-index: 2;">&times;</span>
+                <h3 style="margin-bottom: 1.2rem; color: #2a3b4c; font-size: 1.3rem; font-weight: 600; text-align: center;">Message Details</h3>
+                <div id="message-view-content" style="font-size: 1.08rem; color: #222; line-height: 1.7; background: #f7fafd; border-radius: 0.7rem; padding: 1.2rem 1.1rem; border: 1px solid #e3e9f2;"></div>
+                <button id="close-message-view-btn" style="margin: 1.5rem auto 0 auto; display: block; background: #2a7be4; color: #fff; border: none; border-radius: 0.5rem; padding: 0.6rem 1.6rem; font-size: 1rem; cursor: pointer; transition: background 0.2s;">Close</button>
+              </div>
+            `;
         document.querySelector("#messages-section").appendChild(modal);
       }
-      let messagesData = [
-        {
-          from: "Mary Johnson",
-          email: "maryj@email.com",
-          subject: "Appointment Inquiry",
-          date: "2025-05-25",
-        },
-        {
-          from: "Paul Green",
-          email: "paulg@email.com",
-          subject: "Lab Report",
-          date: "2025-05-25",
-        },
-      ];
-      function renderMessages() {
+      let messagesData = [];
+      async function fetchMessages() {
+        try {
+          const res = await fetch("http://localhost:5000/api/messages");
+          if (!res.ok) throw new Error("Failed");
+          return await res.json();
+        } catch {
+          return [];
+        }
+      }
+      async function deleteMessage(id) {
+        try {
+          const res = await fetch(`http://localhost:5000/api/messages/${id}`, { method: "DELETE" });
+          return res.ok;
+        } catch {
+          return false;
+        }
+      }
+      async function renderMessages() {
+        messagesData = await fetchMessages();
         messagesTbody.innerHTML = "";
         messagesData.forEach((msg, idx) => {
           const tr = document.createElement("tr");
           tr.innerHTML = `
-            <td>${msg.from}</td>
-            <td>${msg.email}</td>
-            <td>${msg.subject}</td>
-            <td>${msg.date}</td>
-            <td>
-              <button class="view-btn" data-idx="${idx}"><i class="fa fa-eye"></i></button>
-              <button class="edit-btn" data-idx="${idx}"><i class="fa fa-edit"></i></button>
-              <button class="delete-btn" data-idx="${idx}"><i class="fa fa-trash"></i></button>
-            </td>
-          `;
+      <td>${msg.name || msg.from || "-"}</td>
+      <td>${msg.email || "-"}</td>
+      <td>${msg.subject || "-"}</td>
+      <td>${msg.date ? msg.date.split("T")[0] : "-"}</td>
+      <td>
+        <button class="view-btn" data-idx="${idx}"><i class="fa fa-eye"></i></button>
+        <button class="delete-btn" data-idx="${idx}"><i class="fa fa-trash"></i></button>
+      </td>
+    `;
           messagesTbody.appendChild(tr);
         });
       }
-      function openMessageModal(editIdx = null) {
-        ensureMessageModal();
-        messageModal = document.getElementById("message-modal");
-        closeMessageModal = document.getElementById("close-message-modal");
-        messageForm = document.getElementById("message-form");
-        messageModalTitle = document.getElementById("message-modal-title");
-        messageIndexInput = document.getElementById("message-index");
-        messageFromInput = document.getElementById("message-from");
-        messageEmailInput = document.getElementById("message-email");
-        messageSubjectInput = document.getElementById("message-subject");
-        messageDateInput = document.getElementById("message-date");
-        messageModal.style.display = "block";
-        if (editIdx !== null) {
-          messageModalTitle.textContent = "Edit Message";
-          messageIndexInput.value = editIdx;
-          messageFromInput.value = messagesData[editIdx].from;
-          messageEmailInput.value = messagesData[editIdx].email;
-          messageSubjectInput.value = messagesData[editIdx].subject;
-          messageDateInput.value = messagesData[editIdx].date;
-        } else {
-          messageModalTitle.textContent = "Add Message";
-          messageIndexInput.value = "";
-          messageForm.reset();
-        }
-      }
-      function closeMessageModalFunc() {
-        messageModal.style.display = "none";
-        messageForm.reset();
-      }
-      function openMessageViewModal(idx) {
-        ensureMessageViewModal();
-        messageViewModal = document.getElementById("message-view-modal");
-        closeMessageViewModal = document.getElementById(
-          "close-message-view-modal"
-        );
-        messageViewContent = document.getElementById("message-view-content");
-        const msg = messagesData[idx];
-        messageViewContent.innerHTML = `<strong>From:</strong> ${msg.from}<br><strong>Email:</strong> ${msg.email}<br><strong>Subject:</strong> ${msg.subject}<br><strong>Date:</strong> ${msg.date}`;
-        messageViewModal.style.display = "block";
-      }
-      function closeMessageViewModalFunc() {
-        messageViewModal.style.display = "none";
-        messageViewContent.innerHTML = "";
-      }
-      document.addEventListener("click", function (e) {
-        if (e.target && e.target.id === "close-message-modal")
-          closeMessageModalFunc();
-        if (e.target && e.target.id === "close-message-view-modal")
-          closeMessageViewModalFunc();
-      });
-      document.addEventListener("submit", function (e) {
-        if (e.target && e.target.id === "message-form") {
-          e.preventDefault();
-          const idx = messageIndexInput.value;
-          const newMsg = {
-            from: messageFromInput.value,
-            email: messageEmailInput.value,
-            subject: messageSubjectInput.value,
-            date: messageDateInput.value,
-          };
-          if (idx === "") messagesData.push(newMsg);
-          else messagesData[idx] = newMsg;
-          renderMessages();
-          closeMessageModalFunc();
-        }
-      });
-      messagesTbody.addEventListener("click", function (e) {
+      messagesTbody.addEventListener("click", async function (e) {
         if (e.target.closest(".view-btn")) {
           const idx = e.target.closest(".view-btn").dataset.idx;
           openMessageViewModal(idx);
-        } else if (e.target.closest(".edit-btn")) {
-          const idx = e.target.closest(".edit-btn").dataset.idx;
-          openMessageModal(idx);
         } else if (e.target.closest(".delete-btn")) {
           const idx = e.target.closest(".delete-btn").dataset.idx;
+          const msg = messagesData[idx];
           if (confirm("Are you sure you want to delete this message?")) {
-            messagesData.splice(idx, 1);
-            renderMessages();
+            if (await deleteMessage(msg._id)) {
+              renderMessages();
+            } else {
+              alert("Failed to delete message.");
+            }
           }
         }
       });
-      window.addEventListener("mousedown", function (e) {
-        ensureMessageModal();
+      function openMessageViewModal(idx) {
         ensureMessageViewModal();
-        if (
-          messageModal &&
-          messageModal.style.display === "block" &&
-          !messageModal.querySelector(".modal-content").contains(e.target)
-        ) {
-          closeMessageModalFunc();
-        }
-        if (
-          messageViewModal &&
-          messageViewModal.style.display === "block" &&
-          !messageViewModal.querySelector(".modal-content").contains(e.target)
-        ) {
-          closeMessageViewModalFunc();
-        }
-      });
+        messageViewModal = document.getElementById("message-view-modal");
+        closeMessageViewModal = document.getElementById("close-message-view-modal");
+        messageViewContent = document.getElementById("message-view-content");
+        const msg = messagesData[idx];
+        messageViewContent.innerHTML = `<strong>From:</strong> ${msg.name || msg.from || "-"}<br><strong>Email:</strong> ${msg.email || "-"}<br><strong>Subject:</strong> ${msg.subject || "-"}<br><strong>Date:</strong> ${msg.date ? msg.date.split("T")[0] : "-"}<br><strong>Message:</strong> ${msg.message || msg.content || "-"}`;
+        messageViewModal.style.display = "block";
+      }
       // --- Dashboard Stats: Fetch Counts from Backend ---
       async function fetchCount(url) {
         try {
@@ -1745,14 +1076,22 @@
           return 0;
         }
       }
+      async function fetchPatientCount() {
+        try {
+          const res = await fetch("http://localhost:5000/api/users");
+          if (!res.ok) throw new Error("Failed");
+          const data = await res.json();
+          return Array.isArray(data) ? data.length : data.count || 0;
+        } catch {
+          return 0;
+        }
+      }
       async function updateDashboardStats() {
-        const [doctorCount, patientCount, appointmentCount] = await Promise.all(
-          [
-            fetchCount("http://localhost:5000/api/doctors"),
-            fetchCount("http://localhost:5000/api/patients/count"),
-            fetchCount("http://localhost:5000/api/appointments"),
-          ]
-        );
+        const [doctorCount, patientCount, appointmentCount] = await Promise.all([
+          fetchCount("http://localhost:5000/api/doctors"),
+          fetchPatientCount(),
+          fetchCount("http://localhost:5000/api/appointments"),
+        ]);
         document.querySelectorAll(".stat-label").forEach((el) => {
           if (el.textContent.includes("Doctor"))
             el.nextElementSibling.textContent = doctorCount;
@@ -1773,155 +1112,59 @@
           return [];
         }
       }
-      function doctorRowHTML(doc, idx) {
-        return `<tr>
-    <td>${doc.name}</td>
-    <td>${doc.specialty}</td>
-    <td>${doc.email || ""}</td>
-    <td>${doc.phone || ""}</td>
-    <td>
-      <button class="edit-btn" data-idx="${idx}"><i class="fa fa-edit"></i></button>
-      <button class="delete-btn" data-idx="${idx}"><i class="fa fa-trash"></i></button>
-    </td>
-  </tr>`;
-      }
-      async function renderDoctors() {
-        const doctors = await fetchDoctors();
-        const tbody = document.getElementById("doctors-tbody");
-        tbody.innerHTML = doctors.map(doctorRowHTML).join("");
-      }
-      renderDoctors();
-      // --- Add Doctor Modal Logic ---
-      document.getElementById("add-doctor-btn").onclick = function () {
-        document.getElementById("doctor-modal-title").textContent =
-          "Add Doctor";
-        document.getElementById("doctor-form").reset();
-        document.getElementById("doctor-modal").style.display = "block";
-      };
-      document.getElementById("close-doctor-modal").onclick = function () {
-        document.getElementById("doctor-modal").style.display = "none";
-      };
-      document.getElementById("doctor-form").onsubmit = async function (e) {
-        e.preventDefault();
-        const name = document.getElementById("doctor-name").value;
-        const specialty = document.getElementById("doctor-specialty").value;
-        const email = document.getElementById("doctor-email").value;
-        const phone = document.getElementById("doctor-phone").value;
-        const bio = document.getElementById("doctor-bio").value;
-        const image = document.getElementById("doctor-image").files[0];
-        const errorDiv = document.getElementById("doctor-form-error");
-        const successDiv = document.getElementById("doctor-form-success");
-        errorDiv.style.display = "none";
-        successDiv.style.display = "none";
+      // --- Fix close for message view modal ---
+      async function fetchRecentAppointments() {
         try {
-          const res = await fetch("http://localhost:5000/api/doctors", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ name, specialty, email, phone, bio }),
-          });
-          if (res.ok) {
-            const data = await res.json();
-            if (image) {
-              const formData = new FormData();
-              formData.append("image", image);
-              await fetch(
-                `http://localhost:5000/api/doctors/${data.id}/image`,
-                {
-                  method: "POST",
-                  body: formData,
-                }
-              );
-            }
-            successDiv.style.display = "block";
-            setTimeout(() => {
-              document.getElementById("doctor-modal").style.display = "none";
-              successDiv.style.display = "none";
-              renderDoctors();
-              updateDashboardStats();
-            }, 1200);
-          } else {
-            const data = await res.json().catch(() => ({}));
-            errorDiv.textContent = data.message || "Failed to add doctor.";
-            errorDiv.style.display = "block";
-          }
-        } catch {
-          errorDiv.textContent = "Server error.";
-          errorDiv.style.display = "block";
-        }
-      };
-      // --- Patients CRUD: Fetch, Add, Render ---
-      async function fetchPatients() {
-        try {
-          const res = await fetch("http://localhost:5000/api/patients");
+          const res = await fetch("http://localhost:5000/api/appointments/recent");
           if (!res.ok) throw new Error("Failed");
           return await res.json();
         } catch {
           return [];
         }
       }
-      function patientRowHTML(pat, idx) {
-        return `<tr>
-    <td>${pat.name}</td>
-    <td>${pat.gender}</td>
-    <td>${pat.age}</td>
-    <td>${pat.email}</td>
-    <td>${pat.phone}</td>
-    <td>
-      <button class="edit-btn" data-idx="${idx}"><i class="fa fa-edit"></i></button>
-      <button class="delete-btn" data-idx="${idx}"><i class="fa fa-trash"></i></button>
-    </td>
-  </tr>`;
+      async function renderRecentAppointments() {
+        const recentTbody = document.getElementById("recent-appointments-tbody");
+        const apps = await fetchRecentAppointments();
+        recentTbody.innerHTML = "";
+        apps.forEach((app) => {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+      <td>${app.patientName || app.patient}</td>
+      <td>${app.doctorName || app.doctor}</td>
+      <td>${app.date} ${app.time ? app.time : ""}</td>
+      <td>${app.status || "Pending"}</td>
+    `;
+          recentTbody.appendChild(tr);
+        });
       }
-      async function renderPatients() {
-        const patients = await fetchPatients();
-        const tbody = document.getElementById("patients-tbody");
-        tbody.innerHTML = patients.map(patientRowHTML).join("");
-      }
-      renderPatients();
-      document.getElementById("add-patient-btn").onclick = function () {
-        document.getElementById("patient-modal-title").textContent =
-          "Add Patient";
-        document.getElementById("patient-form").reset();
-        document.getElementById("patient-modal").style.display = "block";
-      };
-      document.getElementById("close-patient-modal").onclick = function () {
-        document.getElementById("patient-modal").style.display = "none";
-      };
-      document.getElementById("patient-form").onsubmit = async function (e) {
-        e.preventDefault();
-        const name = document.getElementById("patient-name").value;
-        const gender = document.getElementById("patient-gender").value;
-        const age = document.getElementById("patient-age").value;
-        const email = document.getElementById("patient-email").value;
-        const phone = document.getElementById("patient-phone").value;
-        const errorDiv = document.getElementById("patient-form-error");
-        const successDiv = document.getElementById("patient-form-success");
-        errorDiv.style.display = "none";
-        successDiv.style.display = "none";
+      // --- Fetch and Render Recent Messages for Dashboard ---
+      async function fetchRecentMessages() {
         try {
-          const res = await fetch("http://localhost:5000/api/patients", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ name, gender, age, email, phone }),
-          });
-          if (res.ok) {
-            successDiv.style.display = "block";
-            setTimeout(() => {
-              document.getElementById("patient-modal").style.display = "none";
-              successDiv.style.display = "none";
-              renderPatients();
-              updateDashboardStats && updateDashboardStats();
-            }, 1200);
-          } else {
-            const data = await res.json().catch(() => ({}));
-            errorDiv.textContent = data.message || "Failed to add patient.";
-            errorDiv.style.display = "block";
-          }
+          const res = await fetch("http://localhost:5000/api/messages/recent");
+          if (!res.ok) throw new Error("Failed");
+          return await res.json();
         } catch {
-          errorDiv.textContent = "Server error.";
-          errorDiv.style.display = "block";
+          return [];
         }
-      };
+      }
+      async function renderRecentMessages() {
+        const recentTbody = document.getElementById("recent-messages-tbody");
+        const msgs = await fetchRecentMessages();
+        recentTbody.innerHTML = "";
+        msgs.forEach((msg) => {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+      <td>${msg.name || msg.from || "-"}</td>
+      <td>${msg.email || "-"}</td>
+      <td>${msg.subject || "-"}</td>
+      <td>${msg.date ? msg.date.split("T")[0] : "-"}</td>
+    `;
+          recentTbody.appendChild(tr);
+        });
+      }
+      // Call these on dashboard load
+      renderRecentAppointments();
+      renderRecentMessages();
     </script>
   </body>
 </html>
